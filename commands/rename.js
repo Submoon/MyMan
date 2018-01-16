@@ -11,15 +11,16 @@ module.exports = class RenameCommand{
     static get description(){
         return  {
             text:"Changes the nickname of someone",
-            usage: "rename {@username} {new nickname} {reason...}"
+            usage: "rename {@username} {new nickname} ; {reason...}"
         };
     }
 
     async run() {
         let user = this.message.mentions.members.first();
         this.args.shift();
-        let nick = this.args.shift();
-        let reason = this.args.join(" ");
+        let argsSeperated = this.args.join(" ").split(";");
+        let nick = argsSeperated.shift().trim();
+        let reason = argsSeperated.join("");
         if(!user){
             return this.message.channel.send("!rename @user new_pseudo reason");
         }
