@@ -6,7 +6,7 @@ const client = new Discord.Client();
 
 client.config = require("./config.json");
 
-let commands = [];
+client.commands = [];
 
 // This loop reads the /events/ folder and attaches each event file to the appropriate event.
 fs.readdir("./events/", (err, files) => {
@@ -15,7 +15,12 @@ fs.readdir("./events/", (err, files) => {
       let Event = require(`./events/${file}`);
       let eventName = file.split(".")[0];
       // super-secret recipe to call events with all their proper arguments *after* the `client` var.
-      client.on(eventName, (...args) => new Event(client, ...args).run());
+      client.on(eventName, (...args) =>
+       new Event(client, ...args).run()
+        .catch(ex => {
+            console.error(ex);
+        })
+    );
     });
   });
 
@@ -25,7 +30,7 @@ fs.readdir("./events/", (err, files) => {
       let command = require(`./commands/${file}`);
 
       let commandName = file.split(".")[0];
-      commands[commandName] = command;
+      client.commands[commandName] = command;
     });
   });
   
@@ -39,8 +44,18 @@ fs.readdir("./events/", (err, files) => {
   
     // The list of if/else is replaced with those simple 2 lines:
     try {
-      const Command = commands[commandName];
-      new Command(client, message, args).run();
+        if(!client.commands[commandName]){
+            return;
+        }
+      const Command = client.commands[commandName];
+      new Command(client, message, args)
+      .run()
+      .then(()=>{
+        // Everything is fine
+      })
+      .catch(ex => {
+        console.error(ex);
+      });
     } catch (err) {
       console.error(err);
     }

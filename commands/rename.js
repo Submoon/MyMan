@@ -8,6 +8,13 @@ module.exports = class RenameCommand{
         this.args = args;
     }
 
+    static get description(){
+        return  {
+            text:"Changes the nickname of someone",
+            usage: "rename {@username} {new nickname} {reason...}"
+        };
+    }
+
     async run() {
         let user = this.message.mentions.members.first();
         this.args.shift();
@@ -18,7 +25,7 @@ module.exports = class RenameCommand{
         }
         user.setNickname(nick, reason)
         .then(usr =>{
-            return this.message.channel.send(`Changed user's nickname to ${usr.nickname}`)
+            return this.message.channel.send(`Changed user's nickname to ${nick}`)
         })
         .catch(reason =>{
             return this.message.channel.send(`There has been an error: ${reason}`);
