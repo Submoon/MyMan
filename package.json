@@ -1,0 +1,23 @@
+{
+  "name": "MyMan",
+  "version": "1.0.0",
+  "description": "MyMan is a custom bot written with discord.js.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Submoon/MyMan.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Submoon/MyMan/issues"
+  },
+  "homepage": "https://github.com/Submoon/MyMan#readme",
+  "dependencies": {
+    "discord.js": "^11.3.0"
+  }
+}
