@@ -9,7 +9,12 @@ module.exports = class EmojiCommand{
         this.args = args;
     }
 
-    
+    static get description(){
+        return  {
+            text:"Saves the emojis of this guild",
+            usage: "emojis"
+        };
+    }
 
     async run() {
         let path =  './emojis';
