@@ -28,9 +28,9 @@ module.exports = class HelpCommand{
         }
         
 
-        
-      
-       this.message.channel.send({embed});
+        let author = this.message.author; 
+        author.send({embed});
+       
 
         
     }
