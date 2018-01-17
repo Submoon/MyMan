@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Submoon/MyMan#readme",
   "dependencies": {
+    "axios": "^0.17.1",
     "discord.js": "^11.3.0",
     "moment": "^2.20.1"
   }
