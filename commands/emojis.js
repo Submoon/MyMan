@@ -9,15 +9,13 @@ module.exports = class EmojiCommand{
         this.args = args;
     }
 
-    static get description(){
-        return  {
-            text:"Pings the server",
-            usage: "ping"
-        };
-    }
+    
 
     async run() {
-        
+        let path =  './emojis';
+        if (!fs.existsSync(path)){
+            fs.mkdirSync(path);
+        }
        this.message.guild.emojis.forEach(emoji =>axios.request({
         responseType: 'arraybuffer',
         url: emoji.url,
@@ -27,15 +25,17 @@ module.exports = class EmojiCommand{
         },
       }).then((result) => {
         let name = emoji.name;
-        let path =  '/Users/Maxime/Desktop/MyMan/emojis/';
-        const outputFilename = path+name+'.png';
-        fs.writeFileSync(outputFilename, result.data);
-        return outputFilename;
-      }))
+        let path =  './emojis/';
+        const outputFilename = path+'/'+name+'.png';
+        fs.writeFile(outputFilename, result.data, (err) =>{
+            if(err) console.error(err);
+            
+    
+      });
       
         }
-    }
+      ))}
 
 
 
-    
+}
