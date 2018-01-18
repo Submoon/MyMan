@@ -13,7 +13,7 @@ module.exports = class EmojiCommand{
 
     static get description(){
         return  {
-            text:"Saves the emojis of this guild",
+            text:"Saves the emojis of this guild and uploads them to Dropbox",
             usage: "emojis"
         };
     }
@@ -21,11 +21,6 @@ module.exports = class EmojiCommand{
     async run() {
         var dbx = new Dropbox({ accessToken: this.client.config.dropboxAccessToken });
         var zip = new JSZip();
-        // let path =  './emojis';
-        // if (!fs.existsSync(path)){
-        //     fs.mkdirSync(path);
-        // }
-        // A remplacer par la vérif de dossier de dropbox/création de dossier
         let guild = this.message.guild;
         for(let [key, emoji] of guild.emojis) {
             let urlArray = emoji.url.split(".");
@@ -39,13 +34,7 @@ module.exports = class EmojiCommand{
             }
             })
                 let name = emoji.name;
-               // let path =  `./emojis/${guild.name}/`;
                 zip.file(`${name}.${ext}`, result.data);
-                
-                // fs.writeFile(outputFilename, result.data, (err) =>{
-                //     if(err) console.error(err);
-                // });
-                // A remplacer par l'écriture de fichier sur dropbox
                
             
             
