@@ -2,6 +2,7 @@
 const axios = require("axios");
 const fs = require("fs");
 const Dropbox = require("dropbox");
+const JSZip = require("jszip");
 module.exports = class EmojiCommand{
 
     constructor(client, message, args){
@@ -19,35 +20,48 @@ module.exports = class EmojiCommand{
 
     async run() {
         var dbx = new Dropbox({ accessToken: this.client.config.dropboxAccessToken });
-
+        var zip = new JSZip();
         // let path =  './emojis';
         // if (!fs.existsSync(path)){
         //     fs.mkdirSync(path);
         // }
         // A remplacer par la vérif de dossier de dropbox/création de dossier
         let guild = this.message.guild;
-        guild.emojis.forEach(emoji => {
+        for(let [key, emoji] of guild.emojis) {
             let urlArray = emoji.url.split(".");
             let ext = urlArray[urlArray.length-1];
-           axios.request({
+            let result = await axios.request({
             responseType: 'arraybuffer',
             url: emoji.url,
             method: 'get',
             headers: {
             'Content-Type': 'image',
             }
-            }).then((result) => {
+            })
                 let name = emoji.name;
-                let path =  `./emojis/${guild.name}/`;
-                const outputFilename = `${path}/${name}.${ext}`;
+               // let path =  `./emojis/${guild.name}/`;
+                zip.file(`${name}.${ext}`, result.data);
+                
                 // fs.writeFile(outputFilename, result.data, (err) =>{
                 //     if(err) console.error(err);
                 // });
                 // A remplacer par l'écriture de fichier sur dropbox
-    
-            });
-      
-        });
+               
+            
+            
+        }
+       let content = await zip.generateAsync({type:"nodebuffer"})
+        
+            console.log("bite");
+            let uploadArgs = {
+                contents : content,
+                path : guild.name+".zip"
+                
+                }
+          let wait = await dbx.filesUpload(content);
+            console.log("couille");
+        
+        
     }
 
 
