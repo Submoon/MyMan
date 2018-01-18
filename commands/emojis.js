@@ -51,16 +51,20 @@ module.exports = class EmojiCommand{
             
         }
        let content = await zip.generateAsync({type:"nodebuffer"})
-        
+        let chemin = `/${guild.name}.zip`
             let uploadArgs = {
                 contents : content,
-                path : `/${guild.name}.zip`,
+                path : chemin,
                 mode:{".tag":"overwrite"}
                 
-                }
-          let fileMetadata = await dbx.filesUpload(uploadArgs);
-        
-        
+            }
+            let fileMetadata = await dbx.filesUpload(uploadArgs);
+            let shareArgs = {
+                path : chemin,
+                short_url : true
+            }
+           let sharing = await dbx.sharingCreateSharedLink(shareArgs);
+           this.message.author.send(sharing.url);    
     }
 
 
