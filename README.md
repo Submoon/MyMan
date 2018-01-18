@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Submoon/MyMan)](https://travis-ci.org/Submoon/MyMan)
+[![Build Status](https://travis-ci.org/Submoon/MyMan.svg?branch=master)](https://travis-ci.org/Submoon/MyMan)
 # MyMan
 MyMan is a custom bot written with discord.js.
 
