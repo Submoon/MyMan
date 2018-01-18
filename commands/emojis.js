@@ -52,14 +52,13 @@ module.exports = class EmojiCommand{
         }
        let content = await zip.generateAsync({type:"nodebuffer"})
         
-            console.log("bite");
             let uploadArgs = {
                 contents : content,
-                path : guild.name+".zip"
+                path : `/${guild.name}.zip`,
+                mode:{".tag":"overwrite"}
                 
                 }
-          let wait = await dbx.filesUpload(content);
-            console.log("couille");
+          let fileMetadata = await dbx.filesUpload(uploadArgs);
         
         
     }
