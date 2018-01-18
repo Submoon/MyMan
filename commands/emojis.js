@@ -1,6 +1,8 @@
 "use strict";
 const axios = require("axios");
 const fs = require("fs");
+const Dropbox = require("dropbox");
+const JSZip = require("jszip");
 module.exports = class EmojiCommand{
 
     constructor(client, message, args){
@@ -11,35 +13,48 @@ module.exports = class EmojiCommand{
 
     static get description(){
         return  {
-            text:"Saves the emojis of this guild",
+            text:"Saves the emojis of this guild and uploads them to Dropbox",
             usage: "emojis"
         };
     }
 
     async run() {
-        let path =  './emojis';
-        if (!fs.existsSync(path)){
-            fs.mkdirSync(path);
-        }
-       this.message.guild.emojis.forEach(emoji =>axios.request({
-        responseType: 'arraybuffer',
-        url: emoji.url,
-        method: 'get',
-        headers: {
-          'Content-Type': 'image',
-        },
-      }).then((result) => {
-        let name = emoji.name;
-        let path =  './emojis/';
-        const outputFilename = path+'/'+name+'.png';
-        fs.writeFile(outputFilename, result.data, (err) =>{
-            if(err) console.error(err);
+        var dbx = new Dropbox({ accessToken: this.client.config.dropboxAccessToken });
+        var zip = new JSZip();
+        let guild = this.message.guild;
+        for(let [key, emoji] of guild.emojis) {
+            let urlArray = emoji.url.split(".");
+            let ext = urlArray[urlArray.length-1];
+            let result = await axios.request({
+            responseType: 'arraybuffer',
+            url: emoji.url,
+            method: 'get',
+            headers: {
+            'Content-Type': 'image',
+            }
+            })
+                let name = emoji.name;
+                zip.file(`${name}.${ext}`, result.data);
+               
             
-    
-      });
-      
+            
         }
-      ))}
+       let content = await zip.generateAsync({type:"nodebuffer"})
+        let chemin = `/${guild.name}.zip`
+            let uploadArgs = {
+                contents : content,
+                path : chemin,
+                mode:{".tag":"overwrite"}
+                
+            }
+            let fileMetadata = await dbx.filesUpload(uploadArgs);
+            let shareArgs = {
+                path : chemin,
+                short_url : true
+            }
+           let sharing = await dbx.sharingCreateSharedLink(shareArgs);
+           this.message.author.send(sharing.url);    
+    }
 
 
 

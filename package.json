@@ -20,6 +20,8 @@
   "dependencies": {
     "axios": "^0.17.1",
     "discord.js": "^11.3.0",
+    "dropbox": "^2.5.13",
+    "jszip": "^3.1.5",
     "moment": "^2.20.1"
   }
 }
