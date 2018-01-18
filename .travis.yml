@@ -9,9 +9,8 @@ addons:
     packages:
       - sshpass
 after_success:
-  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && .
-  - mkdir build
-  - mv * build
-  - tar -czf package.tgz build
-  - export SSHPASS=$DEPLOY_PASS
-  - sshpass -e scp package.tgz $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
+  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && mkdir build
+  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && mv * build
+  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && tar -czf package.tgz build
+  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && export SSHPASS=$DEPLOY_PASS
+  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && sshpass -o StrictHostKeyChecking=no -e scp package.tgz $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
