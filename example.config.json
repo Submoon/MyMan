@@ -1,5 +1,6 @@
 {
     "token":"MY TOKEN",
     "adminId":"My user Id",
-    "prefix":"!"
+    "prefix":"!",
+    "dropboxAccessToken": "dropboxAccessToken"
 }
