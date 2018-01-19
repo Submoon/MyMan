@@ -20,11 +20,18 @@ module.exports = class NewChannelCommand{
         let cat = false;
         let id;
         let argsSeperated = this.args.join(" ").split(";");
-        let [name, type] = argsSeperated.shift().split(" ");
+        let type = argsSeperated.shift();
+        let name = argsSeperated.shift();
         let topic = argsSeperated.shift();
         let parent = argsSeperated.shift();
-        
-        let chan = await guild.createChannel(name,type)
+        let chan
+        try{
+             chan = await guild.createChannel(name,type)
+        }   
+        catch(error){
+            this.message.channel.send("Use only alphanumerical characters for the name of the text channel");
+            return;
+        }
         chan.setTopic(topic);
         if(parent&&type!='category'){
             let parentFound = guild.channels.find(channel => channel.type==null && channel.name.toLowerCase() == parent.toLowerCase());        
