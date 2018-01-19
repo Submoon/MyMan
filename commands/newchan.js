@@ -11,7 +11,7 @@ module.exports = class NewChannelCommand{
     static get description(){
         return  {
             text:"Creates a new channel (text voice or category), sets the topic and puts the channel in the given category",
-            usage: "newchan name option; topic; parent"
+            usage: "newchan option; name; topic; parent"
         }
     }
 
