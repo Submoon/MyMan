@@ -35,7 +35,7 @@ console.log(`Command files found: [${commandFiles}]`);
 commandFiles.forEach(file => {
   let command = require(`./commands/${file}`);
 
-  let commandName = file.replace("/", "_").split(".")[0];
+  let commandName = file.replace(/\//g, "_").split(".")[0];
   client.commands[commandName] = command;
   console.log(`Command registered : ${commandName}`);
 
