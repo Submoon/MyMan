@@ -1,7 +1,7 @@
 "use strict";
 const moment = require('moment');
 
-module.exports = class LastRenamedCommand{
+module.exports = class RenameHistoryCommand{
 
     constructor(client, message, args){
         this.client = client;
