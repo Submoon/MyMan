@@ -3,6 +3,7 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const _ = require("lodash");
 const glob = require("glob");
+const auto = require('./commands/model/auto.js');
 
 const client = new Discord.Client();
 
@@ -53,6 +54,10 @@ commandFiles.forEach(file => {
 
 client.on("message", message => {
   if (message.author.bot) return;
+  for(let [id, user] of message.mentions.users){
+    if(auto.answer.get(id))
+        message.channel.send(`${user} said : ${auto.answer.get(id)}`)
+  }
   if(message.content.indexOf(client.config.prefix) !== 0) return;
 
   // This is the best way to define args. Trust me.
