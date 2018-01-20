@@ -1,5 +1,5 @@
 "use strict";
-const auto = require('../auto.js');
+const auto = require('../model/auto.js');
 module.exports = class AutoStopCommand{
 
     constructor(client, message, args){

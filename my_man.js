@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const _ = require("lodash");
 const glob = require("glob");
-const auto = require('./commands/auto.js');
+const auto = require('./commands/model/auto.js');
 
 const client = new Discord.Client();
 
