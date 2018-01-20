@@ -1,6 +1,6 @@
 "use strict";
-module.exports = class CahPickCommand{
 
+module.exports =  class CahJoinCommand{
     constructor(client, message, args){
         this.client = client;
         this.message = message;
@@ -9,8 +9,8 @@ module.exports = class CahPickCommand{
 
     static get description(){
         return  {
-            text:"Allows to choose one or multiple cards to be played",
-            usage: "cah_pick {x} {y}"
+            text:"Allows to join a cah game",
+            usage: "cah_join"
         };
     }
 
