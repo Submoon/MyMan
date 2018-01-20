@@ -2,7 +2,7 @@
 
 const gamemanager = require("./model/gamemanager")
 
-module.exports =  class CahJoinCommand{
+module.exports =  class CahStopCommand{
     constructor(client, message, args){
         this.client = client;
         this.message = message;

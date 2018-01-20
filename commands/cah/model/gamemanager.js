@@ -20,10 +20,9 @@ class GameManager{
     }
 
     async destroyGame(channelId){
-        if(!this.games.get(channelId)){
+        if(!this.games.delete(channelId)){
             throw "There is no game to stop";
         }
-        this.games.delete(channelId);
     }
 
     async joinGame(channelId, user){
@@ -33,6 +32,15 @@ class GameManager{
         }
         let player = await game.addPlayer(user);
         return player;
+    }
+
+    async playerLeave(channelId, userId){
+        let game = this.games.get(channelId);
+        if(!game){
+            throw "There is no game to leave in this channel";
+        }
+        await game.playerLeave(userId)
+        
     }
 
 }

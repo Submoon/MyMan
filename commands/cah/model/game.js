@@ -20,6 +20,12 @@ module.exports =  class Game{
         return player;
     }
 
+    async playerLeave(playerId){
+        if(!this.players.delete(playerId)){
+            throw "You are are not part of the game !";
+        }
+    }
+
 
     async startGame(){
 
