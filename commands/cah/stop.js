@@ -1,6 +1,6 @@
 "use strict";
 
-const cah = require("./model/gamemanager")
+const gamemanager = require("./model/gamemanager")
 
 module.exports =  class CahJoinCommand{
     constructor(client, message, args){
@@ -17,7 +17,7 @@ module.exports =  class CahJoinCommand{
     }
 
     async run() {
-        cah.destroyGame(this.message.channel.id).then(() => {
+        gamemanager.destroyGame(this.message.channel.id).then(() => {
             this.message.channel.send(`Game stopped for channel ${this.message.channel}`);
         }).catch(error => {
             this.message.channel.send("Error: "+error);

@@ -1,6 +1,6 @@
 "use strict";
 
-const cah = require("./model/gamemanager")
+const gamemanager = require("./model/gamemanager")
 
 module.exports =  class CahJoinCommand{
     constructor(client, message, args){
@@ -17,7 +17,7 @@ module.exports =  class CahJoinCommand{
     }
 
     async run() {
-        cah.createGame(this.message.channel).then(game => {
+        gamemanager.createGame(this.message.channel).then(game => {
             this.message.channel.send(`Game started for channel ${game.channel}\nPlease join the game by using cah_join`);
         }).catch(error => {
             this.message.channel.send("Error: "+error);

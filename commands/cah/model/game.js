@@ -1,6 +1,7 @@
 "use strict";
 
 const _ = require("lodash");
+const Player = require("./player");
 module.exports =  class Game{
 
     constructor(channel){
@@ -10,11 +11,13 @@ module.exports =  class Game{
         this.turn = 0;
     }
 
-    async addPlayer(id, name){
-        this.players.set(id, new Player(id, name));
-        for(let i = 0 ; i< 10; i++){
-
+    async addPlayer(user){
+        if(this.players.get(user.id)){
+            throw "You're already in the game !";
         }
+        let player = new Player(user);
+        this.players.set(player.user.id, player);
+        return player;
     }
 
 

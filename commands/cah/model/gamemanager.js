@@ -26,6 +26,15 @@ class GameManager{
         this.games.delete(channelId);
     }
 
+    async joinGame(channelId, user){
+        let game = this.games.get(channelId);
+        if(!game){
+            throw "There is no game to join";
+        }
+        let player = await game.addPlayer(user);
+        return player;
+    }
+
 }
 
 module.exports = new GameManager();
