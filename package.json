@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Submoon/MyMan#readme",
   "dependencies": {
     "axios": "^0.17.1",
+    "cheerio": "^1.0.0-rc.2",
     "discord.js": "^11.3.0",
     "dropbox": "^2.5.13",
     "glob": "^7.1.2",

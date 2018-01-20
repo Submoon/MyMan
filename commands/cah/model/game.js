@@ -9,6 +9,10 @@ module.exports =  class Game{
         this.allCards = require("./cahcards.json");
         this.players = new Map();
         this.turn = 0;
+        this.deckWhiteCards = _.shuffle(this.allCards.whiteCards);
+        this.deckBlackCards = _.shuffle(this.allCards.blackCards);
+        this.playedWhiteCards = [];
+        this.playedBlackCards = [];
     }
 
     async addPlayer(user){
@@ -16,6 +20,12 @@ module.exports =  class Game{
             throw "You're already in the game !";
         }
         let player = new Player(user);
+
+        for(let i=0; i<10; i++){
+            let card = this.deckWhiteCards.shift();
+            player.drawCard(card)
+        }
+
         this.players.set(player.user.id, player);
         return player;
     }
