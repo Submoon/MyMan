@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = class ColorCommand{
+module.exports = class ColorSetCommand{
 
     constructor(client, message, args){
         this.client = client;
@@ -10,8 +10,8 @@ module.exports = class ColorCommand{
 
     static get description(){
         return  {
-            text:"Gives the given color to the user",
-            usage: "color wantedcolor"
+            text:"Creates a role linked to the user, and set the role's color to the given color",
+            usage: "color_set color"
         };
     }
 
@@ -24,7 +24,13 @@ module.exports = class ColorCommand{
         let RoleFound = await this.message.guild.roles.find(Role => Role.name ==nameRole);
 
         if(RoleFound){
-             await RoleFound.setColor(color);
+            try{
+                await RoleFound.setColor(color);
+            }
+            catch(error){
+                this.message.channel.send("Incorrect color");
+                return;
+            }
         }
         else{
             let bot = this.client.user;
@@ -41,7 +47,7 @@ module.exports = class ColorCommand{
             let position = roleBot.position-1;
             await guild.setRolePosition(role, position);
             try{
-                role.setColor(color);
+                await role.setColor(color);
             }
             catch(error){
                 this.message.channel.send("Incorrect color");
