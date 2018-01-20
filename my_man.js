@@ -10,6 +10,9 @@ client.config = require("./config.json");
 
 client.commands = {};
 
+var level = 1;
+var xp = 0;
+
 // This loop reads the /events/ folder and attaches each event file to the appropriate event.
 fs.readdir("./events/", (err, files) => {
     if (err) return console.error(err);
@@ -53,8 +56,27 @@ commandFiles.forEach(file => {
 
 client.on("message", message => {
   if (message.author.bot) return;
-  if(message.content.indexOf(client.config.prefix) !== 0) return;
+  if(message.content.indexOf(client.config.prefix) !== 0) {
+    xp += Math.ceil(message.content.length/20);
 
+    let xpNeededForNextLevel = Math.floor(Math.pow(level*10, 1.05));
+    
+    while(xp >= xpNeededForNextLevel){
+      xp -= xpNeededForNextLevel;
+      level++;
+      xpNeededForNextLevel = Math.floor(Math.pow(level*10, 1.1));
+
+      let embed = new Discord.RichEmbed()
+      .setAuthor(message.author.username, message.author.avatarURL)
+      .setColor(0xffdf00)
+      .setDescription(`You are now a level ${level} poster!`)
+      .setTitle("Level Up!")
+      .addField("Next level", `${xp}/${xpNeededForNextLevel} xp`);
+      message.channel.send({embed});
+    }
+
+    return;
+  }
   // This is the best way to define args. Trust me.
   const args = message.content.slice(client.config.prefix.length).trim().split(/ +/g);
   const commandName = args.shift().toLowerCase();
