@@ -26,7 +26,7 @@ Node.js 8.0.0 or newer is required.
 
 Ignore any warnings about unmet peer dependencies, as they're all optional.
 
-## Specific to this app
+### Specific to this app
 Clone the repository.
 
 Copy example.config.json to config.json and replace the values with yours.
