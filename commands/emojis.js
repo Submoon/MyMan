@@ -3,6 +3,8 @@ const axios = require("axios");
 const fs = require("fs");
 const Dropbox = require("dropbox");
 const JSZip = require("jszip");
+const logger = require("../utils/logger");
+
 module.exports = class EmojiCommand{
 
     constructor(client, message, args){
@@ -22,38 +24,46 @@ module.exports = class EmojiCommand{
         var dbx = new Dropbox({ accessToken: this.client.config.dropboxAccessToken });
         var zip = new JSZip();
         let guild = this.message.guild;
+        logger.info(`Processing emojis of guild ${guild}...`);
         for(let [key, emoji] of guild.emojis) {
             let urlArray = emoji.url.split(".");
             let ext = urlArray[urlArray.length-1];
+            logger.debug(`Downloading emoji ${emoji.url}`);
+
             let result = await axios.request({
-            responseType: 'arraybuffer',
-            url: emoji.url,
-            method: 'get',
-            headers: {
-            'Content-Type': 'image',
-            }
-            })
-                let name = emoji.name;
-                zip.file(`${name}.${ext}`, result.data);
-               
+                responseType: 'arraybuffer',
+                url: emoji.url,
+                method: 'get',
+                headers: {
+                'Content-Type': 'image',
+                }
+            });
+
+            let name = emoji.name;
+            zip.file(`${name}.${ext}`, result.data);
+            logger.debug(`Added emoji ${name} to zip file`);
             
             
         }
-       let content = await zip.generateAsync({type:"nodebuffer"})
-        let chemin = `/${guild.name}.zip`
-            let uploadArgs = {
-                contents : content,
-                path : chemin,
-                mode:{".tag":"overwrite"}
-                
-            }
-            let fileMetadata = await dbx.filesUpload(uploadArgs);
-            let shareArgs = {
-                path : chemin,
-                short_url : true
-            }
-           let sharing = await dbx.sharingCreateSharedLink(shareArgs);
-           this.message.author.send(sharing.url);    
+        logger.debug(`Generating zip file...`);
+        let content = await zip.generateAsync({type:"nodebuffer"});
+        let chemin = `/${guild.name}.zip`;
+        let uploadArgs = {
+            contents : content,
+            path : chemin,
+            mode:{".tag":"overwrite"}
+            
+        };
+        let fileMetadata = await dbx.filesUpload(uploadArgs);
+        logger.info(`Uploaded zip file to ${chemin}`);
+        let shareArgs = {
+            path : chemin,
+            short_url : true
+        };
+        
+        let sharing = await dbx.sharingCreateSharedLink(shareArgs);
+        this.message.author.send(sharing.url);
+        logger.info(`Sent sharing link to user ${this.message.author}`);
     }
 
 
