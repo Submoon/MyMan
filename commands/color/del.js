@@ -1,4 +1,5 @@
 "use strict";
+const logger = require("../../utils/logger");
 
 module.exports = class ColorDelCommand{
 
@@ -20,10 +21,13 @@ module.exports = class ColorDelCommand{
         let name = `color{${id}}`;
         let RoleFound = this.message.guild.roles.find(Role => Role.name ==name);
         if(RoleFound){
-            RoleFound.delete();
+            logger.info(`Role ${roleFound} found`);
+            await RoleFound.delete();
+            logger.info(`Role ${roleFound} deleted`);
             this.message.channel.send("Role deleted.");
         }
         else
+            logger.warn(`Role ${name} was not found`);
             this.message.channel.send("Couldn't find the role");
 
 
