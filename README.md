@@ -8,7 +8,7 @@ It is still in heavy development, and is actually hosted on a raspberry pi, so i
 If you still want to try it, you can invite it with [this link](https://discordapp.com/api/oauth2/authorize?client_id=402755102735073280&permissions=2146958448&scope=bot)
 
 ## Usage
-Available commands are available with the command !help and you can get specific help with !help command_name
+Available commands are available with the command ```!help``` and you can get specific help with ```!help command_name```
 
 Help is provided by a RichEmbed via private message, so please authorize Rich Embeds on your discord client.
 
