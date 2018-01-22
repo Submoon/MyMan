@@ -37,7 +37,7 @@ module.exports = class HelpCommand{
     }
 
     getHelpForCommand(commandName){
-        console.debug(`Sending help for command ${commandName}`);
+        logger.debug(`Sending help for command ${commandName}`);
         let lowerCommandName = commandName.toLowerCase();
         let command = this.client.commands[lowerCommandName];
         let embed = new Discord.RichEmbed()
@@ -62,7 +62,7 @@ module.exports = class HelpCommand{
 
     getHelpPageEmbed(page){
 
-        console.debug(`Sending page ${page} of help`);
+        logger.debug(`Sending page ${page} of help`);
 
         //We should use a map
         let numberOfPages = Math.floor(this.client.commands.length / 25)+1;

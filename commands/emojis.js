@@ -55,7 +55,7 @@ module.exports = class EmojiCommand{
             
         };
         let fileMetadata = await dbx.filesUpload(uploadArgs);
-        console.info(`Uploaded zip file to ${chemin}`);
+        logger.info(`Uploaded zip file to ${chemin}`);
         let shareArgs = {
             path : chemin,
             short_url : true
@@ -63,7 +63,7 @@ module.exports = class EmojiCommand{
         
         let sharing = await dbx.sharingCreateSharedLink(shareArgs);
         this.message.author.send(sharing.url);
-        console.info(`Sent sharing link to user ${this.message.author}`);
+        logger.info(`Sent sharing link to user ${this.message.author}`);
     }
 
 
