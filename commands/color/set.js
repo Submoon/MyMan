@@ -24,43 +24,28 @@ module.exports = class ColorSetCommand{
         let RoleFound = await this.message.guild.roles.find(Role => Role.name ==nameRole);
 
         if(RoleFound){
-            try{
-                await RoleFound.setColor(color);
-            }
-            catch(error){
-                this.message.channel.send("Incorrect color");
-                return;
-            }
+            await RoleFound.setColor(color);
         }
         else{
-            let bot = this.client.user;
-            let BotFound = guild.members.find(GuildMember => GuildMember.id ==bot.id);     
-            let roleBot = BotFound.highestRole;   
+            let Bot = guild.member(this.client.user);
+            let roleBot = Bot.highestRole;   
   
             let argrole = {
-                name : nameRole
+                name : nameRole,
+                color : color
             }
             let role = await this.message.guild.createRole(argrole);
-            await guild.setRolePosition(role, 1);
+            await guild.setRolePosition(role, 1);  //Used to update the positions of the roles, Discord doesn't update it when a role is deleted
            
-
             let position = roleBot.position-1;
-            await guild.setRolePosition(role, position);
-            try{
-                await role.setColor(color);
-            }
-            catch(error){
-                this.message.channel.send("Incorrect color");
+            try {await guild.setRolePosition(role, position);}
+            catch(error){                                                //Sometimes Discord refuses to change the role's position. It happens purely randomly
+                role.delete();                                           //Deleting the role and using again the set command makes it work
+                this.message.channel.send("Error, please try again"); 
                 return;
             }
-            
-            let UserFound = await guild.members.find(GuildMember => GuildMember.id ==id);
-            UserFound.addRole(role);     
-
+            let User = guild.member(this.message.author);
+            User.addRole(role);     
         }
-
     }
-}
-
-
-    
+}  
