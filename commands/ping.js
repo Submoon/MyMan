@@ -1,4 +1,5 @@
 "use strict";
+const logger = require("../utils/logger");
 
 module.exports = class PingCommand{
 
@@ -16,7 +17,12 @@ module.exports = class PingCommand{
     }
 
     async run() {
-        this.message.channel.send("pong!");
+        let startTime = +new Date();
+        let message = await this.message.channel.send("Pong!");
+        let endTime = +new Date();
+        let diff = endTime-startTime;
+        message.edit(`Pong (${diff}ms)`)
+        logger.info(`Received ping command, ping = ${diff}ms`)
     }
 }
 

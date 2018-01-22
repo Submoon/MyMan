@@ -1,5 +1,7 @@
 "use strict";
 const auto = require('../model/auto.js');
+const logger = require("../../utils/logger");
+
 module.exports = class AutoStopCommand{
 
     constructor(client, message, args){
@@ -18,9 +20,11 @@ module.exports = class AutoStopCommand{
     async run() {
        
        let id = this.message.author.id;
-       if(auto.answer.get(id)){
-           auto.answer.delete(id);
+       if(auto.answer.delete(id)){
+           logger.info(`Deleted automessage for user ${id}`);
+            return this.message.channel.send(`Deleted message`);
        }
-       this.message.channel.send(`Deleted message`);
+       logger.info(`No message to delete for user ${id}`);
+       return this.message.channel.send(`No message to delete`);
     }
 }

@@ -1,4 +1,5 @@
 "use strict";
+const logger = require("../utils/logger");
 
 module.exports = class PollCommand{
 
@@ -61,6 +62,7 @@ module.exports = class PollCommand{
             poll.channel.send(result);
         })
         .catch(exception =>{
+            logger.error(exception);
             poll.channel.send(exception);
         })
 
