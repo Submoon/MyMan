@@ -21,7 +21,7 @@ module.exports = class ColorDelCommand{
         let name = `color{${id}}`;
         let RoleFound = this.message.guild.roles.find(Role => Role.name ==name);
         if(RoleFound){
-            logger.info(`Role ${roleFound} found`);
+            logger.info(`Role ${RoleFound} found`);
             await RoleFound.delete();
             logger.info(`Role ${roleFound} deleted`);
             this.message.channel.send("Role deleted.");
