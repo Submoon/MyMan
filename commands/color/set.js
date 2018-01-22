@@ -23,11 +23,11 @@ module.exports = class ColorSetCommand{
         let nameRole = `color{${id}}`;
         let [color] = this.args;
 
-        let RoleFound = await this.message.guild.roles.find(Role => Role.name ==nameRole);
+        let roleFound = await this.message.guild.roles.find(Role => Role.name ==nameRole);
 
-        if(RoleFound){
+        if(roleFound){
             logger.info(`Role ${roleFound} was found`);
-            await RoleFound.setColor(color);
+            await roleFound.setColor(color);
             logger.info(`Changing color of role ${roleFound} to ${color}`);
         }
         else{
@@ -44,8 +44,8 @@ module.exports = class ColorSetCommand{
             logger.debug(`Updating positions of all roles`);
             await guild.setRolePosition(role, 1);  //Used to update the positions of the roles, Discord doesn't update it when a role is deleted
            
-            let Bot = guild.member(this.client.user);
-            let roleBot = Bot.highestRole;   
+            let bot = guild.member(this.client.user);
+            let roleBot = bot.highestRole;   
 
             let position = roleBot.position-1;
             logger.info(`Trying to set role ${role} postion to ${position}. Current position: ${roleBot.position}`);

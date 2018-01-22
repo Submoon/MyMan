@@ -19,17 +19,17 @@ module.exports = class ColorDelCommand{
     async run() {
         let id = this.message.author.id;
         let name = `color{${id}}`;
-        let RoleFound = this.message.guild.roles.find(Role => Role.name ==name);
-        if(RoleFound){
-            logger.info(`Role ${RoleFound} found`);
-            await RoleFound.delete();
+        let roleFound = this.message.guild.roles.find(Role => Role.name ==name);
+        if(roleFound){
+            logger.info(`Role ${roleFound} found`);
+            await roleFound.delete();
             logger.info(`Role ${roleFound} deleted`);
             this.message.channel.send("Role deleted.");
         }
-        else
+        else{
             logger.warn(`Role ${name} was not found`);
             this.message.channel.send("Couldn't find the role");
-
+        }
 
     }
 }
