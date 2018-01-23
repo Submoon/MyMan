@@ -24,13 +24,13 @@ module.exports = class DispoCommand{
         if(avail === 1 || avail === 0){
             // Control of redundant cases.
             if(dispo.get(author) === avail){
-                this.message.channel.send("Vous avez déjà le statut **" + (avail === 1 ? "disponible" : "indisponible") + "**.")
+                this.message.channel.send("You already have the status **" + (avail === 1 ? "available" : "unavailable") + "**.")
             }else{
-                this.message.channel.send("La disponibilité a été modifiée. Vous êtes maintenant **" + (avail === 1 ? "disponible" : "indisponible") + "**." );
+                this.message.channel.send("The disponibility has been modified. You are now **" + (avail === 1 ? "available" : "unavailable") + "**." );
                 dispo.set(author, avail);
             }
         }else{
-            this.message.channel.send("La disponibilité n'a pas été reconnue.");
+            this.message.channel.send("The disponibility has not been recognized.");
         }
     }
 }

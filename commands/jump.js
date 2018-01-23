@@ -22,7 +22,7 @@ module.exports = class JumpCommand{
         
         for (var [key, value] of dispo) {
             if(value === 1){
-                key.send(author.username + " a prévu de faire un jump. " + (this.args[0] ? "\r\rOn vous précise également la chose suivante : _" + str + "_" : ""));
+                key.send(author.username + " scheduled a jump. " + (this.args[0] ? "\r\rYou have been told : _" + str + "_" : ""));
             }
         }
     }
