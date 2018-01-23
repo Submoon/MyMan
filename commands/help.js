@@ -1,6 +1,7 @@
 "use strict";
 const Discord = require("discord.js");
 const entries = require("../utils/arrayutils").entries;
+const logger = require("../utils/logger");
 
 module.exports = class HelpCommand{
 
@@ -21,7 +22,7 @@ module.exports = class HelpCommand{
         const nb = Number(this.args[0]);
         let embed = null;
         if(this.args.length==0 || !isNaN(nb)){
-            let page = nb ? nb : 1;
+            let page = !isNaN(nb) ? nb : 1;
             embed = this.getHelpPageEmbed(page);
         }else{
             embed = this.getHelpForCommand(this.args[0]);
@@ -36,6 +37,7 @@ module.exports = class HelpCommand{
     }
 
     getHelpForCommand(commandName){
+        logger.debug(`Sending help for command ${commandName}`);
         let lowerCommandName = commandName.toLowerCase();
         let command = this.client.commands[lowerCommandName];
         let embed = new Discord.RichEmbed()
@@ -60,14 +62,14 @@ module.exports = class HelpCommand{
 
     getHelpPageEmbed(page){
 
+        logger.debug(`Sending page ${page} of help`);
+
+        //We should use a map
         let numberOfPages = Math.floor(this.client.commands.length / 25)+1;
-        // console.log(this.client.commands);
+        
         let currentPage = page < numberOfPages ? page-1: numberOfPages-1;
 
         
-
-        // console.log(`currentPage ${currentPage}`);
-        // console.log(commandsToPrint);
 
         let embed = new Discord.RichEmbed()
         .setTitle("Help")

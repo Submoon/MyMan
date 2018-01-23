@@ -3,6 +3,9 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const _ = require("lodash");
 const glob = require("glob");
+const auto = require('./commands/model/auto.js');
+const logger = require('./utils/logger');
+
 
 const client = new Discord.Client();
 
@@ -12,7 +15,7 @@ client.commands = {};
 
 // This loop reads the /events/ folder and attaches each event file to the appropriate event.
 fs.readdir("./events/", (err, files) => {
-    if (err) return console.error(err);
+    if (err) return logger.error(err);
     files.forEach(file => {
       let Event = require(`./events/${file}`);
       let eventName = file.split(".")[0];
@@ -20,7 +23,7 @@ fs.readdir("./events/", (err, files) => {
       client.on(eventName, (...args) =>
        new Event(client, ...args).run()
         .catch(ex => {
-            console.error(ex);
+            logger.error(ex);
         })
     );
     });
@@ -30,19 +33,19 @@ let pattern = "**/*.js";
 
 let commandFiles = glob.sync(pattern, {cwd: "./commands/", ignore: "**/model/**"});
 
-console.log(`Command files found: [${commandFiles}]`);
+logger.info(`Command files found: [${commandFiles}]`);
 
 commandFiles.forEach(file => {
   let command = require(`./commands/${file}`);
 
   let commandName = file.replace(/\//g, "_").split(".")[0];
   client.commands[commandName] = command;
-  console.log(`Command registered : ${commandName}`);
+  logger.info(`Command registered : ${commandName}`);
 
 });
 
 // fs.readdir("./commands", (err, files) => {
-//   if (err) return console.error(err);
+//   if (err) return logger.error(err);
 //   files.forEach(file => {
 //     let command = require(`./commands/${file}`);
 
@@ -53,6 +56,10 @@ commandFiles.forEach(file => {
 
 client.on("message", message => {
   if (message.author.bot) return;
+  for(let [id, user] of message.mentions.users){
+    if(auto.answer.get(id))
+        message.channel.send(`${user} said : ${auto.answer.get(id)}`)
+  }
   if(message.content.indexOf(client.config.prefix) !== 0) return;
 
   // This is the best way to define args. Trust me.
@@ -71,10 +78,10 @@ client.on("message", message => {
       // Everything is fine
     })
     .catch(ex => {
-      console.error(ex);
+      logger.error(ex);
     });
   } catch (err) {
-    console.error(err);
+    logger.error(err);
   }
 });
 
