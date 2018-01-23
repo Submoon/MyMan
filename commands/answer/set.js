@@ -1,5 +1,5 @@
 "use strict";
-const auto = require('../model/auto.js');
+const answer = require('../model/database.js').answer;
 const logger = require("../../utils/logger");
 
 module.exports = class AutoMessageCommand{
@@ -13,14 +13,14 @@ module.exports = class AutoMessageCommand{
     static get description(){
         return  {
             text:"Sets an automessage, which will be said by the bot everytime someone mentions you",
-            usage: "auto_set message"
+            usage: "answer_set message"
         }
     }
 
     async run() {
        let str = this.args.join(" ");
        let id = this.message.author.id;
-       auto.answer.set(id, str);
+       answer.set(id, str);
        logger.info(`Setting answer ${str} for user ${id}`);
        this.message.channel.send(`Message saved : ${str}`);
     }
