@@ -18,7 +18,6 @@ module.exports = class JumpListCommand{
 
     async run() {
         let author = this.message.author;
-        this.message.channel.send(`${dispo.size}`);
         if(dispo.size){
             this.message.channel.send("Here is the list of all available players : ");
             // We are going through the 'dispo' map to return only the players with the disponibility value '1'.
