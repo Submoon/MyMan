@@ -22,8 +22,7 @@ module.exports = class PlayCommand{
     async run() {
         let broadcast = this.client.createVoiceBroadcast();
         let link = this.args.join(" ");
-        let botid = this.client.user.id;
-        let Bot = await this.message.guild.fetchMember(botid);
+        let Bot = this.message.guild.member(this.client.user.id);
         let vCb = Bot.voiceChannel;
         let member = this.message.member;
         let vC = member.voiceChannel;
