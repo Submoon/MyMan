@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const _ = require("lodash");
 const glob = require("glob");
-const anwser = require('./commands/model/database.js').answer;
+const answer = require('./commands/model/database.js').answer;
 
 const client = new Discord.Client();
 
