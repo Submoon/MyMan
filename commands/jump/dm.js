@@ -1,7 +1,7 @@
 "use strict";
 const dispo = require("./model/database").list;
 
-module.exports = class JumpCommand{
+module.exports = class JumpDMCommand{
 
     constructor(client, message, args){
         this.client = client;
@@ -12,7 +12,7 @@ module.exports = class JumpCommand{
     static get description(){
         return  {
             text:"Sends a private message to the list of users who are available.",
-            usage: "jump {message}"
+            usage: "jump_dm {message}"
         };
     }
 

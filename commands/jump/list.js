@@ -1,7 +1,7 @@
 "use strict";
 const dispo = require("./model/database").list;
 
-module.exports = class DispoListCommand{
+module.exports = class JumpListCommand{
 
     constructor(client, message, args){
         this.client = client;
@@ -12,7 +12,7 @@ module.exports = class DispoListCommand{
     static get description(){
         return  {
             text:"Returns a list of users who are available.",
-            usage: "dispolist"
+            usage: "jump_list"
         };
     }
 
