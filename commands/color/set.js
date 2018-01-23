@@ -22,7 +22,9 @@ module.exports = class ColorSetCommand{
         let id = this.message.author.id;
         let nameRole = `color{${id}}`;
         let [color] = this.args;
-
+        if(!color){
+            color = "RANDOM";
+        }
         let roleFound = await this.message.guild.roles.find(Role => Role.name ==nameRole);
 
         if(roleFound){

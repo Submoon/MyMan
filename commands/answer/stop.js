@@ -1,5 +1,5 @@
 "use strict";
-const auto = require('../model/auto.js');
+const answer = require('../model/database.js').answer;
 const logger = require("../../utils/logger");
 
 module.exports = class AutoStopCommand{
@@ -13,14 +13,14 @@ module.exports = class AutoStopCommand{
     static get description(){
         return  {
             text:"Deletes the automessage",
-            usage: "auto_stop"
+            usage: "answer_stop"
         }
     }
 
     async run() {
        
        let id = this.message.author.id;
-       if(auto.answer.delete(id)){
+       if(answer.delete(id)){
            logger.info(`Deleted automessage for user ${id}`);
             return this.message.channel.send(`Deleted message`);
        }
