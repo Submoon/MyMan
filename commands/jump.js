@@ -1,5 +1,5 @@
 "use strict";
-const dispo = require("./model/auto").list;
+const dispo = require("./model/database").list;
 
 module.exports = class JumpCommand{
 
@@ -22,7 +22,7 @@ module.exports = class JumpCommand{
         
         for (var [key, value] of dispo) {
             if(value === 1){
-                key.send(author.username + " scheduled a jump. " + (this.args[0] ? "\r\rYou have been told : _" + str + "_" : ""));
+                key.send(author.username + " scheduled a jump. You can join the conversation here : " + this.message.channel + (this.args[0] ? "\r\rYou have been told : _" + str + "_" : ""));
             }
         }
     }
