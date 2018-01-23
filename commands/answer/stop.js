@@ -1,5 +1,5 @@
 "use strict";
-const auto = require('../model/auto.js');
+const answer = require('../model/database.js').answer;
 module.exports = class AutoStopCommand{
 
     constructor(client, message, args){
@@ -11,15 +11,15 @@ module.exports = class AutoStopCommand{
     static get description(){
         return  {
             text:"Deletes the automessage",
-            usage: "auto_stop"
+            usage: "answer_stop"
         }
     }
 
     async run() {
        
        let id = this.message.author.id;
-       if(auto.answer.get(id)){
-           auto.answer.delete(id);
+       if(answer.get(id)){
+           answer.delete(id);
        }
        this.message.channel.send(`Deleted message`);
     }
