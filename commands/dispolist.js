@@ -17,11 +17,14 @@ module.exports = class DispoListCommand{
     }
 
     async run() {
+        let author = this.message.author;
+
         this.message.channel.send("Voici la liste des joueurs disponibles : ");
         // We are going through the 'dispo' map to return only the players with the disponibility value '1'.
         for (var [key, value] of dispo) {
             if(value === 1){
-                this.message.channel.send("**" + key + "**");
+                this.message.channel.send("**" + key.username + "**");
+                key.send(author.username + " a prévu de faire un jump. Allez voir ça !");
             }
           }
     }
