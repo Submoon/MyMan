@@ -1,5 +1,5 @@
 "use strict";
-const dispo = require("./model/auto").list;
+const dispo = require("./model/database").list;
 
 module.exports = class DispoListCommand{
 
