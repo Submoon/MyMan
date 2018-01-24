@@ -1,5 +1,5 @@
 "use strict";
-
+const logger = require('../utils/logger');
 
 module.exports = class ReadyEvent{
 
@@ -7,7 +7,7 @@ module.exports = class ReadyEvent{
         this.client = client;
     }
     async run() {
-        console.log("I am ready!");
+        logger.info("I am ready!");
     }
 }
 

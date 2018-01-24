@@ -1,4 +1,5 @@
 "use strict";
+const logger = require("../utils/logger");
 
 module.exports = class RenameCommand{
 
@@ -29,6 +30,7 @@ module.exports = class RenameCommand{
             return this.message.channel.send(`Changed user's nickname to ${nick}`)
         })
         .catch(reason =>{
+            logger.error(reason);
             return this.message.channel.send(`There has been an error: ${reason}`);
         });
     }

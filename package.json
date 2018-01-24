@@ -27,6 +27,8 @@
     "lodash": "^4.17.4",
     "moment": "^2.20.1",
     "opusscript": "0.0.6",
-    "ytdl": "^0.10.0"
+    "ytdl": "^0.10.0",
+    "winston": "^2.4.0",
+    "winston-daily-rotate-file": "^1.7.2"
   }
 }

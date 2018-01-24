@@ -1,5 +1,6 @@
 "use strict";
 const moment = require('moment');
+const logger = require("../utils/logger");
 
 module.exports = class RenameHistoryCommand{
 
@@ -32,7 +33,6 @@ module.exports = class RenameHistoryCommand{
             let date = moment(log.createdAt).format("DD/MM/YYYY:HH[h]mm");
 
             text += `${date}        [ ${change.old} => ${change.new}]       ${log.reason ?log.reason : "No reason provided" }\n`;
-            // console.log(log);
 
         });
 

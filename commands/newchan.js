@@ -1,4 +1,5 @@
 "use strict";
+const logger = require("../utils/logger");
 
 module.exports = class NewChannelCommand{
 
@@ -24,24 +25,28 @@ module.exports = class NewChannelCommand{
         let name = argsSeperated.shift();
         let topic = argsSeperated.shift();
         let parent = argsSeperated.shift();
-        let chan
+        let chan;
         try{
              chan = await guild.createChannel(name,type)
         }   
         catch(error){
+            logger.error(error);
             this.message.channel.send("Use only alphanumerical characters for the name of the text channel");
             return;
         }
         chan.setTopic(topic);
         if(parent&&type!='category'){
             let parentFound = guild.channels.find(channel => channel.type==null && channel.name.toLowerCase() == parent.toLowerCase());        
-            if(parentFound)
-            chan.setParent(parentFound.id);
-            else{
+            if(parentFound){
+                logger.debug(`Found parent ${parentFound}, setting it as a parent for channel${chan}`);
+                chan.setParent(parentFound.id);
+            }else{
                 let par = await guild.createChannel(parent, 'category');
-                chan.setParent(par);
+                logger.debug(`Parent ${par} created, setting it as a parent for channel${chan}`);
+                await chan.setParent(par);
             }
         }
+        logger.info(`Channel created : ${chan}`);
         this.message.channel.send(`Channel created : ${chan}`);
     }
 }
