@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = class PingCommand{
+module.exports = class LeaveCommand{
 
     constructor(client, message, args){
         this.client = client;

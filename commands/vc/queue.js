@@ -1,6 +1,5 @@
 "use strict";
 const queue = require('../model/database').queue;
-const streamOptions = { seek: 0, volume: 1 };
 
 
 
@@ -42,12 +41,12 @@ module.exports = class QueueCommand{
         else{  
             if(!array){
                 let arr = [url];
-                queue.set(guildId, arr);
-                this.message.channel.send(`Added to the queue`);
+                await queue.set(guildId, arr);
+                this.message.channel.send(`Added to the queue, in position n°${queue.get(guildId).length}`);
             }
-            else if(array.length<2){
-                array.push(url);
-                this.message.channel.send(`Added to the queue`);
+            else if(array.length<10){
+                await array.push(url);
+                this.message.channel.send(`Added to the queue, in position n°${array.length}`);
             }
             else{
                 this.message.channel.send("The queue is full");
