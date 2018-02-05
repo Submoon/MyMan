@@ -18,7 +18,7 @@ module.exports = class JumpDispoCommand{
 
     async run() {
         const avail = Number(this.args[0]);
-        let author = this.message.author;
+        let author = this.message.member;
         
         // Control of the disponibility's value.
         if(avail === 1 || avail === 0){

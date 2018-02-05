@@ -65,10 +65,8 @@ module.exports = class HelpCommand{
         logger.debug(`Sending page ${page} of help`);
 
         //We should use a map
-        let numberOfPages = Math.floor(this.client.commands.length / 25)+1;
-        
-        let currentPage = page < numberOfPages ? page-1: numberOfPages-1;
-
+        var numberOfPages = Math.floor(Object.keys(this.client.commands).length / 25)+1;
+        var currentPage = page < numberOfPages ? page-1: numberOfPages-1;
         
 
         let embed = new Discord.RichEmbed()
