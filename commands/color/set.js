@@ -23,7 +23,6 @@ module.exports = class ColorSetCommand{
         let position = 1;
         let nameRole = `color{${id}}`;
         let [color] = this.args;
-        var x;
 
         if(!color){
             color = "RANDOM";
@@ -47,8 +46,8 @@ module.exports = class ColorSetCommand{
             let role = await this.message.guild.createRole(argrole);
             logger.info(`role ${role} created`);
             logger.debug(`Updating positions of all roles`);
-            var promise = x => new Promise(resolve => guild.setRolePosition(role, position));
-            await promise(x).resolve;  //Updates the positions of the roles, black magic was involved.
+            var promise = (role, position) => new Promise(resolve => {guild.setRolePosition(role, position); resolve();});
+            await promise(role, position);  //Updates the positions of the roles, black magic was involved.
            
             let bot = guild.member(this.client.user);
             let roleBot = bot.highestRole;
@@ -56,7 +55,7 @@ module.exports = class ColorSetCommand{
             position = roleBot.position-1;
             logger.info(`Trying to set role ${role} postion to ${position}. Current position: ${roleBot.position}`);
 
-            try {await promise(x).resolve;}
+            try {await promise(role, position);}
             catch(error){                                                //Sometimes Discord refuses to change the role's position. It happens purely randomly
                 logger.error(`Error while setting role ${role} position to ${position}. Position is still ${role.position}`);
                 logger.error(`Deleting ${role}`);
