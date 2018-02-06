@@ -17,13 +17,21 @@ module.exports = class JumpListCommand{
     }
 
     async run() {
-        let author = this.message.author;
-        if(dispo.size){
+        let author = this.message.member;
+        var hits = 0;
+        
+        for (var [key, value] of dispo) {
+            if(value === 1 && this.message.guild === key.guild){
+                hits++;
+            }
+          }
+        
+        if(dispo.size && hits > 0){
             this.message.channel.send("Here is the list of all available players : ");
             // We are going through the 'dispo' map to return only the players with the disponibility value '1'.
             for (var [key, value] of dispo) {
-                if(value === 1){
-                    this.message.channel.send("**" + key.username + "**");
+                if(value === 1 && this.message.guild === key.guild){
+                    this.message.channel.send("**" + key.user.username + "**");
                 }
               }
         }else{

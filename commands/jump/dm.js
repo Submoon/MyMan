@@ -17,12 +17,12 @@ module.exports = class JumpDMCommand{
     }
 
     async run() {
-        let author = this.message.author;
+        let author = this.message.member;
         let str = this.args.join(" ")
         
         for (var [key, value] of dispo) {
-            if(value === 1){
-                key.send(author.username + " scheduled a jump. You can join the conversation here : " + this.message.channel + (this.args[0] ? "\r\rYou have been told : _" + str + "_" : ""));
+            if(value === 1 && this.message.guild === key.guild){
+                key.send(author.user.username + " scheduled a jump. You can join the conversation here : " + this.message.channel + (this.args[0] ? "\r\rYou have been told : _" + str + "_" : ""));
             }
         }
     }
