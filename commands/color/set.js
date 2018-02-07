@@ -46,17 +46,16 @@ module.exports = class ColorSetCommand{
             let role = await this.message.guild.createRole(argrole);
             logger.info(`role ${role} created`);
             logger.debug(`Updating positions of all roles`);
-            var promise = (role, position) => new Promise(resolve => {guild.setRolePosition(role, position); resolve();});
-            await promise(role, position);  //Updates the positions of the roles, black magic was involved.
-           
+            guild.setRolePosition(role, position);
+            
             let bot = guild.member(this.client.user);
             let roleBot = bot.highestRole;
 
             position = roleBot.position-1;
             logger.info(`Trying to set role ${role} postion to ${position}. Current position: ${roleBot.position}`);
 
-            try {await promise(role, position);}
-            catch(error){                                                //Sometimes Discord refuses to change the role's position. It happens purely randomly
+            try {guild.setRolePosition(role, position);}
+            catch(error){                                                //In case Discord refuses to change the role's position. Unlikely to happen.
                 logger.error(`Error while setting role ${role} position to ${position}. Position is still ${role.position}`);
                 logger.error(`Deleting ${role}`);
                 await role.delete();                                           //Deleting the role and using again the set command makes it work
