@@ -1,4 +1,5 @@
 "use strict";
+const color = require("../../utils/constants").colorok;
 
 module.exports = class ColorListCommand{
 
@@ -16,6 +17,6 @@ module.exports = class ColorListCommand{
     }
 
     async run() {
-        this.message.channel.send("DEFAULT, AQUA, GREEN, BLUE, PURPLE, GOLD, ORANGE, RED, GREY, NAVY, DARK_AQUA, DARK_GREEN, DARK_BLUE, DARK_PURPLE, DARK_GOLD, DARK_ORANGE, DARK_RED, DARK_GREY, DARKER_GREY, LIGHT_GREY, DARK_NAVY, BLURPLE, GREYPLE, DARK_BUT_NOT_BLACK, NOT_QUITE_BLACK, RANDOM");
+        this.message.channel.send(color);
     }
 }    

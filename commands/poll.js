@@ -1,5 +1,6 @@
 "use strict";
 const logger = require("../utils/logger");
+const numbers = require("../utils/constants").poll;
 
 module.exports = class PollCommand{
 
@@ -18,10 +19,6 @@ module.exports = class PollCommand{
 
 
     async run() {
-
-        //Unicode character for :one:, :two:, ...
-        const numbers = ["0⃣", "1⃣", "2⃣", "3⃣", "4⃣", "5⃣", "6⃣", "7⃣", "8⃣", "9⃣"];
-
 
         let time = Number(this.args.shift());
         //Only nine numbers
