@@ -5,9 +5,11 @@ module.exports = {
   development: {
     client: 'pg',
     connection: {
-      database : 'postgres://5.51.141.109/my_man_test',
+      database : 'my_man_test',
       user : config.testdatabaseuser,
-      password : config.testdatabasepassword
+      password : config.testdatabasepassword,
+      host: '5.51.141.109',
+      port: 5432
     },
     migrations: {
       tableName: 'knex_migrations',
@@ -22,9 +24,11 @@ module.exports = {
   production: {
     client: 'pg',
     connection: {
-      database: 'postgres://5.51.141.109/my_man_production',
+      database: 'my_man_production',
       user:     config.productiondatabaseuser,
-      password: config.productiondatabasepassword
+      password: config.productiondatabasepassword,
+      host: '5.51.141.109',
+      port: 5432
     },
     pool: {
       min: 2,
