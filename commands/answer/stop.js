@@ -20,6 +20,7 @@ module.exports = class AutoStopCommand{
     async run() {
        
         let userId = this.message.author.id;
+        let serverId = this.message.guild.id;
         let answer = await Answer.where({
             userId: userId, 
             serverId: serverId
