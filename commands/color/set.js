@@ -20,8 +20,10 @@ module.exports = class ColorSetCommand{
 
         let guild = this.message.guild;
         let id = this.message.author.id;
+        let position = 1;
         let nameRole = `color{${id}}`;
         let [color] = this.args;
+
         if(!color){
             color = "RANDOM";
         }
@@ -39,20 +41,21 @@ module.exports = class ColorSetCommand{
                 name : nameRole,
                 color : color
             }
+
             logger.info(`Creating role ${argrole}`);
             let role = await this.message.guild.createRole(argrole);
             logger.info(`role ${role} created`);
-
             logger.debug(`Updating positions of all roles`);
-            await guild.setRolePosition(role, 1);  //Used to update the positions of the roles, Discord doesn't update it when a role is deleted
-           
+            guild.setRolePosition(role, position);
+            
             let bot = guild.member(this.client.user);
-            let roleBot = bot.highestRole;   
+            let roleBot = bot.highestRole;
 
-            let position = roleBot.position-1;
+            position = roleBot.position-1;
             logger.info(`Trying to set role ${role} postion to ${position}. Current position: ${roleBot.position}`);
-            try {await guild.setRolePosition(role, position);}
-            catch(error){                                                //Sometimes Discord refuses to change the role's position. It happens purely randomly
+
+            try {guild.setRolePosition(role, position);}
+            catch(error){                                                //In case Discord refuses to change the role's position. Unlikely to happen.
                 logger.error(`Error while setting role ${role} position to ${position}. Position is still ${role.position}`);
                 logger.error(`Deleting ${role}`);
                 await role.delete();                                           //Deleting the role and using again the set command makes it work
