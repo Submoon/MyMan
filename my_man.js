@@ -13,6 +13,8 @@ client.config = require("./config.json");
 
 client.commands = {};
 
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 // This loop reads the /events/ folder and attaches each event file to the appropriate event.
 fs.readdir("./events/", (err, files) => {
     if (err) return logger.error(err);
