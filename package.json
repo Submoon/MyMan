@@ -4,6 +4,8 @@
   "description": "MyMan is a custom bot written with discord.js.",
   "main": "index.js",
   "scripts": {
+    "start": "export NODE_ENV=development|| set NODE_ENV=development&& node ./my_man.js",
+    "start_prod": "export NODE_ENV=production|| set NODE_ENV=production&& node ./my_man.js",
     "test": "echo \"No test specified\" && exit 0"
   },
   "repository": {
