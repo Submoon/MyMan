@@ -7,7 +7,7 @@ module.exports = class ReadyEvent{
         this.client = client;
     }
     async run() {
-        logger.info("I am ready!");
+        logger.info(`Bot started in ${process.env.NODE_ENV} mode !`);
     }
 }
 
