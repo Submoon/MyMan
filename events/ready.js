@@ -16,7 +16,7 @@ module.exports = class ReadyEvent{
         let users = client.users;
         let nbOfUsers = users.array().length;
             
-        await client.user.setActivity(`${nbOfUsers} users sleeping`, {type: 'WATCHING'});
+        await client.user.setActivity(`${nbOfUsers} users sleep`, {type: 'WATCHING'});
     }
 }
 
