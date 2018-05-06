@@ -13,8 +13,8 @@ module.exports = class ReadyEvent{
     }
 
     async updateUsers(client) {
-        let users = client.users;
-        let nbOfUsers = users.array().length;
+        let users = client.users.filterArray(u => !u.bot);
+        let nbOfUsers = users.length;
             
         await client.user.setActivity(`${nbOfUsers} users sleep`, {type: 'WATCHING'});
     }
