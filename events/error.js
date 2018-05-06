@@ -8,7 +8,7 @@ module.exports = class ErrorEvent{
         this.error = args.shift();
     }
     async run() {
-        logger.error(`${error.name} : ${error.message}`);
+        logger.error(`${this.error.name} : ${this.error.message}`);
     }
 }
 
