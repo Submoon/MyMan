@@ -42,7 +42,7 @@ module.exports = class PollCommand{
         }
 
         //We don't care about other reacts than the numbers
-        const filter = (reaction, user) => numbers.some(n => n ===reaction.emoji.name);
+        const filter = (reaction, user) => numbers.some(n => n === reaction.emoji.name);
 
         //We wait timeNb*1000 ms for the reactions
         poll.awaitReactions(filter, {time : timeNb*1000})
