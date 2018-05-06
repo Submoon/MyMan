@@ -20,7 +20,12 @@ module.exports = class PollCommand{
 
     async run() {
 
-        let time = Number(this.args.shift());
+        
+        let time = this.args.shift();
+        if(isNaN(time)){
+            return await this.message.channel.send(`'${time}' is not a number`);
+        }
+        let timeNb = Number(time);
         //Only nine numbers
         let choices = this.args.join(" ").split(";").slice(0,9);
 
@@ -39,8 +44,8 @@ module.exports = class PollCommand{
         //We don't care about other reacts than the numbers
         const filter = (reaction, user) => numbers.some(n => n ===reaction.emoji.name);
 
-        //We wait time*1000 ms for the reactions
-        poll.awaitReactions(filter, {time : time*1000})
+        //We wait timeNb*1000 ms for the reactions
+        poll.awaitReactions(filter, {time : timeNb*1000})
         .then(collected => {
 
             let result = "";
