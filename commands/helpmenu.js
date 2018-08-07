@@ -22,11 +22,14 @@ module.exports = class HelpMenuCommand{
     async run() {
         let embed = this.getHelpPageEmbed(1);
         let author = this.message.author; 
-        let message = await author.send({embed});
+        let menu = await this.message.channel.send({embed});
+        for(let i in emojis){
+            await menu.react(`${emojis[i]}`);
+        }
         
         // Create a reaction collector
         const filter = (reaction, user) => emojis.some(e => e === reaction.emoji.name) /*&& user.id === author.id*/
-        const collector = message.createReactionCollector(filter, { time: 120000 });
+        const collector = menu.createReactionCollector(filter, { time: 120000 });
         collector.on('collect', r => console.log(`Collected ${r.emoji.name}`));
         // collector.on('end', collected => console.log(`Collected ${collected.size} items`));
     }
@@ -88,7 +91,7 @@ module.exports = class HelpMenuCommand{
                 break;
             }
             let description = this.getStringDescriptionOfCommand(command);
-            embed = embed.addField(commandName,  description, false); //Not inline
+            embed = embed.addField(`${emojis[i]} ${commandName}`,  description, false); //Not inline
             i++;
         }
         return embed;
