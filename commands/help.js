@@ -4,6 +4,9 @@ const entries = require("../utils/arrayutils").entries;
 const logger = require("../utils/logger");
 const emojis = require("../utils/constants").menuAccepted;
 
+/**
+ * The help command manager
+ */
 module.exports = class HelpCommand{
 
     constructor(client, message, args){
@@ -20,16 +23,26 @@ module.exports = class HelpCommand{
     }
 
 
+    /**
+     * Runs the command
+     */
     async run() {
+        //We check if it's a number or if there are no args
         const nb = Number(this.args[0]);
         if(this.args.length==0 || !isNaN(nb)){
             let page = !isNaN(nb) ? nb : 1;
+            // If it's a number, we print the help page for this page number
             await this.sendMenu(page);
         }else{
+            // If it's a string, we print the help page for this command
             await this.sendHelpForCommand(this.args[0]);
         }
     }
 
+    /**
+     * Sends an embed to the channel displaying help for a specific page
+     * @param {number} page The page number
+     */
     async sendMenu(page){
         let embed = this.getHelpPageEmbed(page);
         let author = this.message.author; 
@@ -46,14 +59,17 @@ module.exports = class HelpCommand{
             //Searching for the emoji index
             let index = emojis.indexOf(r.emoji.name);
             switch(index){
+                //If it's a number emoji
                 case 0:
                 case 1:
                 case 2:
                 case 3:
                 case 4:
+                    // We retrieve the commandName from the embed fields
                     let embed = collect.message.embeds[0];
                     if(index<embed.fields.length){
                         let concernedField = embed.fields[index];
+                        // We retrieve the commandName by deleting the number emoji from the field's name
                         let commandName = concernedField.name.split(' ').splice(-1)[0];
                         logger.info(`That's the command ${commandName}!`)
                         collect.message.delete();
@@ -61,14 +77,17 @@ module.exports = class HelpCommand{
                     }
                     break;
                 case 5:
+                    // Backward arrow
                     collect.message.delete();
                     this.sendMenu(--this.displayedPage);
                     break;
                 case 6:
+                    //Forward arrow 
                     collect.message.delete();
                     this.sendMenu(++this.displayedPage);
                     break;
                 case 7:
+                    //X to exit help
                     collect.message.delete();
                     break;
                 default:
@@ -77,6 +96,11 @@ module.exports = class HelpCommand{
         });
     }
 
+    /**
+     * Creates a help embed for a given command
+     * @param {string} commandName The command name
+     * @return {RichEmbed} The embed
+     */
     getHelpForCommand(commandName){
         logger.debug(`Sending help for command ${commandName}`);
         let lowerCommandName = commandName.toLowerCase();
@@ -96,6 +120,11 @@ module.exports = class HelpCommand{
         return embed;
     }
 
+    /**
+     * Sends an embed for the help page of a command in the current channel
+     * @param {string} commandName The command name
+     * @param {number} returnPage The page which will be displayed if the user click return
+     */
     async sendHelpForCommand(commandName, returnPage = 1){
         let embed = this.getHelpForCommand(commandName);
         let author = this.message.author; 
@@ -114,10 +143,12 @@ module.exports = class HelpCommand{
             let index = acceptedForCommand.indexOf(r.emoji.name);
             switch(index){
                 case 0:
+                    //User clicked back
                     collect.message.delete();
                     this.sendMenu(returnPage);
                     break;
                 case 1:
+                    //X to exit help
                     collect.message.delete();
                     break;
                 default:
@@ -126,6 +157,11 @@ module.exports = class HelpCommand{
         });
     }
 
+    /**
+     * Generates an help embed for a specific page
+     * @param {number} page The page number
+     * @return {RichEmbed} The embed
+     */
     getHelpPageEmbed(page){
         logger.debug(`Sending page ${page} of help`);
 
@@ -158,12 +194,18 @@ module.exports = class HelpCommand{
                 break;
             }
             let description = this.getStringDescriptionOfCommand(command);
+            //Adds a field for this command's description and usage
             embed = embed.addField(`${emojis[i%5]} ${commandName}`,  description, false); //Not inline
             i++;
         }
         return embed;
     }
 
+    /**
+     * Returns the description and usage of a command
+     * @param {Command} command The command
+     * @return {string} The description and usage
+     */
     getStringDescriptionOfCommand(command){
         return command.description ? `${command.description.text}; \nusage: ${command.description.usage}` : "No description provided";
     }
