@@ -1,4 +1,6 @@
 "use strict";
+const logger = require("../utils/logger");
+const numbers = require("../utils/constants").poll;
 
 module.exports = class PollCommand{
 
@@ -18,11 +20,12 @@ module.exports = class PollCommand{
 
     async run() {
 
-        //Unicode character for :one:, :two:, ...
-        const numbers = ["0⃣", "1⃣", "2⃣", "3⃣", "4⃣", "5⃣", "6⃣", "7⃣", "8⃣", "9⃣"];
-
-
-        let time = Number(this.args.shift());
+        
+        let time = this.args.shift();
+        if(isNaN(time)){
+            return await this.message.channel.send(`'${time}' is not a number`);
+        }
+        let timeNb = Number(time);
         //Only nine numbers
         let choices = this.args.join(" ").split(";").slice(0,9);
 
@@ -39,10 +42,10 @@ module.exports = class PollCommand{
         }
 
         //We don't care about other reacts than the numbers
-        const filter = (reaction, user) => numbers.some(n => n ===reaction.emoji.name);
+        const filter = (reaction, user) => numbers.some(n => n === reaction.emoji.name);
 
-        //We wait time*1000 ms for the reactions
-        poll.awaitReactions(filter, {time : time*1000})
+        //We wait timeNb*1000 ms for the reactions
+        poll.awaitReactions(filter, {time : timeNb*1000})
         .then(collected => {
 
             let result = "";
@@ -61,6 +64,7 @@ module.exports = class PollCommand{
             poll.channel.send(result);
         })
         .catch(exception =>{
+            logger.error(exception);
             poll.channel.send(exception);
         })
 

@@ -2,5 +2,9 @@
     "token":"MY TOKEN",
     "adminId":"My user Id",
     "prefix":"!",
-    "dropboxAccessToken": "dropboxAccessToken"
+    "dropboxAccessToken": "dropboxAccessToken",
+    "productiondatabaseuser" : "productiondatabaseuser",
+    "productiondatabasepassword" : "productiondatabasepassword",
+    "testdatabaseuser" : "testdatabaseuser",
+    "testdatabasepassword" : "testdatabasepassword"
 }

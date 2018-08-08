@@ -4,6 +4,8 @@
   "description": "MyMan is a custom bot written with discord.js.",
   "main": "index.js",
   "scripts": {
+    "start": "export NODE_ENV=development|| set NODE_ENV=development&& node ./my_man.js",
+    "start_prod": "export NODE_ENV=production|| set NODE_ENV=production&& node ./my_man.js",
     "test": "echo \"No test specified\" && exit 0"
   },
   "repository": {
@@ -19,12 +21,16 @@
   "homepage": "https://github.com/Submoon/MyMan#readme",
   "dependencies": {
     "axios": "^0.17.1",
-    "cheerio": "^1.0.0-rc.2",
-    "discord.js": "^11.3.0",
+    "bookshelf": "^0.13.3",
+    "discord.js": "^11.3.2",
     "dropbox": "^2.5.13",
     "glob": "^7.1.2",
     "jszip": "^3.1.5",
-    "lodash": "^4.17.4",
-    "moment": "^2.20.1"
+    "knex": "^0.14.6",
+    "lodash": "^4.17.10",
+    "moment": "^2.22.2",
+    "pg": "^7.4.3",
+    "winston": "^2.4.3",
+    "winston-daily-rotate-file": "^1.7.2"
   }
 }
