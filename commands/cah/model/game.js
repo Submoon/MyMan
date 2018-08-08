@@ -7,6 +7,7 @@ module.exports =  class Game{
     constructor(channel){
         this.channel = channel;
         this.allCards = require("./cahcards.json");
+        /**@property {Map<string, Player>} players*/
         this.players = new Map();
         this.turn = 0;
         this.deckWhiteCards = _.shuffle(this.allCards.whiteCards);

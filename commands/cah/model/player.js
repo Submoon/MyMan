@@ -3,16 +3,33 @@
 const cheerio = require('cheerio');
 const Discord = require("discord.js");
 
+/**
+ * @class Player
+ */
 module.exports =  class Player{
+
+    /**
+     * @param {User} user The user
+     */
     constructor(user){
+        /**@property {User} user*/
         this.user = user;
+        /**@property {Card[]} cards*/
         this.cards = [];
     }
 
+    /**
+     * Player draws the specified card
+     * @param {card} card The card
+     */
     drawCard(card){
         this.cards.push(card);
     }
 
+    /**
+     * Displays the user cards as an embed
+     * @return {RichEmbed} An embed
+     */
     printCards(){
         // let text = "```Markdown\n";
 
