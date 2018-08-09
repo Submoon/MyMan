@@ -1,5 +1,4 @@
-"use strict";
-module.exports.entries = function* entries(obj) {
+export function* entries(obj: any){
     for (let key of Object.keys(obj)) {
         yield [key, obj[key]];
     }

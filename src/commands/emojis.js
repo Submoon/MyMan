@@ -5,7 +5,7 @@ const Dropbox = require("dropbox");
 const JSZip = require("jszip");
 const logger = require("../utils/logger");
 
-module.exports = class EmojiCommand{
+module.exports = class EmojiCommand extends BaseCommand{
 
     constructor(client, message, args){
         this.client = client;

@@ -1,6 +1,8 @@
 // Update with your config settings.
-const config = require("./config.json");
-module.exports = {
+import config = require('../config.json');
+import * as Knex from 'knex';
+
+export default {
 
   development: {
     client: 'pg',
@@ -19,7 +21,7 @@ module.exports = {
       directory: __dirname + '/db/seeds/development'
     }
 
-  },
+  } as Knex.Config,
 
   production: {
     client: 'pg',
@@ -41,6 +43,6 @@ module.exports = {
     seeds: {
       directory: __dirname + '/db/seeds/production'
     }
-  }
+  } as Knex.Config
 
 };

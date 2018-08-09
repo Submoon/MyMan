@@ -1,23 +1,24 @@
 "use strict";
-const Discord = require("discord.js");
-const fs = require("fs");
-const _ = require("lodash");
-const glob = require("glob");
-const logger = require('./utils/logger');
-const Answer = require("./db/models/autoanswer");
+import * as Discord from 'discord.js';
+import {IExtendedClient, IConfig} from './api';
+import * as fs from 'fs'
+import * as glob from 'glob';
+import logger from './utils/logger';
+import AutoAnswer from './db/models/autoanswer';
 
 
-const client = new Discord.Client();
 
-client.config = require("./config.json");
+const client = new Discord.Client() as IExtendedClient;
 
-client.commands = {};
+client.config = (require("./config.json") as IConfig);
+
+client.commands = [];
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 // This loop reads the /events/ folder and attaches each event file to the appropriate event.
 fs.readdir("./events/", (err, files) => {
-    if (err) return logger.error(err);
+    if (err) return logger.error(err.message);
     files.forEach(file => {
       let Event = require(`./events/${file}`);
       let eventName = file.split(".")[0];
@@ -46,20 +47,10 @@ commandFiles.forEach(file => {
 
 });
 
-// fs.readdir("./commands", (err, files) => {
-//   if (err) return logger.error(err);
-//   files.forEach(file => {
-//     let command = require(`./commands/${file}`);
-
-//     let commandName = file.split(".")[0];
-//     client.commands[commandName] = command;
-//   });
-// });
-
 client.on("message", message => {
   if (message.author.bot) return;
   for(let [id, user] of message.mentions.users){
-    Answer.where({userId: id, serverId: message.guild.id}).fetch().then(ans => {
+    AutoAnswer.where({userId: id, serverId: message.guild.id}).fetch().then(ans => {
       if(ans) message.channel.send(`${user} said : ${ans.toJSON().autoanswer}`);
     });
   }

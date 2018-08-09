@@ -1,18 +1,15 @@
-"use strict";
-const logger = require('../utils/logger');
+import logger from '../utils/logger';
+import {BaseEvent, IExtendedClient} from '../api';
 
-module.exports = class ReadyEvent{
+export default class ReadyEvent extends BaseEvent{
 
-    constructor(client, ...args){
-        this.client = client;
-    }
     async run() {
         logger.info(`Bot started in ${process.env.NODE_ENV} mode !`);
         this.updateUsers(this.client);
         this.client.setInterval(this.updateUsers, 60000, this.client);
     }
 
-    async updateUsers(client) {
+    async updateUsers(client: IExtendedClient) {
         let users = client.users.filterArray(u => !u.bot);
         let nbOfUsers = users.length;
             

@@ -1,5 +1,4 @@
-'use strict';
-const winston = require('winston');
+import * as Winston from 'winston';
 const fs = require('fs');
 const env = process.env.NODE_ENV || 'development';
 const logDir = '../logs';
@@ -8,10 +7,10 @@ if (!fs.existsSync(logDir)) {
   fs.mkdirSync(logDir);
 }
 const tsFormat = () => (new Date()).toLocaleTimeString();
-const logger = new (winston.Logger)({
+const logger = new (Winston.Logger)({
   transports: [
     // colorize the output to the console
-    new (winston.transports.Console)({
+    new (Winston.transports.Console)({
       timestamp: tsFormat,
       colorize: true,
       level: 'debug'
@@ -26,4 +25,4 @@ const logger = new (winston.Logger)({
   ]
 });
 
-module.exports = logger;
+export default logger;
