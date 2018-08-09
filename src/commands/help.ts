@@ -1,18 +1,18 @@
 "use strict";
-const Discord = require("discord.js");
-const entries = require("../utils/arrayutils").entries;
-const logger = require("../utils/logger");
-const emojis = require("../utils/constants").menuAccepted;
-
+import { RichEmbed, Message } from "discord.js";
+import { entries } from "../utils/arrayutils";
+import logger from "../utils/logger";
+import {ICommand, BaseCommand} from '../api';
+import Constants from '../utils/constants';
+const emojis = Constants.MENUACCEPTED
 /**
  * The help command manager
  */
-module.exports = class HelpCommand{
+export default class HelpCommand extends BaseCommand{
 
+    public displayedPage: number;
     constructor(client, message, args){
-        this.client = client;
-        this.message = message;
-        this.args = args;
+        super(client, message, args);
     }
 
     static get description(){
@@ -46,7 +46,7 @@ module.exports = class HelpCommand{
     async sendMenu(page){
         let embed = this.getHelpPageEmbed(page);
         let author = this.message.author; 
-        let menu = await this.message.channel.send({embed});
+        let menu = await this.message.channel.send({embed}) as Message;
         for(let i in emojis){
             await menu.react(`${emojis[i]}`);
         }
@@ -66,32 +66,32 @@ module.exports = class HelpCommand{
                 case 3:
                 case 4:
                     // We retrieve the commandName from the embed fields
-                    let embed = collect.message.embeds[0];
+                    let embed = r.message.embeds[0];
                     if(index<embed.fields.length){
                         let concernedField = embed.fields[index];
                         // We retrieve the commandName by deleting the number emoji from the field's name
                         let commandName = concernedField.name.split(' ').splice(-1)[0];
                         logger.info(`That's the command ${commandName}!`)
-                        collect.message.delete();
+                        r.message.delete();
                         this.sendHelpForCommand(commandName, this.displayedPage);
                     }
                     break;
                 case 5:
                     // Backward arrow
-                    collect.message.delete();
+                    r.message.delete();
                     this.sendMenu(--this.displayedPage);
                     break;
                 case 6:
                     //Forward arrow 
-                    collect.message.delete();
+                    r.message.delete();
                     this.sendMenu(++this.displayedPage);
                     break;
                 case 7:
                     //X to exit help
-                    collect.message.delete();
+                    r.message.delete();
                     break;
                 default:
-                    logger.error("What are you doing here, little one?");
+                logger.error("What are you doing here, little one?");
             }
         });
     }
@@ -105,7 +105,7 @@ module.exports = class HelpCommand{
         logger.debug(`Sending help for command ${commandName}`);
         let lowerCommandName = commandName.toLowerCase();
         let command = this.client.commands[lowerCommandName];
-        let embed = new Discord.RichEmbed()
+        let embed = new RichEmbed()
         .setAuthor(this.client.user.username, this.client.user.avatarURL)
         .setColor(0x00AE86)
         .setDescription("A list of all commands available for the bot");
@@ -128,7 +128,7 @@ module.exports = class HelpCommand{
     async sendHelpForCommand(commandName, returnPage = 1){
         let embed = this.getHelpForCommand(commandName);
         let author = this.message.author; 
-        let menu = await this.message.channel.send({embed});
+        let menu = await this.message.channel.send({embed}) as Message;
         let acceptedForCommand = [emojis[5], emojis[7]];
         for(let i in acceptedForCommand){
             await menu.react(`${acceptedForCommand[i]}`);
@@ -144,12 +144,12 @@ module.exports = class HelpCommand{
             switch(index){
                 case 0:
                     //User clicked back
-                    collect.message.delete();
+                    r.message.delete();
                     this.sendMenu(returnPage);
                     break;
                 case 1:
                     //X to exit help
-                    collect.message.delete();
+                    r.message.delete();
                     break;
                 default:
                     logger.error("What are you doing here, little one?");
@@ -171,7 +171,7 @@ module.exports = class HelpCommand{
         currentPage = currentPage < 0 ? 0 : currentPage;
         this.displayedPage = currentPage+1;
 
-        let embed = new Discord.RichEmbed()
+        let embed = new RichEmbed()
         .setTitle("Help")
         .setAuthor(this.client.user.username, this.client.user.avatarURL)
         .setColor(0x00AE86)
@@ -203,10 +203,10 @@ module.exports = class HelpCommand{
 
     /**
      * Returns the description and usage of a command
-     * @param {Command} command The command
+     * @param {ICommand} command The command
      * @return {string} The description and usage
      */
-    getStringDescriptionOfCommand(command){
+    getStringDescriptionOfCommand(command: ICommand): string{
         return command.description ? `${command.description.text}; \nusage: ${command.description.usage}` : "No description provided";
     }
 }

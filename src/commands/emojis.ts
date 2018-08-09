@@ -1,16 +1,14 @@
 "use strict";
-const axios = require("axios");
-const fs = require("fs");
-const Dropbox = require("dropbox");
-const JSZip = require("jszip");
-const logger = require("../utils/logger");
+import axios, { AxiosRequestConfig } from 'axios';
+import JSZip = require("jszip");
+import logger from '../utils/logger';
+import {IExtendedClient, BaseCommand} from '../api';
+import {Dropbox} from 'dropbox';
 
-module.exports = class EmojiCommand extends BaseCommand{
+export default class EmojiCommand extends BaseCommand{
 
     constructor(client, message, args){
-        this.client = client;
-        this.message = message;
-        this.args = args;
+        super(client, message, args);
     }
 
     static get description(){
@@ -21,7 +19,7 @@ module.exports = class EmojiCommand extends BaseCommand{
     }
 
     async run() {
-        var dbx = new Dropbox({ accessToken: this.client.config.dropboxAccessToken });
+        var dbx = new Dropbox({ accessToken: this.client.config.dropboxAccessToken } as DropboxTypes.DropboxOptions);
         var zip = new JSZip();
         let guild = this.message.guild;
         logger.info(`Processing emojis of guild ${guild}...`);
@@ -37,7 +35,7 @@ module.exports = class EmojiCommand extends BaseCommand{
                 headers: {
                 'Content-Type': 'image',
                 }
-            });
+            } as AxiosRequestConfig);
 
             let name = emoji.name;
             zip.file(`${name}.${ext}`, result.data);
@@ -48,15 +46,15 @@ module.exports = class EmojiCommand extends BaseCommand{
         logger.debug(`Generating zip file...`);
         let content = await zip.generateAsync({type:"nodebuffer"});
         let chemin = `/${guild.name}.zip`;
-        let uploadArgs = {
+        let uploadArgs = <DropboxTypes.files.CommitInfo>{
             contents : content,
             path : chemin,
             mode:{".tag":"overwrite"}
-            
         };
+
         let fileMetadata = await dbx.filesUpload(uploadArgs);
         logger.info(`Uploaded zip file to ${chemin}`);
-        let shareArgs = {
+        let shareArgs = <DropboxTypes.sharing.CreateSharedLinkArg>{
             path : chemin,
             short_url : true
         };
@@ -65,7 +63,4 @@ module.exports = class EmojiCommand extends BaseCommand{
         this.message.author.send(sharing.url);
         logger.info(`Sent sharing link to user ${this.message.author}`);
     }
-
-
-
 }

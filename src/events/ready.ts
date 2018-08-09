@@ -9,7 +9,7 @@ export default class ReadyEvent extends BaseEvent{
         this.client.setInterval(this.updateUsers, 60000, this.client);
     }
 
-    async updateUsers(client: IExtendedClient) {
+    async updateUsers(client: IExtendedClient) : Promise<void>{
         let users = client.users.filterArray(u => !u.bot);
         let nbOfUsers = users.length;
             

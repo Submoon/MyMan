@@ -1,6 +1,6 @@
 "use strict";
 
-export class Constants{
+export default class Constants{
 
     static readonly NUMBERS = ["0⃣", "1⃣", "2⃣", "3⃣", "4⃣", "5⃣", "6⃣", "7⃣", "8⃣", "9⃣"];
     

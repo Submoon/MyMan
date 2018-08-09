@@ -23,7 +23,7 @@
     "axios": "^0.17.1",
     "bookshelf": "^0.13.3",
     "discord.js": "^11.3.2",
-    "dropbox": "^2.5.13",
+    "dropbox": "^4.0.9",
     "glob": "^7.1.2",
     "jszip": "^3.1.5",
     "knex": "^0.14.6",
@@ -36,6 +36,7 @@
   "devDependencies": {
     "@types/bookshelf": "^0.9.9",
     "@types/glob": "^5.0.35",
+    "@types/jszip": "^3.1.4",
     "@types/knex": "^0.14.20",
     "@types/lodash": "^4.14.116",
     "@types/node": "^10.5.7",

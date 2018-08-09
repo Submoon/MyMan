@@ -26,14 +26,12 @@ export interface ICommand {
     client: IExtendedClient;
     message: Discord.Message;
     args: string[];
-    description: IDescription;
     run(): Promise<void>;
 }
 
 export abstract class BaseCommand implements ICommand{
     public constructor(public client: IExtendedClient, public message: Discord.Message, public args: string[]){
     }
-    description: IDescription;
     abstract run(): Promise<void>;
 }
 
