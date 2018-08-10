@@ -7,7 +7,9 @@
     "start": "export NODE_ENV=development|| set NODE_ENV=development&& node ./my_man.js",
     "start_prod": "export NODE_ENV=production|| set NODE_ENV=production&& node ./my_man.js",
     "test": "echo \"No test specified\" && exit 0",
-    "lint": "tslint src/**/*.ts -t verbose"
+    "lint": "tslint src/**/*.ts -t verbose",
+    "migratedb": "knex migrate:latest",
+    "tscwatch": "tsc -watch"
   },
   "repository": {
     "type": "git",
