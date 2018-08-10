@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Lancer le programme",
-            "program": "${workspaceFolder}\\my_man.js"
+            "program": "${workspaceFolder}\\built\\src\\my_man.js"
         }
     ]
 }

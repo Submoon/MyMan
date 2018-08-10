@@ -47,7 +47,7 @@ export default class HelpCommand extends BaseCommand {
         const embed = this.getHelpPageEmbed(page);
         const author = this.message.author;
         const menu = await this.message.channel.send({embed}) as Message;
-        for (const [i, e] of emojis.values()) {
+        for (const e of emojis) {
             await menu.react(`${e}`);
         }
 

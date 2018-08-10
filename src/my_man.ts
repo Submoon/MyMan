@@ -46,8 +46,11 @@ commandFiles.forEach((file) => {
 client.on("message", (message) => {
     if (message.author.bot) { return; }
     for (const [id, user] of message.mentions.users) {
-        AutoAnswer.where<AutoAnswer>({userId: id, serverId: message.guild.id}).fetch().then((ans) => {
+        AutoAnswer.where<AutoAnswer>({userId: id, serverId: message.guild.id}).fetch()
+        .then((ans) => {
             if (ans) { message.channel.send(`${user} said : ${ans.toJSON().autoanswer}`); }
+        }).catch((e) => {
+            logger.error(`Error while trying to access to autoanswers ${e.message}`);
         });
     }
     if (message.content.indexOf(client.config.prefix) !== 0) { return; }

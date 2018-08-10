@@ -11,8 +11,8 @@ export default class ReadyEvent extends BaseEvent {
     }
 
     public async updateUsers(client: IExtendedClient): Promise<void> {
-        const users = client.users.filterArray((u) => !u.bot);
-        const nbOfUsers = users.length;
+        const users = client.users.filter((u) => !u.bot);
+        const nbOfUsers = users.size;
 
         await client.user.setActivity(`${nbOfUsers} users sleep`, {type: "WATCHING"});
     }
