@@ -2,8 +2,10 @@ import * as Discord from "discord.js";
 import * as fs from "fs";
 import * as glob from "glob";
 import * as path from "path";
-import {IConfig, IExtendedClient} from "./api";
+import {IConfig, IEvent, IExtendedClient} from "./api";
+import CommandCreator from "./commandcreator";
 import AutoAnswer from "./db/models/autoanswer";
+import EventCreator from "./eventcreator";
 import logger from "./utils/logger";
 
 const client = new Discord.Client() as IExtendedClient;
@@ -19,16 +21,13 @@ fs.readdir(path.join(__dirname, "./events/"), (err, files) => {
     if (err) { return logger.error(err.message); }
     logger.info(files.toString());
     files.forEach((file) => {
-        const Event = require(`./events/${file}`);
+        const eventClass = require(`./events/${file}`).default;
         const eventName = file.split(".")[0];
         // super-secret recipe to call events with all their proper arguments *after* the `client` var.
-        client.on(eventName, (...args) =>
-        new Event(client, ...args).run()
-        .catch((ex) => {
-            logger.error(ex);
-        }),
-    );
-});
+        client.on(eventName, (...args) => {
+            (new eventClass(client, ...args) as IEvent).run();
+        });
+    });
 });
 
 const pattern = "**/*.js";
@@ -38,10 +37,10 @@ const commandFiles = glob.sync(pattern, {cwd: path.join(__dirname, "./commands/"
 logger.info(`Command files found: [${commandFiles}]`);
 
 commandFiles.forEach((file) => {
-    const command = require(`./commands/${file}`);
+    const commandClass = require(`./commands/${file}`).default;
 
     const commandName = file.replace(/\//g, "_").split(".")[0];
-    client.commands[commandName] = command;
+    client.commands[commandName] = commandClass;
     logger.info(`Command registered : ${commandName}`);
 
 });
@@ -64,8 +63,8 @@ client.on("message", (message) => {
         if (!client.commands[commandName]) {
             return;
         }
-        const Command = client.commands[commandName];
-        new Command(client, message, args)
+        const commandClass = client.commands[commandName];
+        new commandClass(client, message, args)
         .run()
         .then(() => {
             // Everything is fine
