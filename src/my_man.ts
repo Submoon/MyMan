@@ -1,22 +1,23 @@
-"use strict";
 import * as Discord from "discord.js";
 import * as fs from "fs";
 import * as glob from "glob";
+import * as path from "path";
 import {IConfig, IExtendedClient} from "./api";
 import AutoAnswer from "./db/models/autoanswer";
 import logger from "./utils/logger";
 
 const client = new Discord.Client() as IExtendedClient;
 
-client.config = (require("./config.json") as IConfig);
+client.config = (require("../config.json") as IConfig);
 
 client.commands = [];
 
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
 
 // This loop reads the /events/ folder and attaches each event file to the appropriate event.
-fs.readdir("./events/", (err, files) => {
+fs.readdir(path.join(__dirname, "./events/"), (err, files) => {
     if (err) { return logger.error(err.message); }
+    logger.info(files.toString());
     files.forEach((file) => {
         const Event = require(`./events/${file}`);
         const eventName = file.split(".")[0];
@@ -32,7 +33,7 @@ fs.readdir("./events/", (err, files) => {
 
 const pattern = "**/*.js";
 
-const commandFiles = glob.sync(pattern, {cwd: "./commands/", ignore: "**/model/**"});
+const commandFiles = glob.sync(pattern, {cwd: path.join(__dirname, "./commands/"), ignore: "**/model/**"});
 
 logger.info(`Command files found: [${commandFiles}]`);
 

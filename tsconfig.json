@@ -5,10 +5,14 @@
         "checkJs": true,
         "target": "es2017",
         "module": "commonjs",
-        "lib": ["es2017"],
-        "resolveJsonModule": true
+        "lib": ["es2017",
+            "dom"],
+        "resolveJsonModule": true,
     },
     "include": [
         "./src/**/*"
-    ]
+    ],
+    "exclude": [
+        "./node_modules"
+        ]
 }

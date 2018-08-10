@@ -23,7 +23,7 @@ export default class EmojiCommand extends BaseCommand {
         const zip = new JSZip();
         const guild = this.message.guild;
         logger.info(`Processing emojis of guild ${guild}...`);
-        for (const [, emoji] of guild.emojis) {
+        for (const  emoji of guild.emojis.array()) {
             const urlArray = emoji.url.split(".");
             const ext = urlArray[urlArray.length - 1];
             logger.debug(`Downloading emoji ${emoji.url}`);
