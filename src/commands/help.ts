@@ -1,6 +1,6 @@
 "use strict";
 import { Message, RichEmbed} from "discord.js";
-import {ICommand, IDescription} from "../api";
+import {ICommand, IDescription, IExtendedClient} from "../api";
 import BaseCommand from "../basecommand";
 import { entries } from "../utils/arrayutils";
 import Constants from "../utils/constants";
@@ -12,7 +12,7 @@ const emojis = Constants.MENUACCEPTED;
 export default class HelpCommand extends BaseCommand {
 
     public displayedPage: number;
-    public constructor(client, message, args) {
+    public constructor(client: IExtendedClient, message: Message, args: string[]) {
         super(client, message, args);
     }
 

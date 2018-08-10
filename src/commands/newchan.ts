@@ -1,12 +1,12 @@
 "use strict";
-import { CategoryChannel, TextChannel, VoiceChannel } from "discord.js";
-import { IDescription } from "../api";
+import { CategoryChannel, Message, TextChannel, VoiceChannel } from "discord.js";
+import { IDescription, IExtendedClient } from "../api";
 import BaseCommand from "../basecommand";
 import logger from "../utils/logger";
 
 export default class NewChannelCommand extends BaseCommand {
 
-    public constructor(client, message, args) {
+    public constructor(client: IExtendedClient, message: Message, args: string[]) {
         super(client, message, args);
     }
 
