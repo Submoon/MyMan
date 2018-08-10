@@ -2,10 +2,8 @@ import * as Discord from "discord.js";
 import * as fs from "fs";
 import * as glob from "glob";
 import * as path from "path";
-import {IConfig, IEvent, IExtendedClient} from "./api";
-import CommandCreator from "./commandcreator";
+import {ICommandConstructor, IConfig, IEvent, IEventConstructor, IExtendedClient} from "./api";
 import AutoAnswer from "./db/models/autoanswer";
-import EventCreator from "./eventcreator";
 import logger from "./utils/logger";
 
 const client = new Discord.Client() as IExtendedClient;
@@ -21,7 +19,7 @@ fs.readdir(path.join(__dirname, "./events/"), (err, files) => {
     if (err) { return logger.error(err.message); }
     logger.info(files.toString());
     files.forEach((file) => {
-        const eventClass = require(`./events/${file}`).default;
+        const eventClass = require(`./events/${file}`).default as IEventConstructor;
         const eventName = file.split(".")[0];
         // super-secret recipe to call events with all their proper arguments *after* the `client` var.
         client.on(eventName, (...args) => {
@@ -37,7 +35,7 @@ const commandFiles = glob.sync(pattern, {cwd: path.join(__dirname, "./commands/"
 logger.info(`Command files found: [${commandFiles}]`);
 
 commandFiles.forEach((file) => {
-    const commandClass = require(`./commands/${file}`).default;
+    const commandClass = require(`./commands/${file}`).default as ICommandConstructor;
 
     const commandName = file.replace(/\//g, "_").split(".")[0];
     client.commands[commandName] = commandClass;
@@ -63,7 +61,7 @@ client.on("message", (message) => {
         if (!client.commands[commandName]) {
             return;
         }
-        const commandClass = client.commands[commandName];
+        const commandClass = client.commands[commandName] as ICommandConstructor;
         new commandClass(client, message, args)
         .run()
         .then(() => {

@@ -1,4 +1,5 @@
 import * as Discord from "discord.js";
+import { Message } from "discord.js";
 
 export interface IConfig {
     token: "NDAzMjEzMzgzNDg4MzcyNzQ4.DUECDA.9ToUPg27IHvWgWmtjcw0kiLcrO0";
@@ -13,7 +14,7 @@ export interface IConfig {
 
 export interface IExtendedClient extends Discord.Client {
     config: IConfig;
-    commands: ICommand[];
+    commands: ICommandConstructor[];
 }
 
 export interface IDescription {
@@ -32,4 +33,12 @@ export interface IEvent {
     client: IExtendedClient;
     args: any[];
     run(): Promise<void>;
+}
+
+export interface IEventConstructor {
+    new (client: IExtendedClient, ...args: any[]): IEvent;
+}
+
+export interface ICommandConstructor {
+    new (client: IExtendedClient, message: Message,  ...args: any[]): ICommand;
 }
