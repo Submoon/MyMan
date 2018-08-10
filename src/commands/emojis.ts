@@ -1,65 +1,63 @@
-"use strict";
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig } from "axios";
+import {Dropbox} from "dropbox";
 import JSZip = require("jszip");
-import logger from '../utils/logger';
-import {IExtendedClient, BaseCommand} from '../api';
-import {Dropbox} from 'dropbox';
+import { IDescription } from "../api";
+import BaseCommand from "../basecommand";
+import logger from "../utils/logger";
 
-export default class EmojiCommand extends BaseCommand{
+export default class EmojiCommand extends BaseCommand {
 
-    constructor(client, message, args){
+    public constructor(client, message, args) {
         super(client, message, args);
     }
 
-    static get description(){
+    static get description(): IDescription {
         return  {
-            text:"Saves the emojis of this guild and uploads them to Dropbox",
-            usage: "emojis"
+            text: "Saves the emojis of this guild and uploads them to Dropbox",
+            usage: "emojis",
         };
     }
 
-    async run() {
-        var dbx = new Dropbox({ accessToken: this.client.config.dropboxAccessToken } as DropboxTypes.DropboxOptions);
-        var zip = new JSZip();
-        let guild = this.message.guild;
+    public async run() {
+        const dbx = new Dropbox({ accessToken: this.client.config.dropboxAccessToken } as DropboxTypes.DropboxOptions);
+        const zip = new JSZip();
+        const guild = this.message.guild;
         logger.info(`Processing emojis of guild ${guild}...`);
-        for(let [key, emoji] of guild.emojis) {
-            let urlArray = emoji.url.split(".");
-            let ext = urlArray[urlArray.length-1];
+        for (const [, emoji] of guild.emojis) {
+            const urlArray = emoji.url.split(".");
+            const ext = urlArray[urlArray.length - 1];
             logger.debug(`Downloading emoji ${emoji.url}`);
 
-            let result = await axios.request({
-                responseType: 'arraybuffer',
-                url: emoji.url,
-                method: 'get',
+            const result = await axios.request({
                 headers: {
-                'Content-Type': 'image',
-                }
+                    "Content-Type": "image",
+                },
+                method: "get",
+                responseType: "arraybuffer",
+                url: emoji.url,
             } as AxiosRequestConfig);
 
-            let name = emoji.name;
+            const name = emoji.name;
             zip.file(`${name}.${ext}`, result.data);
             logger.debug(`Added emoji ${name} to zip file`);
-            
-            
         }
         logger.debug(`Generating zip file...`);
-        let content = await zip.generateAsync({type:"nodebuffer"});
-        let chemin = `/${guild.name}.zip`;
-        let uploadArgs = <DropboxTypes.files.CommitInfo>{
+        const content = await zip.generateAsync({type: "nodebuffer"});
+        const chemin = `/${guild.name}.zip`;
+        const uploadArgs = {
             contents : content,
+            mode: {".tag": "overwrite"},
             path : chemin,
-            mode:{".tag":"overwrite"}
-        };
+        } as DropboxTypes.files.CommitInfo;
 
-        let fileMetadata = await dbx.filesUpload(uploadArgs);
+        const fileMetadata = await dbx.filesUpload(uploadArgs);
         logger.info(`Uploaded zip file to ${chemin}`);
-        let shareArgs = <DropboxTypes.sharing.CreateSharedLinkArg>{
+        const shareArgs = {
             path : chemin,
-            short_url : true
-        };
-        
-        let sharing = await dbx.sharingCreateSharedLink(shareArgs);
+            short_url : true,
+        } as DropboxTypes.sharing.CreateSharedLinkArg;
+
+        const sharing = await dbx.sharingCreateSharedLink(shareArgs);
         this.message.author.send(sharing.url);
         logger.info(`Sent sharing link to user ${this.message.author}`);
     }

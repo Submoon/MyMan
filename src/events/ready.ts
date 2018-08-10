@@ -1,21 +1,19 @@
-import logger from '../utils/logger';
-import {BaseEvent, IExtendedClient} from '../api';
+import {IExtendedClient} from "../api";
+import BaseEvent from "../baseevent";
+import logger from "../utils/logger";
 
-export default class ReadyEvent extends BaseEvent{
+export default class ReadyEvent extends BaseEvent {
 
-    async run() {
+    public async run() {
         logger.info(`Bot started in ${process.env.NODE_ENV} mode !`);
         this.updateUsers(this.client);
         this.client.setInterval(this.updateUsers, 60000, this.client);
     }
 
-    async updateUsers(client: IExtendedClient) : Promise<void>{
-        let users = client.users.filterArray(u => !u.bot);
-        let nbOfUsers = users.length;
-            
-        await client.user.setActivity(`${nbOfUsers} users sleep`, {type: 'WATCHING'});
+    public async updateUsers(client: IExtendedClient): Promise<void> {
+        const users = client.users.filterArray((u) => !u.bot);
+        const nbOfUsers = users.length;
+
+        await client.user.setActivity(`${nbOfUsers} users sleep`, {type: "WATCHING"});
     }
 }
-
-
-    

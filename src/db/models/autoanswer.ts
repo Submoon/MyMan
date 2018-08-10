@@ -1,9 +1,9 @@
-import Database from '../database';
+import Database from "../database";
 
-let db = Database.getInstance();
-let Bookshelf = db.getBookshelf();
+const db = Database.getInstance();
+const Bookshelf = db.getBookshelf();
 
-export default class AutoAnswer extends Bookshelf.Model<AutoAnswer>{
-  get tableName(){ return "autoanswers"; }
-  get hasTimestamps(){ return true; };
+export default class AutoAnswer extends Bookshelf.Model<AutoAnswer> {
+  get tableName() { return "autoanswers"; }
+  get hasTimestamps() { return true; }
 }

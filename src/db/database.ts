@@ -1,44 +1,39 @@
 // database.js
-import * as Knex from 'knex';
-import * as Bookshelf from 'bookshelf';
-import knexfile from '../knexfile';
+import * as Bookshelf from "bookshelf";
+import * as Knex from "knex";
+import knexfile from "../knexfile";
 
-'use strict';
+export default class Database {
 
-export default class Database{
+    public static getInstance(): Database {
+        return Database.instance;
+    }
 
-    private static _instance : Database = new Database();
+    private static instance: Database = new Database();
 
-    protected _knex:any = null;
+    protected knex: Knex = null;
 
-    protected _bookshelf : Bookshelf = null;
+    protected bookshelf: Bookshelf = null;
 
-    constructor() {
-        if(Database._instance){
+    protected constructor() {
+        if (Database.instance) {
             throw new Error("Error: Instantiation failed: Use Database.getInstance() instead of new.");
         }
 
-        this._knex = Knex(knexfile[process.env.NODE_ENV || 'development']);
+        this.knex = Knex(knexfile[process.env.NODE_ENV || "development"]);
 
-        this._bookshelf = Bookshelf(this._knex);
+        this.bookshelf = Bookshelf(this.knex);
 
-        this._bookshelf.plugin('registry');
+        this.bookshelf.plugin("registry");
 
-        Database._instance = this;
+        Database.instance = this;
     }
 
-    public static getInstance():Database
-    {
-        return Database._instance;
+    public getKnex(): any {
+        return this.knex;
     }
 
-    public getKnex(): any
-    {
-        return this._knex;
-    }
-
-    public getBookshelf(): Bookshelf
-    {
-        return this._bookshelf;
+    public getBookshelf(): Bookshelf {
+        return this.bookshelf;
     }
 }

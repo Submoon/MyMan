@@ -1,18 +1,17 @@
-import logger from '../utils/logger';
-import {IExtendedClient, BaseEvent} from '../api';
+import {IExtendedClient} from "../api";
+import BaseEvent from "../baseevent";
+import logger from "../utils/logger";
 
-export default class ErrorEvent extends BaseEvent{
+export default class ErrorEvent extends BaseEvent {
 
     public error: Error;
 
-    constructor(client: IExtendedClient, args: any[]){
+    public constructor(client: IExtendedClient, args: any[]) {
         super(client, args);
         this.error = args.shift();
     }
-    async run(): Promise<void> {
+
+    public async run(): Promise<void> {
         logger.error(`${this.error.name} : ${this.error.message}`);
     }
 }
-
-
-    
