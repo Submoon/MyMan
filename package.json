@@ -1,12 +1,16 @@
 {
-  "name": "MyMan",
+  "name": "myman",
   "version": "1.0.0",
   "description": "MyMan is a custom bot written with discord.js.",
   "main": "index.js",
   "scripts": {
-    "start": "export NODE_ENV=development|| set NODE_ENV=development&& node ./my_man.js",
-    "start_prod": "export NODE_ENV=production|| set NODE_ENV=production&& node ./my_man.js",
-    "test": "echo \"No test specified\" && exit 0"
+    "start": "export NODE_ENV=development|| set NODE_ENV=development&& node ./dist/src/my_man.js",
+    "start_prod": "export NODE_ENV=production|| set NODE_ENV=production && node ./dist/src/my_man.js",
+    "test": "echo \"No test specified\" && exit 0",
+    "lint": "tslint src/**/*.ts -t verbose",
+    "migratedb": "knex migrate:latest",
+    "tscwatch": "tsc -watch",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",
@@ -20,12 +24,15 @@
   },
   "homepage": "https://github.com/Submoon/MyMan#readme",
   "dependencies": {
+    "@types/isomorphic-fetch": "0.0.34",
     "axios": "^0.17.1",
     "bookshelf": "^0.13.3",
     "cheerio": "^1.0.0-rc.2",
-    "discord.js": "^11.3.2",
-    "dropbox": "^2.5.13",
+    "discord.js": "^11.4.0",
+    "dropbox": "^4.0.9",
+    "es6-promise": "^4.2.4",
     "glob": "^7.1.2",
+    "isomorphic-fetch": "^2.2.1",
     "jszip": "^3.1.5",
     "knex": "^0.14.6",
     "lodash": "^4.17.10",
@@ -33,5 +40,16 @@
     "pg": "^7.4.3",
     "winston": "^2.4.3",
     "winston-daily-rotate-file": "^1.7.2"
+  },
+  "devDependencies": {
+    "@types/bookshelf": "^0.9.9",
+    "@types/glob": "^5.0.35",
+    "@types/jszip": "^3.1.4",
+    "@types/knex": "^0.14.20",
+    "@types/lodash": "^4.14.116",
+    "@types/node": "^10.5.7",
+    "@types/winston": "^2.3.9",
+    "tslint": "^5.11.0",
+    "typescript": "^3.0.1"
   }
 }

@@ -1,46 +1,49 @@
 // Update with your config settings.
+// Keep it as JS because it's useless to make it a TS file and it has to be at the root of the project
+const Knex = require("knex");
 const config = require("./config.json");
+
 module.exports = {
 
-  development: {
-    client: 'pg',
-    connection: {
-      database : 'my_man_test',
-      user : config.testdatabaseuser,
-      password : config.testdatabasepassword,
-      host: '5.51.141.109',
-      port: 5432
-    },
-    migrations: {
-      tableName: 'knex_migrations',
-      directory: __dirname + '/db/migrations'
-    },
-    seeds: {
-      directory: __dirname + '/db/seeds/development'
-    }
+    development: {
+        client: "pg",
+        connection: {
+            database : "my_man_test",
+            host: config.host,
+            password : config.testdatabasepassword,
+            port: 5432,
+            user : config.testdatabaseuser,
+        },
+        migrations: {
+            directory: __dirname + "/migrations",
+            tableName: "knex_migrations",
+        },
+        seeds: {
+            directory: __dirname + "/seeds/development",
+        },
 
-  },
+    },
 
-  production: {
-    client: 'pg',
-    connection: {
-      database: 'my_man_production',
-      user:     config.productiondatabaseuser,
-      password: config.productiondatabasepassword,
-      host: '5.51.141.109',
-      port: 5432
+    production: {
+        client: "pg",
+        connection: {
+            database: "my_man_production",
+            host: config.host,
+            password: config.productiondatabasepassword,
+            port: 5432,
+            user:     config.productiondatabaseuser,
+        },
+        migrations: {
+            directory: __dirname + "/migrations",
+            tableName: "knex_migrations",
+        },
+        pool: {
+            max: 10,
+            min: 2,
+        },
+        seeds: {
+            directory: __dirname + "/seeds/production",
+        },
     },
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations',
-      directory: __dirname + '/db/migrations'
-    },
-    seeds: {
-      directory: __dirname + '/db/seeds/production'
-    }
-  }
 
 };
