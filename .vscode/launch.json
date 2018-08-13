@@ -8,7 +8,8 @@
             "type": "node",
             "request": "launch",
             "name": "Lancer le programme",
-            "program": "${workspaceFolder}\\dist\\src\\my_man.js"
+            "program": "${workspaceFolder}\\dist\\src\\my_man.js",
+            "console": "integratedTerminal"
         }
     ]
 }
