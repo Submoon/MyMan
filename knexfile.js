@@ -1,9 +1,9 @@
 // Update with your config settings.
 // Keep it as JS because it's useless to make it a TS file and it has to be at the root of the project
-import * as Knex from "knex";
+const Knex = require("knex");
 const config = require("./config.json");
 
-export default {
+module.exports = {
 
     development: {
         client: "pg",
