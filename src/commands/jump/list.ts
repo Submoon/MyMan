@@ -1,7 +1,7 @@
 import { Message } from "discord.js";
 import { IDescription, IExtendedClient } from "../../api";
 import BaseCommand from "../../basecommand";
-import {dispoList as dispo} from "../model/database";
+import {dispoList as dispo} from "../../models/fakedatabase";
 
 export default class JumpListCommand extends BaseCommand {
 
