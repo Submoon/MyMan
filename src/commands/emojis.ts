@@ -1,13 +1,14 @@
 import axios, { AxiosRequestConfig } from "axios";
+import { Message } from "discord.js";
 import {Dropbox} from "dropbox";
 import JSZip = require("jszip");
-import { IDescription } from "../api";
+import { IDescription, IExtendedClient } from "../api";
 import BaseCommand from "../basecommand";
 import logger from "../utils/logger";
 
 export default class EmojiCommand extends BaseCommand {
 
-    public constructor(client, message, args) {
+    public constructor(client: IExtendedClient, message: Message, args: string[]) {
         super(client, message, args);
     }
 

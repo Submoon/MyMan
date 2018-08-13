@@ -5,7 +5,7 @@ import logger from "../utils/logger";
 export default class ErrorEvent extends BaseEvent {
 
     public warning: string;
-    public constructor(client: IExtendedClient, ...args) {
+    public constructor(client: IExtendedClient, ...args: any[]) {
         super(client, args);
         this.warning = args.shift() as string;
     }

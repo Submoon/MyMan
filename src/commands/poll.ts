@@ -1,4 +1,4 @@
-import { Message } from "discord.js";
+import { CollectorFilter, Message } from "discord.js";
 import { IDescription, IExtendedClient } from "../api";
 import BaseCommand from "../basecommand";
 import Constants from "../utils/constants";
@@ -41,7 +41,7 @@ export default class PollCommand extends BaseCommand {
         }
 
         // We don't care about other reacts than the numbers
-        const filter = (reaction, user) => numbers.some((n) => n === reaction.emoji.name);
+        const filter: CollectorFilter = (reaction, user) => numbers.some((n) => n === reaction.emoji.name);
 
         // We wait timeNb*1000 ms for the reactions
         poll.awaitReactions(filter, {time : timeNb * 1000})

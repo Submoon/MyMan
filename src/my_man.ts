@@ -10,19 +10,19 @@ const client = new Discord.Client() as IExtendedClient;
 
 client.config = (require("../config.json") as IConfig);
 
-client.commands = [];
+client.commands = new Map<string, ICommandConstructor>();
 
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
 
 // This loop reads the /events/ folder and attaches each event file to the appropriate event.
 fs.readdir(path.join(__dirname, "./events/"), (err, files) => {
-    if (err) { return logger.error(err.message); }
+    if (err) { logger.error(err.message); }
     logger.info(files.toString());
     files.forEach((file) => {
         const eventClass = require(`./events/${file}`).default as IEventConstructor;
         const eventName = file.split(".")[0];
         // super-secret recipe to call events with all their proper arguments *after* the `client` var.
-        client.on(eventName, (...args) => {
+        client.on(eventName, (...args: any[]) => {
             (new eventClass(client, ...args) as IEvent).run();
         });
     });
@@ -38,7 +38,7 @@ commandFiles.forEach((file) => {
     const commandClass = require(`./commands/${file}`).default as ICommandConstructor;
 
     const commandName = file.replace(/\//g, "_").split(".")[0];
-    client.commands[commandName] = commandClass;
+    client.commands.set(commandName, commandClass);
     logger.info(`Command registered : ${commandName}`);
 
 });
@@ -61,10 +61,10 @@ client.on("message", (message) => {
 
     // The list of if/else is replaced with those simple 2 lines:
     try {
-        if (!client.commands[commandName]) {
+        if (!client.commands.has(commandName)) {
             return;
         }
-        const commandClass = client.commands[commandName] as ICommandConstructor;
+        const commandClass = client.commands.get(commandName);
         new commandClass(client, message, args)
         .run()
         .then(() => {

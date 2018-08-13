@@ -1,5 +1,5 @@
 "use strict";
-import { Message, RichEmbed} from "discord.js";
+import { CollectorFilter, Message, RichEmbed} from "discord.js";
 import {ICommand, IDescription, IExtendedClient} from "../api";
 import BaseCommand from "../basecommand";
 import { entries } from "../utils/arrayutils";
@@ -52,7 +52,9 @@ export default class HelpCommand extends BaseCommand {
         }
 
         // Create a reaction collector
-        const filter = (reaction, user) => emojis.some((e) => e === reaction.emoji.name) && user.id === author.id;
+        const filter: CollectorFilter = (reaction, user) =>
+            emojis.some((e) => e === reaction.emoji.name) && user.id === author.id;
+
         const collector = menu.createReactionCollector(filter, { time: 120000 });
         collector.on("collect", (r, collect)  => {
             logger.info(`Collected ${r.emoji.name}`);
@@ -104,7 +106,7 @@ export default class HelpCommand extends BaseCommand {
     private getHelpForCommand(commandName: string): RichEmbed {
         logger.debug(`Sending help for command ${commandName}`);
         const lowerCommandName = commandName.toLowerCase();
-        const command = this.client.commands[lowerCommandName];
+        const command = this.client.commands.get(lowerCommandName);
         let embed = new RichEmbed()
         .setAuthor(this.client.user.username, this.client.user.avatarURL)
         .setColor(0x00AE86)
@@ -135,7 +137,7 @@ export default class HelpCommand extends BaseCommand {
         }
 
         // Create a reaction collector
-        const filter = (reaction, user) => acceptedForCommand.some((e) => e === reaction.emoji.name)
+        const filter: CollectorFilter = (reaction, user) => acceptedForCommand.some((e) => e === reaction.emoji.name)
             && user.id === author.id;
         const collector = menu.createReactionCollector(filter, { time: 120000 });
         collector.on("collect", (r, collect)  => {

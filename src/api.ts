@@ -2,19 +2,19 @@ import * as Discord from "discord.js";
 import { Message } from "discord.js";
 
 export interface IConfig {
-    token: "NDAzMjEzMzgzNDg4MzcyNzQ4.DUECDA.9ToUPg27IHvWgWmtjcw0kiLcrO0";
-    adminId: "My user Id";
-    prefix: "&";
-    dropboxAccessToken: "tn9JanDQ0b4AAAAAAABXLjHfwzXF-4tDHB3hX2aDtDVdwa-XX1bhtbBTpDXEUfjC";
-    productiondatabaseuser: "productiondatabaseuser";
-    productiondatabasepassword: "productiondatabasepassword";
-    testdatabaseuser: "testdatabaseuser";
-    testdatabasepassword: "testdatabasepassword";
+    token: string;
+    adminId: string;
+    prefix: string;
+    dropboxAccessToken: string;
+    productiondatabaseuser: string;
+    productiondatabasepassword: string;
+    testdatabaseuser: string;
+    testdatabasepassword: string;
 }
 
 export interface IExtendedClient extends Discord.Client {
     config: IConfig;
-    commands: ICommandConstructor[];
+    commands: Map<string, ICommandConstructor>;
 }
 
 export interface IDescription {
@@ -40,5 +40,6 @@ export interface IEventConstructor {
 }
 
 export interface ICommandConstructor {
+    description: IDescription;
     new (client: IExtendedClient, message: Message,  ...args: any[]): ICommand;
 }
