@@ -19,6 +19,7 @@ export default class RenameHistoryCommand extends BaseCommand {
     public async run() {
         if (this.message.mentions.members.size === 0) {
             await this.message.channel.send("Please mention the user you want the history of !");
+            return;
         }
         const user = this.message.mentions.members.first();
 
