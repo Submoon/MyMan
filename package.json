@@ -9,7 +9,8 @@
     "test": "echo \"No test specified\" && exit 0",
     "lint": "tslint src/**/*.ts -t verbose",
     "migratedb": "knex migrate:latest",
-    "tscwatch": "tsc -watch"
+    "tscwatch": "tsc -watch",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",
