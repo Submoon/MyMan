@@ -17,6 +17,9 @@ export default class RenameHistoryCommand extends BaseCommand {
     }
 
     public async run() {
+        if (this.message.mentions.members.size === 0) {
+            await this.message.channel.send("Please mention the user you want the history of !");
+        }
         const user = this.message.mentions.members.first();
 
         const auditLogs = await this.message.guild.fetchAuditLogs({
@@ -30,7 +33,7 @@ export default class RenameHistoryCommand extends BaseCommand {
         let text = "";
 
         if (array.length === 0) {
-            await this.message.channel.send(`User ${user.nickname} has never been renamed !`);
+            await this.message.channel.send(`User ${user.displayName} has never been renamed !`);
             return;
         }
 
