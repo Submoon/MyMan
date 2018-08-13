@@ -1,7 +1,11 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { Message } from "discord.js";
 import {Dropbox} from "dropbox";
+import * as e6p from "es6-promise";
+(e6p as any).polyfill();
 import JSZip = require("jszip");
+
+import "isomorphic-fetch";
 import { IDescription, IExtendedClient } from "../api";
 import BaseCommand from "../basecommand";
 import logger from "../utils/logger";
