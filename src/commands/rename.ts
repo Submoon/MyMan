@@ -3,7 +3,7 @@ import { IDescription, IExtendedClient } from "../api";
 import BaseCommand from "../basecommand";
 import logger from "../utils/logger";
 
-module.exports = class RenameCommand extends BaseCommand {
+export default class RenameCommand extends BaseCommand {
 
     constructor(client: IExtendedClient, message: Message, args: string[]) {
         super(client, message, args);
@@ -36,4 +36,4 @@ module.exports = class RenameCommand extends BaseCommand {
             return this.message.channel.send(`There has been an error: ${error}`);
         });
     }
-};
+}
