@@ -1,6 +1,6 @@
 "use strict";
 import { CollectorFilter, Message, RichEmbed} from "discord.js";
-import {ICommand, IDescription, IExtendedClient} from "../api";
+import {ICommand, ICommandConstructor, IDescription, IExtendedClient} from "../api";
 import BaseCommand from "../basecommand";
 import { entries } from "../utils/arrayutils";
 import Constants from "../utils/constants";
@@ -96,6 +96,10 @@ export default class HelpCommand extends BaseCommand {
                 logger.error("What are you doing here, little one?");
             }
         });
+        collector.on("end", (collected, reason) => {
+            logger.info(`Deleted collector because of ${reason}`);
+            collector.message.delete();
+        });
     }
 
     /**
@@ -169,7 +173,7 @@ export default class HelpCommand extends BaseCommand {
         logger.debug(`Sending page ${page} of help`);
 
         // We should use a map
-        const numberOfPages = Math.floor(Object.keys(this.client.commands).length / 5) + 1;
+        const numberOfPages = Math.floor(this.client.commands.size / 5) + 1;
         let currentPage = page < numberOfPages ? page - 1 : numberOfPages - 1;
         currentPage = currentPage < 0 ? 0 : currentPage;
         this.displayedPage = currentPage + 1;
@@ -185,7 +189,7 @@ export default class HelpCommand extends BaseCommand {
         // 5 max fields...
         const mini = currentPage * 5;
         const maxi = mini + 4;
-        const commandsToPrint = entries(this.client.commands)/*.slice(mini, maxi)*/;
+        const commandsToPrint = this.client.commands.entries()/*.slice(mini, maxi)*/;
 
         for (const [commandName, command] of commandsToPrint) {
             // Can't slice an associative array, this is a nightmare
@@ -209,7 +213,7 @@ export default class HelpCommand extends BaseCommand {
      * @param {ICommand} command The command
      * @return {string} The description and usage
      */
-    private getStringDescriptionOfCommand(command: ICommand): string {
+    private getStringDescriptionOfCommand(command: ICommandConstructor): string {
         const commandStatic = command as any;
         return commandStatic.description ?
          `${commandStatic.description.text}; \nusage: ${commandStatic.description.usage}`
