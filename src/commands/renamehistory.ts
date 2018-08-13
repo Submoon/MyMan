@@ -28,14 +28,21 @@ export default class RenameHistoryCommand extends BaseCommand {
         .filter((log) => log.changes.some((c) => c.key === "nick"));
         const array = entries.array().slice(0, 10);
         let text = "";
+
+        if (array.length === 0) {
+            await this.message.channel.send(`User ${user.nickname} has never been renamed !`);
+            return;
+        }
+
         array.forEach((log) => {
             const change = log.changes.find((c) => c.key === "nick");
             const date = moment(log.createdAt).format("DD/MM/YYYY:HH[h]mm");
 
-            text += `${date}\t[ ${change.old} => ${change.new}]\t ${log.reason ? log.reason : "No reason provided" }\n`;
+            text += `${date}\t[ ${change.old} => ${change.new}]\t`
+                + `${log.reason ? log.reason : "No reason provided" }\n`;
 
         });
 
-        this.message.channel.send(text);
+        await this.message.channel.send(text);
     }
 }
