@@ -15,20 +15,31 @@ client.commands = new Map<string, ICommandConstructor>();
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
 
 // This loop reads the /events/ folder and attaches each event file to the appropriate event.
-fs.readdir(path.join(__dirname, "./events/"), (err, files) => {
-    if (err) { logger.error(err.message); }
-    logger.info(files.toString());
-    files.forEach((file) => {
-        const eventClass = require(`./events/${file}`).default as IEventConstructor;
-        const eventName = file.split(".")[0];
-        // super-secret recipe to call events with all their proper arguments *after* the `client` var.
-        client.on(eventName, (...args: any[]) => {
-            (new eventClass(client, ...args) as IEvent).run();
-        });
-    });
-});
+// fs.readdir(path.join(__dirname, "./events/"), (err, files) => {
+//     if (err) { logger.error(err.message); }
+//     logger.info(files.toString());
+//     files.forEach((file) => {
+//         const eventClass = require(`./events/${file}`).default as IEventConstructor;
+//         const eventName = file.split(".")[0];
+//         // super-secret recipe to call events with all their proper arguments *after* the `client` var.
+//         client.on(eventName, (...args: any[]) => {
+//             (new eventClass(client, ...args) as IEvent).run();
+//         });
+//     });
+// });
 
 const pattern = "**/*.js";
+
+const eventFiles = glob.sync(pattern, {cwd: path.join(__dirname, "./events/")});
+
+eventFiles.forEach((file) => {
+    const eventClass = require(`./events/${file}`).default as IEventConstructor;
+    const eventName = file.split(".")[0];
+    // super-secret recipe to call events with all their proper arguments *after* the `client` var.
+    client.on(eventName, (...args: any[]) => {
+        (new eventClass(client, ...args) as IEvent).run();
+    });
+});
 
 const commandFiles = glob.sync(pattern, {cwd: path.join(__dirname, "./commands/"), ignore: "**/model/**"});
 
