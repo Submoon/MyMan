@@ -2,12 +2,17 @@
     "compilerOptions": {
         "outDir": "./built",
         "allowJs": true,
-        "checkJs": true,
+        "checkJs": false,
         "target": "es2017",
         "module": "commonjs",
         "lib": ["es2017",
             "dom"],
         "resolveJsonModule": true,
+        "alwaysStrict": true,
+        "noImplicitAny": true,
+        "sourceMap": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true
     },
     "include": [
         "./src/**/*"
