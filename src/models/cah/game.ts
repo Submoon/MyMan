@@ -1,5 +1,3 @@
-"use strict";
-
 import { Channel, User } from "discord.js";
 import * as _ from "lodash";
 import { IBlackCard, IDeck } from "./cahapi";
@@ -14,7 +12,7 @@ export default class Game {
     public playedWhiteCards: string[];
     public playedBlackCards: IBlackCard[];
 
-    constructor(public channel: Channel) {
+    public constructor(public channel: Channel) {
         this.deck = require("./cahcards.json") as IDeck;
         this.players = new Map();
         this.turn = 0;
@@ -24,7 +22,7 @@ export default class Game {
         this.playedBlackCards = [];
     }
 
-    public async addPlayer(user: User): Player {
+    public async addPlayer(user: User): Promise<Player> {
         if (this.players.get(user.id)) {
             throw new Error("You're already in the game !");
         }
@@ -53,8 +51,8 @@ export default class Game {
         throw new Error("Not implemented");
     }
 
-    public async playerPicked(playerId: string, cardId: number) {
-        this.players.get(playerId).picked = cardId;
+    public async playerPicked(playerId: string, cardIndex: number): Promise<number> {
+        return await this.players.get(playerId).pick(cardIndex);
     }
 
 }
