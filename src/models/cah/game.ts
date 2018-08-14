@@ -1,8 +1,10 @@
 import { Channel, User } from "discord.js";
+import { EventEmitter } from "events";
 import * as _ from "lodash";
 import { IBlackCard, IDeck } from "./cahapi";
 import Player from "./player";
-export default class Game {
+import Round from "./round";
+export default class Game extends EventEmitter {
 
     public deck: IDeck;
     public players: Map<string, Player>;
@@ -11,8 +13,10 @@ export default class Game {
     public deckBlackCards: IBlackCard[];
     public playedWhiteCards: string[];
     public playedBlackCards: IBlackCard[];
+    public rounds: Round[];
 
     public constructor(public channel: Channel) {
+        super();
         this.deck = require("./cahcards.json") as IDeck;
         this.players = new Map();
         this.turn = 0;
@@ -52,7 +56,8 @@ export default class Game {
     }
 
     public async playerPicked(playerId: string, cardIndex: number): Promise<number> {
-        return await this.players.get(playerId).pick(cardIndex);
+        // return await this.players.get(playerId).pick(cardIndex);
+        throw new Error("Not implemented!");
     }
 
 }

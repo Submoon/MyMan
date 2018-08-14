@@ -1,6 +1,7 @@
 import { RichEmbed, User } from "discord.js";
 
 import * as cheerio from "cheerio";
+import { userInfo } from "os";
 
 /**
  * @class Player
@@ -8,7 +9,11 @@ import * as cheerio from "cheerio";
 export default class Player {
 
     public hand: string[];
-    public picked: number;
+
+    get id(): string {
+        return this.user.id;
+    }
+
     /**
      * @param {User} user The user
      */
@@ -52,11 +57,6 @@ export default class Player {
         }
         // text += "```";
         return embed;
-    }
-
-    public async pick(cardIndex: number) {
-        this.picked = cardIndex;
-        return this.picked;
     }
 
 }
