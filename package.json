@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "@types/bookshelf": "^0.9.9",
+    "@types/cheerio": "^0.22.8",
     "@types/glob": "^5.0.35",
     "@types/jszip": "^3.1.4",
     "@types/knex": "^0.14.20",
