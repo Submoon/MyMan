@@ -27,7 +27,7 @@ export default class ColorSetCommand extends BaseCommand {
         if (!color) {
             color = "RANDOM";
         }
-        const roleFound = await this.message.guild.roles.find((Role) => Role.name === nameRole);
+        const roleFound = await this.message.guild.roles.find((role) => role.name === nameRole);
 
         if (roleFound) {
             logger.info(`Role ${roleFound} was found`);
