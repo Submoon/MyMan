@@ -43,6 +43,7 @@ class GameManager {
         if (!this.games.delete(channelId)) {
             throw new Error("There is no game to stop");
         }
+        return channelId;
     }
 
     /**
