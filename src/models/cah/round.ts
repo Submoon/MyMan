@@ -9,7 +9,11 @@ export default class Round extends EventEmitter {
 
     public cardsPlayed: ICardsPlayed[];
 
-    constructor(public cardCzar: Player, public blackCard: IBlackCard, public players: Player[]) {
+    constructor(
+        public readonly cardCzar: Player,
+        public readonly blackCard: IBlackCard,
+        public readonly players: Player[],
+    ) {
         super();
         // Initializes cardsPlayed to 0 cards played for every playing player
         this.cardsPlayed = [];

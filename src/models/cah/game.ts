@@ -15,7 +15,7 @@ export default class Game extends EventEmitter {
     public playedBlackCards: IBlackCard[];
     public rounds: Round[];
 
-    public constructor(public channel: Channel) {
+    public constructor(public readonly channel: Channel) {
         super();
         this.deck = require("./cahcards.json") as IDeck;
         this.players = new Map();
