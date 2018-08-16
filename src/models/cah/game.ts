@@ -87,15 +87,24 @@ export default class Game {
     public async czarChose(userId: string, winnerIndex: number) {
         if (!this.started || !this.waitingForCzarInput) {
             await this.channel.send("Please wait for a round to be finished!");
+            return;
         }
         if (this.round.cardCzar.id !== userId) {
             await this.channel.send("You are not the card czar.");
+            return;
+        }
+
+        if (winnerIndex < 0 || winnerIndex > this.round.choices.length) {
+            await this.channel.send(`Number ${winnerIndex} is not a valid option.`);
         }
 
         const winner = this.round.choices[winnerIndex];
         const text = `Winner is ${winner.player.user.tag}
         With:
         ${CahMessageFormatter.getBlackAndWhiteMix(this.round.blackCard, winner.cards)}`;
+        await this.channel.send(text);
+        
+        await this.newRound();
     }
 
     private async newRound() {
@@ -105,6 +114,7 @@ export default class Game {
         const nextBlackCard = this.deckBlackCards.draw();
         const playingPlayers = _.filter(this.players, (p) => p.id !== newCzar.id);
 
+        this.waitingForCzarInput = false;
         this.round = new Round(newCzar, nextBlackCard, playingPlayers);
         const roundText = `New round.
         ${newCzar.user.tag} is the card czar.
