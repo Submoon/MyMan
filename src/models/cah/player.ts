@@ -1,4 +1,4 @@
-import { RichEmbed, User } from "discord.js";
+import { Message, RichEmbed, User } from "discord.js";
 
 import * as cheerio from "cheerio";
 import { userInfo } from "os";
@@ -40,14 +40,14 @@ export default class Player {
      * Displays the user cards as an embed
      * @return {RichEmbed} An embed
      */
-    public printCards(): RichEmbed {
+    public printCards(roundMessage: Message): string {
 
         let embed = new RichEmbed()
         .setAuthor(this.user.username, this.user.avatarURL)
         .setColor(0x00AE86)
         .setTitle("Your cards");
-        
-        const text = "";
+        // embe = embed.addField("Link", roundMessage.link);
+        // const text = "";
         // let turndown = new TurnDown();
         for (let i = 0; i < this.hand.length; i++) {
             const card = this.hand[i];
@@ -62,8 +62,16 @@ export default class Player {
             // let cardWithoutdHtml = card.replace(/<[^>]+>/g, '');
             // text += `${i} : ${markdown}\n`;
         }
+
+        const lines: string[] = [];
+        lines.push("Your cards");
+        lines.push(`Message: ${roundMessage.url}`);
+        this.hand.forEach((card, i) => {
+            lines.push(`${i} : ${card}`);
+        });
+
         // text += "```";
-        return embed;
+        return lines.join("\n");
     }
 
 }

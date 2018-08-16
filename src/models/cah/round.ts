@@ -29,6 +29,14 @@ export default class Round extends EventEmitter {
         }
         
         const playedByPlayer: string[] = [];
+        // First, we add the cards
+        cardIndexes.forEach((index) => {
+            const card = player.hand[index];
+            playedByPlayer.push(card);
+        });
+
+        // Then we delete the cards (Higher first so we don't break indexes)
+        cardIndexes = cardIndexes.sort().reverse();
         cardIndexes.forEach((index) => {
             const removedCard = player.hand.splice(index, 1)[0];
             playedByPlayer.push(removedCard);
@@ -39,10 +47,14 @@ export default class Round extends EventEmitter {
             this.shuffleChoices();
             this.emit("end", this);
         }
-        return cardIndexes;
+        return;
     }
 
     public canPlayCards(player: Player, cardIndexes: number[]) {
+        for (const i of cardIndexes) {
+            if (i < 0 || i > player.hand.length) { return false; }
+        }
+        
         if (cardIndexes.length !== this.blackCard.pick) {
             throw new Error(`Please pick ${this.blackCard.pick} ordered cards for this round`);
         }

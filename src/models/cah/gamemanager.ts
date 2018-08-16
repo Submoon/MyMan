@@ -20,7 +20,7 @@ class GameManager {
     
     /**
      * Create a game in this channel
-     * @param {Channel} channel
+     * @param {TextChannel} channel
      * @return {Promise<Game>} the created game
      */
     public async createGame(channel: TextChannel): Promise<Game> {

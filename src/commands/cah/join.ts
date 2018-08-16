@@ -20,8 +20,8 @@ export default class CahJoinCommand extends BaseCommand {
         .then((player) => {
             this.message.channel.send(`Player ${player.user} joined the game`);
             // TODO: Remove when not debugging
-            const embed = player.printCards();
-            user.send({embed});
+            // const embed = player.printCards();
+            // user.send({embed});
         })
         .catch((ex) => {
             logger.error(ex);

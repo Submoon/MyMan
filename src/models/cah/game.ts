@@ -1,4 +1,4 @@
-import { TextChannel, User } from "discord.js";
+import { Message, TextChannel, User } from "discord.js";
 import { EventEmitter } from "events";
 import * as _ from "lodash";
 import logger from "../../utils/logger";
@@ -29,7 +29,7 @@ export default class Game {
     }
 
     public get started() {
-        return this.round !== null;
+        return this.round != null;
     }
 
     /**
@@ -54,8 +54,8 @@ export default class Game {
         this.players.push(player);
 
         // If we have more than 2 players, start the game
-        if (this.players.length > 2 && !this.started) {
-            this.startGame();
+        if (this.players.length > 1 && !this.started) {
+            await this.startGame();
         }
         return player;
     }
@@ -74,10 +74,10 @@ export default class Game {
 
     public async sendChoices(r: Round) {
         this.round.removeAllListeners();
-        const text = CahMessageFormatter.formatChoicesMessage(this.round.choices, this.round.blackCard);
+        const text = CahMessageFormatter.choicesMessage(this.round.choices, this.round.blackCard);
 
         await this.channel.send(text);
-        await this.channel.send(`Waiting for ${this.round.cardCzar.user.tag} to pick a winner.`);
+        await this.channel.send(`Waiting for ${this.round.cardCzar.user} to pick a winner.`);
         this.waitingForCzarInput = true;
     }
 
@@ -85,8 +85,13 @@ export default class Game {
         if (!this.started) {
             throw new Error("Game hasn't started yet.");
         }
+        if (this.waitingForCzarInput) {
+            return;
+        }
         const player = this.players.find((p) => p.id === playerId);
-        return this.round.addPlayedCards(player, cardIndexes);
+        this.round.addPlayedCards(player, cardIndexes);
+        this.channel.send(`${player.user} played ${cardIndexes.join(", ")}!`);
+        return;
     }
 
     public async czarChose(userId: string, winnerIndex: number) {
@@ -101,19 +106,18 @@ export default class Game {
 
         if (winnerIndex < 0 || winnerIndex > this.round.choices.length) {
             await this.channel.send(`Number ${winnerIndex} is not a valid option.`);
+            return;
         }
 
         const winner = this.round.choices[winnerIndex];
-        const text = `Winner is ${winner.player.user.tag}
-        With:
-        ${CahMessageFormatter.getBlackAndWhiteMix(this.round.blackCard, winner.cards)}`;
-        await this.channel.send(text);
+
+        await this.channel.send(CahMessageFormatter.winnerMessage(winner, this.round.blackCard));
         
         await this.newRound();
     }
 
     private async newRound() {
-        const oldCzar = this.round !== null ? this.round.cardCzar : null;
+        const oldCzar = this.round != null ? this.round.cardCzar : null;
         // Getting czar, black card and players
         const newCzar = this.getNextCzar(oldCzar);
         const nextBlackCard = this.deckBlackCards.draw();
@@ -121,15 +125,15 @@ export default class Game {
 
         this.waitingForCzarInput = false;
         this.round = new Round(newCzar, nextBlackCard, playingPlayers);
-        const roundText = `New round.
-        ${newCzar.user.tag} is the card czar.
-        Players for this round : ${playingPlayers.join(", ")}
-        
-        ${nextBlackCard.text}
-        
-        Please pick ${nextBlackCard.pick} cards.`;
+        const roundText = CahMessageFormatter.newRoundMessage(newCzar, nextBlackCard, playingPlayers);
 
-        await this.channel.send(roundText);
+        const roundMessage = await this.channel.send(roundText) as Message;
+        this.round.players.forEach((p) => {
+            p.drawUntilFull(this.deckWhiteCards);
+            const printedCards = p.printCards(roundMessage);
+            p.user.send(printedCards);
+        });
+        
         this.round.once("end", (r) => {
             this.sendChoices(r)
             .catch((err) => {
