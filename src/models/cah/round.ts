@@ -2,12 +2,12 @@ import { EventEmitter } from "events";
 import * as _ from "lodash";
 import { isNullOrUndefined } from "util";
 import { IBlackCard } from "./cahapi";
-import ICardsPlayed from "./ICardsPlayed";
+import ICardChoice from "./ICardChoice";
 import Player from "./player";
 
 export default class Round extends EventEmitter {
 
-    public cardsPlayed: ICardsPlayed[];
+    public choices: ICardChoice[];
 
     constructor(
         public readonly cardCzar: Player,
@@ -16,7 +16,11 @@ export default class Round extends EventEmitter {
     ) {
         super();
         // Initializes cardsPlayed to 0 cards played for every playing player
-        this.cardsPlayed = [];
+        this.choices = [];
+    }
+
+    public get isOver(): boolean {
+        return this.choices.length === this.players.length;
     }
 
     public addPlayedCards(player: Player, cardIndexes: number[]) {
@@ -29,27 +33,24 @@ export default class Round extends EventEmitter {
             const removedCard = player.hand.splice(index, 1)[0];
             playedByPlayer.push(removedCard);
         });
-        this.cardsPlayed.push({cards: playedByPlayer, player});
+        this.choices.push({cards: playedByPlayer, player});
         
         if (this.isOver) {
-            this.shuffleCards();
+            this.shuffleChoices();
             this.emit("end", this);
         }
+        return cardIndexes;
     }
 
     public canPlayCards(player: Player, cardIndexes: number[]) {
         if (cardIndexes.length !== this.blackCard.pick) {
             throw new Error(`Please pick ${this.blackCard.pick} ordered cards for this round`);
         }
-        const alreadyPlayed = !isNullOrUndefined(this.cardsPlayed.find((c) => c.player.id === player.id));
+        const alreadyPlayed = !isNullOrUndefined(this.choices.find((c) => c.player.id === player.id));
         return !alreadyPlayed;
     }
 
-    public get isOver(): boolean {
-        return this.cardsPlayed.length === this.players.length;
+    private shuffleChoices() {
+        this.choices = _.shuffle(this.choices);
     }
-
-    private shuffleCards() {
-        this.cardsPlayed = _.shuffle(this.cardsPlayed);
-     }
 }

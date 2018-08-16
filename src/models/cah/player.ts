@@ -2,6 +2,7 @@ import { RichEmbed, User } from "discord.js";
 
 import * as cheerio from "cheerio";
 import { userInfo } from "os";
+import Deck from "./deck";
 
 /**
  * @class Player
@@ -27,6 +28,12 @@ export default class Player {
      */
     public drawCard(card: string) {
         this.hand.push(card);
+    }
+
+    public drawUntilFull(deck: Deck<string>) {
+        while (this.hand.length !== 10) {
+            this.drawCard(deck.draw());
+        }
     }
 
     /**

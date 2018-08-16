@@ -1,4 +1,4 @@
-export interface IDeck {
+export interface ICahCards {
     blackCards: IBlackCard[];
     whiteCards: string[];
     order: string[];

@@ -1,4 +1,4 @@
-import { Channel, User } from "discord.js";
+import { TextChannel, User } from "discord.js";
 import Game from "./game";
 import Player from "./player";
 
@@ -23,7 +23,7 @@ class GameManager {
      * @param {Channel} channel
      * @return {Promise<Game>} the created game
      */
-    public async createGame(channel: Channel): Promise<Game> {
+    public async createGame(channel: TextChannel): Promise<Game> {
         const channelId = channel.id;
         if (this.games.get(channelId)) {
             throw new Error("There is already a game on this channel! Please use the command cah_stop");
@@ -40,9 +40,12 @@ class GameManager {
      * @throws Will throw an error if there is no game to stop
      */
     public async destroyGame(channelId: string) {
-        if (!this.games.delete(channelId)) {
+        const game = this.games.get(channelId);
+        if (game === null) {
             throw new Error("There is no game to stop");
         }
+        game.dispose();
+        this.games.delete(channelId);
         return channelId;
     }
 
@@ -75,6 +78,22 @@ class GameManager {
             throw new Error("There is no game to leave in this channel");
         }
         await game.playerLeave(userId);
+    }
+
+    public async playerPicked(channelId: string, userId: string, cardIndexes: number[]) {
+        const game = this.games.get(channelId);
+        if (!game) {
+            throw new Error("There is no game in this channel");
+        }
+        return await game.playerPicked(userId, cardIndexes);
+    }
+
+    public async czarChose(channelId: string, userId: string, winnerIndex: number) {
+        const game = this.games.get(channelId);
+        if (!game) {
+            throw new Error("There is no game in this channel");
+        }
+        return await game.czarChose(userId, winnerIndex);
     }
 
 }

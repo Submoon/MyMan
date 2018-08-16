@@ -1,4 +1,4 @@
-import { Message } from "discord.js";
+import { Message, TextChannel } from "discord.js";
 import { IDescription, IExtendedClient } from "../../api";
 import BaseCommand from "../../basecommand";
 import gameManager from "../../models/cah/gamemanager";
@@ -16,7 +16,7 @@ export default class CahStartCommand extends BaseCommand {
     }
 
     public async run() {
-        gameManager.createGame(this.message.channel)
+        gameManager.createGame(this.message.channel as TextChannel)
         .then((game) => {
             const text = `Game started for channel ${game.channel}
             Please join the game by using cah_join`;

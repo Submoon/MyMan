@@ -1,6 +1,6 @@
 import Player from "./player";
 
-export default interface ICardsPlayed {
+export default interface ICardChoice {
     player: Player;
     cards: string[];
 }

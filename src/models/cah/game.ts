@@ -1,63 +1,137 @@
-import { Channel, User } from "discord.js";
+import { TextChannel, User } from "discord.js";
 import { EventEmitter } from "events";
 import * as _ from "lodash";
-import { IBlackCard, IDeck } from "./cahapi";
+import logger from "../../utils/logger";
+import { IBlackCard, ICahCards } from "./cahapi";
+import CahMessageFormatter from "./CahMessageFormatter";
+import Deck from "./deck";
 import Player from "./player";
 import Round from "./round";
-export default class Game extends EventEmitter {
-
-    public deck: IDeck;
-    public players: Map<string, Player>;
+export default class Game {
+    
+    public deck: ICahCards;
+    public players: Player[];
     public turn: number;
-    public deckWhiteCards: string[];
-    public deckBlackCards: IBlackCard[];
-    public playedWhiteCards: string[];
-    public playedBlackCards: IBlackCard[];
-    public rounds: Round[];
+    public deckWhiteCards: Deck<string>;
+    public deckBlackCards: Deck<IBlackCard>;
+    public round: Round;
+    public waitingForCzarInput: boolean;
 
-    public constructor(public readonly channel: Channel) {
-        super();
-        this.deck = require("./cahcards.json") as IDeck;
-        this.players = new Map();
+    public constructor(public readonly channel: TextChannel) {
+        this.deck = require("./cahcards.json") as ICahCards;
+        this.players = [];
         this.turn = 0;
-        this.deckWhiteCards = _.shuffle(this.deck.whiteCards);
-        this.deckBlackCards = _.shuffle(this.deck.blackCards);
-        this.playedWhiteCards = [];
-        this.playedBlackCards = [];
+        this.deckWhiteCards = new Deck(this.deck.whiteCards);
+        this.deckBlackCards = new Deck(this.deck.blackCards);
+        this.waitingForCzarInput = false;
     }
 
+    public get started() {
+        return this.round !== null;
+    }
+
+    /**
+     * Destroys the game (removes listeners on the current Round)
+     */
+    public dispose() {
+        this.round.removeAllListeners();
+    }
+
+    /**
+     * Creates a new player from a user and adds it to this game
+     * @param {User} user the user connecting
+     * @returns {Player} the new player
+     */
     public async addPlayer(user: User): Promise<Player> {
-        if (this.players.get(user.id)) {
+        if (this.players.find((p) => p.id === user.id)) {
             throw new Error("You're already in the game !");
         }
         const player = new Player(user);
+        player.drawUntilFull(this.deckWhiteCards);
 
-        for (let i = 0; i < 10; i++) {
-            const card = this.deckWhiteCards.shift();
-            player.drawCard(card);
+        this.players.push(player);
+
+        // If we have more than 2 players, start the game
+        if (this.players.length > 2 && !this.started) {
+            this.startGame();
         }
-
-        this.players.set(player.user.id, player);
         return player;
     }
 
     public async playerLeave(playerId: string) {
-        if (!this.players.delete(playerId)) {
+        const removed = _.remove(this.players, (p) => p.id === playerId);
+        if (removed.length !== 1) {
             throw new Error("You are are not part of the game !");
         }
     }
 
     public async startGame() {
-        throw new Error("Not implemented");
+        await this.channel.send("Minimum number of players reached. Starting game!");
+        await this.newRound();
     }
 
-    public async playTurn() {
-        throw new Error("Not implemented");
+    public async sendChoices(r: Round) {
+        this.round.removeAllListeners();
+        const text = CahMessageFormatter.formatChoicesMessage(this.round.choices, this.round.blackCard);
+
+        await this.channel.send(text);
+        await this.channel.send(`Waiting for ${this.round.cardCzar.user.tag} to pick a winner.`);
+        this.waitingForCzarInput = true;
     }
 
-    public async playerPicked(playerId: string, cardIndex: number): Promise<number> {
-        // return await this.players.get(playerId).pick(cardIndex);
-        throw new Error("Not implemented!");
+    public async playerPicked(playerId: string, cardIndexes: number[]) {
+        const player = this.players.find((p) => p.id === playerId);
+        return this.round.addPlayedCards(player, cardIndexes);
+    }
+
+    public async czarChose(userId: string, winnerIndex: number) {
+        if (!this.started || !this.waitingForCzarInput) {
+            await this.channel.send("Please wait for a round to be finished!");
+        }
+        if (this.round.cardCzar.id !== userId) {
+            await this.channel.send("You are not the card czar.");
+        }
+
+        const winner = this.round.choices[winnerIndex];
+        const text = `Winner is ${winner.player.user.tag}
+        With:
+        ${CahMessageFormatter.getBlackAndWhiteMix(this.round.blackCard, winner.cards)}`;
+    }
+
+    private async newRound() {
+        const oldCzar = this.round !== null ? this.round.cardCzar : null;
+        // Getting czar, black card and players
+        const newCzar = this.getNextCzar(oldCzar);
+        const nextBlackCard = this.deckBlackCards.draw();
+        const playingPlayers = _.filter(this.players, (p) => p.id !== newCzar.id);
+
+        this.round = new Round(newCzar, nextBlackCard, playingPlayers);
+        const roundText = `New round.
+        ${newCzar.user.tag} is the card czar.
+        Players for this round : ${playingPlayers.join(", ")}
+        
+        ${nextBlackCard.text}
+        
+        Please pick ${nextBlackCard.pick} cards.`;
+
+        await this.channel.send(roundText);
+        this.round.once("end", (r) => {
+            this.sendChoices(r)
+            .catch((err) => {
+                logger.error("Dafuck happened");
+            });
+        });
+    }
+
+    private getNextCzar(oldCzar: Player): Player {
+        // First round
+        if (oldCzar === null) {
+            return this.players[0];
+        }
+        // -1 if for some reason player has left in between, so it won't break
+        const index = this.players.findIndex((p) => p.id === oldCzar.id);
+        return index === this.players.length - 1 ? this.players[0] : this.players[index + 1];
+        
     }
 
 }
