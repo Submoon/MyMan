@@ -3,10 +3,12 @@ import { EventEmitter } from "events";
 import * as _ from "lodash";
 import logger from "../../utils/logger";
 import { IBlackCard, ICahCards } from "./cahapi";
+
 import CahMessageFormatter from "./CahMessageFormatter";
 import Deck from "./deck";
 import Player from "./player";
 import Round from "./round";
+
 export default class Game {
     
     public deck: ICahCards;
@@ -80,6 +82,9 @@ export default class Game {
     }
 
     public async playerPicked(playerId: string, cardIndexes: number[]) {
+        if (!this.started) {
+            throw new Error("Game hasn't started yet.");
+        }
         const player = this.players.find((p) => p.id === playerId);
         return this.round.addPlayedCards(player, cardIndexes);
     }
