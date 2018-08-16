@@ -25,7 +25,7 @@ export default class Round extends EventEmitter {
 
     public addPlayedCards(player: Player, cardIndexes: number[]) {
         if (!this.canPlayCards(player, cardIndexes)) {
-            return;
+            throw new Error(`You can't play cards ${cardIndexes.join(", ")}`);
         }
         
         const playedByPlayer: string[] = [];
