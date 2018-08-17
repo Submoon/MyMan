@@ -55,7 +55,11 @@ export default class Game {
 
         // If we have more than 2 players, start the game
         if (this.players.length > 1 && !this.started) {
-            await this.startGame();
+            await this.channel.send("Game will start in 30 seconds!");
+            setTimeout(async () => {
+                await this.startGame();
+            }, 30000);
+            
         }
         return player;
     }
@@ -136,8 +140,8 @@ export default class Game {
         
         this.round.once("end", (r) => {
             this.sendChoices(r)
-            .catch((err) => {
-                logger.error("Dafuck happened");
+            .catch((err: Error) => {
+                logger.error(`Error: ${err.message}`);
             });
         });
     }
