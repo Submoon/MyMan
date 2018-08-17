@@ -4,6 +4,7 @@ import * as _ from "lodash";
 import logger from "../../utils/logger";
 import { IBlackCard, ICahCards } from "./cahapi";
 
+import * as allCahCards from "../../../cahcards.json";
 import CahMessageFormatter from "./CahMessageFormatter";
 import Deck from "./deck";
 import Player from "./player";
@@ -11,10 +12,10 @@ import Round from "./round";
 
 export default class Game {
     
-    /**
-     * All cards
-     */
-    public allCahCards: ICahCards;
+    // /**
+    //  * All cards
+    //  */
+    // public allCahCards: ICahCards;
     /**
      * Players in the game
      */
@@ -41,10 +42,10 @@ export default class Game {
      * @param {TexChannel} channel the channel in which the game will take place
      */
     public constructor(public readonly channel: TextChannel) {
-        this.allCahCards = require("./cahcards.json") as ICahCards;
+        // this.allCahCards = require("../../../cahcards.json") as ICahCards;
         this.players = [];
-        this.deckWhiteCards = new Deck(this.allCahCards.whiteCards);
-        this.deckBlackCards = new Deck(this.allCahCards.blackCards);
+        this.deckWhiteCards = new Deck(allCahCards.whiteCards);
+        this.deckBlackCards = new Deck(allCahCards.blackCards);
         this.waitingForCzarInput = false;
     }
 

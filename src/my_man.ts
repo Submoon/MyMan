@@ -2,13 +2,14 @@ import * as Discord from "discord.js";
 import * as fs from "fs";
 import * as glob from "glob";
 import * as path from "path";
+import * as config from "../config.json";
 import {ICommandConstructor, IConfig, IEvent, IEventConstructor, IExtendedClient} from "./api";
 import AutoAnswer from "./db/models/autoanswer";
 import logger from "./utils/logger";
 
 const client = new Discord.Client() as IExtendedClient;
 
-client.config = (require("../config.json") as IConfig);
+client.config = (config as IConfig);
 
 client.commands = new Map<string, ICommandConstructor>();
 
