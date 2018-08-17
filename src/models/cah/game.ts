@@ -149,7 +149,8 @@ export default class Game {
         }
         const player = this.players.find((p) => p.id === playerId);
         this.round.addPlayedCards(player, cardIndexes);
-        this.channel.send(`${player.user} played ${cardIndexes.join(", ")}!`);
+        
+        // this.channel.send(`${player.user} played ${cardIndexes.join(", ")}!`);
         return;
     }
 
@@ -200,6 +201,15 @@ export default class Game {
         const playingPlayers = _.filter(this.players, (p) => p.id !== newCzar.id);
 
         this.waitingForCzarInput = false;
+
+        // Discard all played cards
+        if (this.round != null) {
+            const playedWhiteCards = _.flatten(this.round.choices.map((c) => c.cards));
+            
+            this.deckWhiteCards.discard(...playedWhiteCards);
+            this.deckBlackCards.discard(this.round.blackCard);
+        }
+        
         this.round = new Round(newCzar, nextBlackCard, playingPlayers);
         const roundText = CahMessageFormatter.newRoundMessage(newCzar, nextBlackCard, playingPlayers);
         logger.info(`New round created with czar: ${newCzar},`
