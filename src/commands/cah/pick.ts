@@ -15,6 +15,11 @@ export default class CahPickCommand extends BaseCommand {
         const cardIndexes = this.args.map(Number);
 
         gameManager.playerPicked(this.message.channel.id, this.message.author.id, cardIndexes)
+        .then((result) => {
+            if (result === true) {
+                this.message.react("👌");
+            }
+        })
         .catch((err: Error) => {
             this.message.channel.send(`Error: ${err.message}`);
         });

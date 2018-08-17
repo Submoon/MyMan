@@ -145,13 +145,12 @@ export default class Game {
         }
         if (this.waitingForCzarInput) {
             logger.warn(`Waiting for czar input but received ${cardIndexes.join()} from ${playerId}`);
-            return;
+            return false;
         }
         const player = this.players.find((p) => p.id === playerId);
         this.round.addPlayedCards(player, cardIndexes);
-        
         // this.channel.send(`${player.user} played ${cardIndexes.join(", ")}!`);
-        return;
+        return true;
     }
 
     /**
