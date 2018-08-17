@@ -1,7 +1,14 @@
 import * as _ from "lodash";
 
 export default class Deck<T> {
+    /**
+     * Deck pile
+     */
     private cards: T[];
+
+    /**
+     * The discard pile
+     */
     private played: T[];
 
     /**
@@ -15,6 +22,7 @@ export default class Deck<T> {
 
     /**
      * Draws one card
+     * @returns {T} the card
      */
     public draw(): T {
         const card = this.cards.shift();
@@ -30,5 +38,13 @@ export default class Deck<T> {
     public mixCards() {
         this.cards = _.shuffle(this.cards.concat(this.played));
         this.played = [];
+    }
+
+    /**
+     * Adds the specified cards to the discard pile
+     * @param cards the discarded cards
+     */
+    public discard(...cards: T[]) {
+        this.played.push(...cards);
     }
 }

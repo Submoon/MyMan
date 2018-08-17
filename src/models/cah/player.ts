@@ -10,8 +10,14 @@ import Deck from "./deck";
  */
 export default class Player {
 
+    /**
+     * Cards in the hand of the player
+     */
     public hand: string[];
 
+    /**
+     * Returns the user id associated to the player
+     */
     get id(): string {
         return this.user.id;
     }
@@ -31,6 +37,10 @@ export default class Player {
         this.hand.push(card);
     }
 
+    /**
+     * Draws until the player has 10 cards from the specified deck
+     * @param {Deck<string>} deck The deck to draw from
+     */
     public drawUntilFull(deck: Deck<string>) {
         logger.debug(`Player ${this} drawing until full`);
         while (this.hand.length !== 10) {
@@ -39,8 +49,8 @@ export default class Player {
     }
 
     /**
-     * Displays the user cards as an embed
-     * @return {RichEmbed} An embed
+     * Displays the user cards as message
+     * @return {string} The text for a message
      */
     public printCards(roundMessage: Message): string {
 

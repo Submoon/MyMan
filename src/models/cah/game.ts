@@ -11,23 +11,46 @@ import Round from "./round";
 
 export default class Game {
     
-    public deck: ICahCards;
+    /**
+     * All cards
+     */
+    public allCahCards: ICahCards;
+    /**
+     * Players in the game
+     */
     public players: Player[];
-    public turn: number;
+    /**
+     * Deck of white cards
+     */
     public deckWhiteCards: Deck<string>;
+    /**
+     * Deck of black cards
+     */
     public deckBlackCards: Deck<IBlackCard>;
+    /**
+     * Current round
+     */
     public round: Round;
+    /**
+     * true if we're waiting for the czar input, false if it's not the case
+     */
     public waitingForCzarInput: boolean;
 
+    /**
+     * Generates a new game for the specified channel
+     * @param {TexChannel} channel the channel in which the game will take place
+     */
     public constructor(public readonly channel: TextChannel) {
-        this.deck = require("./cahcards.json") as ICahCards;
+        this.allCahCards = require("./cahcards.json") as ICahCards;
         this.players = [];
-        this.turn = 0;
-        this.deckWhiteCards = new Deck(this.deck.whiteCards);
-        this.deckBlackCards = new Deck(this.deck.blackCards);
+        this.deckWhiteCards = new Deck(this.allCahCards.whiteCards);
+        this.deckBlackCards = new Deck(this.allCahCards.blackCards);
         this.waitingForCzarInput = false;
     }
 
+    /**
+     * Returns true if the game has started
+     */
     public get started() {
         return this.round != null;
     }
@@ -43,7 +66,7 @@ export default class Game {
     /**
      * Creates a new player from a user and adds it to this game
      * @param {User} user the user connecting
-     * @returns {Player} the new player
+     * @returns {Promise<Player>} the new player
      */
     public async addPlayer(user: User): Promise<Player> {
         if (this.players.find((p) => p.id === user.id)) {
@@ -68,6 +91,10 @@ export default class Game {
         return player;
     }
 
+    /**
+     * Makes the specified player leave this game
+     * @param {string} playerId the player id
+     */
     public async playerLeave(playerId: string) {
         const removed = _.remove(this.players, (p) => p.id === playerId);
         if (removed.length !== 1) {
@@ -77,12 +104,19 @@ export default class Game {
         }
     }
 
+    /**
+     * Starts this game
+     */
     public async startGame() {
         logger.info("Starting game");
         await this.channel.send("Minimum number of players reached. Starting game!");
         await this.newRound();
     }
 
+    /**
+     * Sends the choices to the czar and then waits for him to select the winner
+     * @param {Round} r the current round
+     */
     public async sendChoices(r: Round) {
         logger.info("Removing listeners from current round");
         this.round.removeAllListeners();
@@ -94,6 +128,12 @@ export default class Game {
         this.waitingForCzarInput = true;
     }
 
+    /**
+     * Specified player picks the cards corresponding to the specified indexes
+     * (Corresponding to the indexes in his hand)
+     * @param {string} playerId the player id
+     * @param {number[]} cardIndexes the card indexes
+     */
     public async playerPicked(playerId: string, cardIndexes: number[]) {
         if (!this.started) {
             throw new Error("Game hasn't started yet.");
@@ -108,6 +148,11 @@ export default class Game {
         return;
     }
 
+    /**
+     * Czar choose the player with the specified index in the current round as winner
+     * @param {string} userId the czar user id
+     * @param {number} winnerIndex the winner index
+     */
     public async czarChose(userId: string, winnerIndex: number) {
         if (!this.started || !this.waitingForCzarInput) {
             await this.channel.send("Please wait for a round to be over!");
@@ -133,6 +178,9 @@ export default class Game {
         await this.newRound();
     }
 
+    /**
+     * Generates a new round and changes round
+     */
     private async newRound() {
         logger.info("Generating new round");
         const oldCzar = this.round != null ? this.round.cardCzar : null;
@@ -163,6 +211,11 @@ export default class Game {
         });
     }
 
+    /**
+     * Retrieves the next card czar
+     * @param {Player} oldCzar the old card czar
+     * @returns {Player} the next czar
+     */
     private getNextCzar(oldCzar: Player): Player {
         logger.info("Retrieving next czar");
         // First round

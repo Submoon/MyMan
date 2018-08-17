@@ -7,14 +7,20 @@ import Player from "./player";
  */
 class GameManager {
 
+    /**
+     * Instance of GameManager
+     */
     public static getInstance(): GameManager {
         return this._instance || (this._instance = new this());
     }
     private static _instance: GameManager;
 
+    /**
+     * Map of games with channel IDs as keys
+     */
     public games: Map<string, Game>;
 
-    constructor() {
+    protected constructor() {
         this.games = new Map();
     }
     
@@ -80,6 +86,13 @@ class GameManager {
         await game.playerLeave(userId);
     }
 
+    /**
+     * Makes the player with the specified userId pick the cards corresponding to the cardIndexes
+     * for the game taking place in the specified channelId
+     * @param {string} channelId the channel ID
+     * @param {string} userId the user ID
+     * @param {number[]} cardIndexes the card indexes
+     */
     public async playerPicked(channelId: string, userId: string, cardIndexes: number[]) {
         const game = this.games.get(channelId);
         if (!game) {
@@ -88,6 +101,14 @@ class GameManager {
         return await game.playerPicked(userId, cardIndexes);
     }
 
+    /**
+     * Makes the player with the specified userID choose a winner
+     * for the game taking place in the specified channelId.
+     * Only works if the user is the current card czar
+     * @param {string} channelId the channel ID
+     * @param {string} userId the user ID
+     * @param {number} winnerIndex the winner index
+     */
     public async czarChose(channelId: string, userId: string, winnerIndex: number) {
         const game = this.games.get(channelId);
         if (!game) {

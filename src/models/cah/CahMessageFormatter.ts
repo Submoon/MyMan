@@ -3,7 +3,14 @@ import ICardChoice from "./ICardChoice";
 import Player from "./player";
 
 export default class CahMessageFormatter {
-    public static choicesMessage(choices: ICardChoice[], blackCard: IBlackCard) {
+
+    /**
+     * Generates the choices message
+     * @param {ICardChoice[]} choices the card choices
+     * @param {IBlackCard} blackCard the black card
+     * @returns {string} the choices Message
+     */
+    public static choicesMessage(choices: ICardChoice[], blackCard: IBlackCard): string {
         const textForChoices: string[] = [];
         textForChoices.push("Here are the choices:");
         choices.forEach((choice, i) => {
@@ -13,9 +20,16 @@ export default class CahMessageFormatter {
         return textForChoices.join("\n");
     }
 
+    /**
+     * Generates text combining the black and white cards
+     * @param {IBlackCard} blackCard the black card
+     * @param {string[]} whiteCards the white cards
+     * @returns {string} the black and white mixed text
+     */
     public static getBlackAndWhiteMix(blackCard: IBlackCard, whiteCards: string[]): string {
         let text = blackCard.text;
         if (blackCard.text.indexOf("_") === -1) {
+            // If there is no _ in the black card, we put the white card's text at the end
             return `${blackCard.text} *${whiteCards[0]}*`;
         }
         whiteCards.forEach((w) => {
@@ -24,7 +38,14 @@ export default class CahMessageFormatter {
         return text;
     }
 
-    public static newRoundMessage(czar: Player, blackCard: IBlackCard, playingPlayers: Player[]) {
+    /**
+     * Generates the new round message
+     * @param {Player} czar the card czar
+     * @param {IBlackCard} blackCard the black card
+     * @param {Player[]} playingPlayers the players playing this round
+     * @returns {string} the new round Message
+     */
+    public static newRoundMessage(czar: Player, blackCard: IBlackCard, playingPlayers: Player[]): string {
         const roundText = `New round.\n`
         + `${czar.user} is the card czar.\n`
         + `Players for this round : ${(playingPlayers.map((p) => p.user).join(", "))}\n\n`
@@ -35,7 +56,13 @@ export default class CahMessageFormatter {
         return roundText;
     }
 
-    public static winnerMessage(winner: ICardChoice, blackCard: IBlackCard) {
+    /**
+     * Generates the winner message
+     * @param {Player} winner the winner for this round
+     * @param {IBlackCard} blackCard the black card
+     * @returns {string} the winner Message
+     */
+    public static winnerMessage(winner: ICardChoice, blackCard: IBlackCard): string {
         const text = `Winner is ${winner.player.user}\n`
         + `With:\n\n`
         + `${CahMessageFormatter.getBlackAndWhiteMix(blackCard, winner.cards)}`;

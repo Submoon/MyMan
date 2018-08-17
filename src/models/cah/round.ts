@@ -8,6 +8,9 @@ import Player from "./player";
 
 export default class Round extends EventEmitter {
 
+    /**
+     * Cards played by each player
+     */
     public choices: ICardChoice[];
 
     constructor(
@@ -20,10 +23,18 @@ export default class Round extends EventEmitter {
         this.choices = [];
     }
 
+    /**
+     * Returns true if the round is over (Everyone played)
+     */
     public get isOver(): boolean {
         return this.choices.length === this.players.length;
     }
 
+    /**
+     * Adds the specified cards to the specified user played cards for this round
+     * @param {Player} player the player
+     * @param {number[]} cardIndexes the played cards indexes
+     */
     public addPlayedCards(player: Player, cardIndexes: number[]) {
         if (!this.canPlayCards(player, cardIndexes)) {
             throw new Error(`You can't play cards ${cardIndexes.join(", ")}`);
@@ -57,6 +68,11 @@ export default class Round extends EventEmitter {
         return;
     }
 
+    /**
+     * Checks if the specified user can play the specified cards
+     * @param {Player} player the player
+     * @param {number[]} cardIndexes the card indexes
+     */
     public canPlayCards(player: Player, cardIndexes: number[]) {
         for (const i of cardIndexes) {
             if (i < 0 || i > player.hand.length) {
@@ -77,6 +93,9 @@ export default class Round extends EventEmitter {
         return `czar: ${this.cardCzar}, blackCard: ${this.blackCard.text}, players: ${this.players.join()}`;
     }
 
+    /**
+     * Shuffles the choices so players can't know which choice belongs to whom
+     */
     private shuffleChoices() {
         logger.info("Shuffling choices");
         this.choices = _.shuffle(this.choices);
