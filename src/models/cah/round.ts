@@ -75,8 +75,8 @@ export default class Round extends EventEmitter {
      */
     public canPlayCards(player: Player, cardIndexes: number[]) {
         for (const i of cardIndexes) {
-            if (i < 0 || i > player.hand.length) {
-                logger.error(`Card index ${i} out of bounds`);
+            if (i < 0 || i >= player.hand.length || isNaN(i) || i == null) {
+                logger.error(`Card index ${i} is not a valid pick`);
                 return false;
             }
         }
@@ -85,7 +85,7 @@ export default class Round extends EventEmitter {
             logger.error(`Player ${player} played ${cardIndexes.length} cards instead of ${this.blackCard.pick}`);
             throw new Error(`Please pick ${this.blackCard.pick} ordered cards for this round`);
         }
-        const alreadyPlayed = !isNullOrUndefined(this.choices.find((c) => c.player.id === player.id));
+        const alreadyPlayed = !(this.choices.find((c) => c.player.id === player.id) == null);
         return !alreadyPlayed;
     }
 

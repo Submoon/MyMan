@@ -4,6 +4,7 @@ import * as _ from "lodash";
 import logger from "../../utils/logger";
 import { IBlackCard, ICahCards } from "./cahapi";
 
+import { isNullOrUndefined } from "util";
 import * as allCahCards from "../../../cahcards.json";
 import CahMessageFormatter from "./CahMessageFormatter";
 import Deck from "./deck";
@@ -167,7 +168,12 @@ export default class Game {
             return;
         }
 
-        if (winnerIndex < 0 || winnerIndex > this.round.choices.length) {
+        if (
+            winnerIndex < 0
+            || winnerIndex > this.round.choices.length - 1
+            || isNaN(winnerIndex)
+            || winnerIndex == null
+        ) {
             await this.channel.send(`Number ${winnerIndex} is not a valid option.`);
             return;
         }
