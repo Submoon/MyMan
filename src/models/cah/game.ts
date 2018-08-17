@@ -61,7 +61,10 @@ export default class Game {
      */
     public dispose() {
         logger.info(`Disposing of game on channel ${this.channel.name}`);
-        this.round.removeAllListeners();
+        if (this.round != null) {
+            this.round.removeAllListeners();
+        }
+        
     }
 
     /**
