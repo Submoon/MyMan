@@ -6,7 +6,6 @@ import Player from "./player";
  * Class GameManager
  */
 class GameManager {
-
     /**
      * Instance of GameManager
      */
@@ -23,7 +22,7 @@ class GameManager {
     protected constructor() {
         this.games = new Map();
     }
-    
+
     /**
      * Create a game in this channel
      * @param {TextChannel} channel
@@ -32,12 +31,13 @@ class GameManager {
     public async createGame(channel: TextChannel): Promise<Game> {
         const channelId = channel.id;
         if (this.games.get(channelId)) {
-            throw new Error("There is already a game on this channel! Please use the command cah_stop");
+            throw new Error(
+                "There is already a game on this channel! Please use the command cah_stop"
+            );
         }
         const game = new Game(channel);
         this.games.set(channelId, game);
         return game;
-
     }
 
     /**
@@ -93,12 +93,16 @@ class GameManager {
      * @param {string} userId the user ID
      * @param {number[]} cardIndexes the card indexes
      */
-    public async playerPicked(channelId: string, userId: string, cardIndexes: number[]) {
+    public async playerPicked(
+        channelId: string,
+        userId: string,
+        cardIndexes: number[]
+    ) {
         const game = this.games.get(channelId);
         if (!game) {
             throw new Error("There is no game in this channel");
         }
-        return await game.playerPicked(userId, cardIndexes);
+        return game.playerPicked(userId, cardIndexes);
     }
 
     /**
@@ -109,14 +113,17 @@ class GameManager {
      * @param {string} userId the user ID
      * @param {number} winnerIndex the winner index
      */
-    public async czarChose(channelId: string, userId: string, winnerIndex: number) {
+    public async czarChose(
+        channelId: string,
+        userId: string,
+        winnerIndex: number
+    ) {
         const game = this.games.get(channelId);
         if (!game) {
             throw new Error("There is no game in this channel");
         }
-        return await game.czarChose(userId, winnerIndex);
+        return game.czarChose(userId, winnerIndex);
     }
-
 }
 
 export default GameManager.getInstance();

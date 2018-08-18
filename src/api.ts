@@ -1,5 +1,4 @@
 import * as Discord from "discord.js";
-import { Message } from "discord.js";
 
 export interface IConfig {
     token: string;
@@ -41,5 +40,9 @@ export interface IEventConstructor {
 
 export interface ICommandConstructor {
     description: IDescription;
-    new (client: IExtendedClient, message: Message,  ...args: any[]): ICommand;
+    new (
+        client: IExtendedClient,
+        message: Discord.Message,
+        ...args: any[]
+    ): ICommand;
 }
