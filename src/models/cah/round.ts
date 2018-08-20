@@ -79,7 +79,12 @@ export default class Round extends EventEmitter {
      * @param {number[]} cardIndexes the card indexes
      */
     public canPlayCards(player: Player, cardIndexes: number[]) {
-        if (this.players.find((p) => p.id === player.id)) {
+        if (!this.players.find((p) => p.id === player.id)) {
+            logger.warn(
+                `Player ${player.id} not found in ${this.players
+                    .map((p) => p.id)
+                    .join()}`
+            );
             return false;
         }
         for (const i of cardIndexes) {
