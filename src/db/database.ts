@@ -1,6 +1,6 @@
 // database.js
-import * as Bookshelf from "bookshelf";
-import * as Knex from "knex";
+import Bookshelf from "bookshelf";
+import Knex from "knex";
 import * as knexfile from "../../knexfile";
 
 export default class Database {
