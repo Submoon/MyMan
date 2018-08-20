@@ -53,7 +53,7 @@
             "pick": 1
         },
         {
-            "text": "What's the next Happy Meal&reg; toy?",
+            "text": "What's the next Happy Meal® toy?",
             "pick": 1
         },
         {
@@ -269,7 +269,7 @@
             "pick": 2
         },
         {
-            "text": "Lifetime&reg; presents \\_, the story of \\_.",
+            "text": "Lifetime® presents \\_, the story of \\_.",
             "pick": 2
         },
         {
@@ -341,7 +341,7 @@
             "pick": 1
         },
         {
-            "text": "During his childhood, Salvador Dal&iacute; produced hundreds of paintings of \\_.",
+            "text": "During his childhood, Salvador DalÍ produced hundreds of paintings of \\_.",
             "pick": 1
         },
         {
@@ -577,7 +577,7 @@
             "pick": 1
         },
         {
-            "text": "Call the law offices of Goldstein &amp; Goldstein, because no one should have to tolerate \\_ in the workplace.",
+            "text": "Call the law offices of Goldstein & Goldstein, because no one should have to tolerate \\_ in the workplace.",
             "pick": 1
         },
         {
@@ -761,7 +761,7 @@
             "pick": 2
         },
         {
-            "text": "Do the Dew &reg; with our most extreme flavor yet! Get ready for Mountain Dew \\_!",
+            "text": "Do the Dew ® with our most extreme flavor yet! Get ready for Mountain Dew \\_!",
             "pick": 1
         },
         {
@@ -845,7 +845,7 @@
             "pick": 1
         },
         {
-            "text": "Do you lack energy? Does it sometimes feel like the whole world is \\_? Zoloft.&reg;",
+            "text": "Do you lack energy? Does it sometimes feel like the whole world is \\_? Zoloft.®",
             "pick": 1
         },
         {
@@ -986,7 +986,7 @@
         },
         {
             "pick": 1,
-            "text": "Coming to Red Lobster&reg; this month, \\_."
+            "text": "Coming to Red Lobster® this month, \\_."
         },
         {
             "pick": 1,
@@ -1258,7 +1258,7 @@
         },
         {
             "pick": 2,
-            "text": "In line with our predictions, we find a robust correlation between \\_ and \\_ (p&gt;.05)."
+            "text": "In line with our predictions, we find a robust correlation between \\_ and \\_ (p>.05)."
         },
         {
             "pick": 1,
@@ -1433,7 +1433,7 @@
             "pick": 1
         },
         {
-            "text": "Press &uarr; &darr; &larr; &rarr; B to unleash \\_.",
+            "text": "Press ↑ ↓ ← → B to unleash \\_.",
             "pick": 1
         },
         {
@@ -1502,11 +1502,11 @@
         },
         {
             "pick": 1,
-            "text": "During my first game of D&amp;D, I accidentally summoned \\_."
+            "text": "During my first game of D&D, I accidentally summoned \\_."
         },
         {
             "pick": 1,
-            "text": "Bob Ross's little-known first show was called &quot;The Joy of \\_.&quot;"
+            "text": "Bob Ross's little-known first show was called \"The Joy of \\_.\""
         },
         {
             "pick": 1,
@@ -1735,11 +1735,11 @@
         },
         {
             "pick": 1,
-            "text": "Apple&reg; has announced a new device that promises to revolutionize the way we think about \\_."
+            "text": "Apple® has announced a new device that promises to revolutionize the way we think about \\_."
         },
         {
             "pick": 1,
-            "text": "Audiences at Sundance were traumatized by Lars von Trier's controversial new film, &quot;\\_.&quot;"
+            "text": "Audiences at Sundance were traumatized by Lars von Trier's controversial new film, \"\\_.\""
         },
         {
             "pick": 1,
@@ -1747,7 +1747,7 @@
         },
         {
             "pick": 3,
-            "text": "Bentley's&reg; latest ultra-high-end luxury sedan comes complete with \\_, \\_ and \\_."
+            "text": "Bentley's® latest ultra-high-end luxury sedan comes complete with \\_, \\_ and \\_."
         },
         {
             "pick": 1,
@@ -1755,7 +1755,7 @@
         },
         {
             "pick": 1,
-            "text": "Coming soon from Pixar: &quot;\\_&quot;."
+            "text": "Coming soon from Pixar: \"\\_\"."
         },
         {
             "pick": 1,
@@ -1771,7 +1771,7 @@
         },
         {
             "pick": 1,
-            "text": "Ever since &quot;the incident,&quot; every time I close my eyes, I still see \\_."
+            "text": "Ever since \"the incident,\" every time I close my eyes, I still see \\_."
         },
         {
             "pick": 1,
@@ -1779,7 +1779,7 @@
         },
         {
             "pick": 1,
-            "text": "From the people who brough you _Sharktopus_ and _Sharknado_, Syfy's&reg; next horror film combines sharks with \\_."
+            "text": "From the people who brough you _Sharktopus_ and _Sharknado_, Syfy's® next horror film combines sharks with \\_."
         },
         {
             "pick": 1,
@@ -1787,7 +1787,7 @@
         },
         {
             "pick": 1,
-            "text": "Fuddruckers&reg; is secretly testing a burger made with \\_."
+            "text": "Fuddruckers® is secretly testing a burger made with \\_."
         },
         {
             "pick": 1,
@@ -1807,7 +1807,7 @@
         },
         {
             "pick": 1,
-            "text": "Hey man, you gonna come check out my shown tonight? My new band is called &quot;\\_.&quot;"
+            "text": "Hey man, you gonna come check out my shown tonight? My new band is called \"\\_.\""
         },
         {
             "pick": 1,
@@ -1875,7 +1875,7 @@
         },
         {
             "pick": 1,
-            "text": "I wish it were something simple &mdash; like peanuts or shellfish &mdash; but my doctor tells me I'm actually allergic to \\_."
+            "text": "I wish it were something simple — like peanuts or shellfish — but my doctor tells me I'm actually allergic to \\_."
         },
         {
             "pick": 2,
@@ -1903,7 +1903,7 @@
         },
         {
             "pick": 1,
-            "text": "If you want a picture of the future, imagine a boot stamping on \\_ &mdash; forever."
+            "text": "If you want a picture of the future, imagine a boot stamping on \\_ — forever."
         },
         {
             "pick": 2,
@@ -1951,7 +1951,7 @@
         },
         {
             "pick": 2,
-            "text": "Netflix's&reg; new original series is a sitcom based around \\_ and \\_."
+            "text": "Netflix's® new original series is a sitcom based around \\_ and \\_."
         },
         {
             "pick": 1,
@@ -1963,7 +1963,7 @@
         },
         {
             "pick": 1,
-            "text": "Oh, so you think you're too good for us now, little &quot;Miss \\_!&quot;"
+            "text": "Oh, so you think you're too good for us now, little \"Miss \\_!\""
         },
         {
             "pick": 1,
@@ -1987,7 +1987,7 @@
         },
         {
             "pick": 2,
-            "text": "So then he says, &quot;If you want to make this relationship work, you need to give up \\_ and \\_.&quot; As. If."
+            "text": "So then he says, \"If you want to make this relationship work, you need to give up \\_ and \\_.\" As. If."
         },
         {
             "pick": 1,
@@ -2007,7 +2007,7 @@
         },
         {
             "pick": 1,
-            "text": "The last three items on my &quot;bucket list&quot;:"
+            "text": "The last three items on my \"bucket list\":"
         },
         {
             "pick": 2,
@@ -2031,31 +2031,31 @@
         },
         {
             "pick": 2,
-            "text": "This bottle of 1961 Ch&acirc;teau Cheval Blanc has notes of \\_ and \\_."
+            "text": "This bottle of 1961 Château Cheval Blanc has notes of \\_ and \\_."
         },
         {
             "pick": 2,
-            "text": "This film has been rated &quot;NC-17&quot; for graphic depictions of \\_ and \\_."
+            "text": "This film has been rated \"NC-17\" for graphic depictions of \\_ and \\_."
         },
         {
             "pick": 3,
-            "text": "Three bullet points from my OKCupid&reg; profile: \\_, \\_, and most importantly, \\_."
+            "text": "Three bullet points from my OKCupid® profile: \\_, \\_, and most importantly, \\_."
         },
         {
             "pick": 1,
-            "text": "Today, Amazon.com&reg; received a patent on \\_."
+            "text": "Today, Amazon.com® received a patent on \\_."
         },
         {
             "pick": 1,
-            "text": "Tonight on &quot;My Super Sweet 16,&quot; Stephani's parents give her \\_."
+            "text": "Tonight on \"My Super Sweet 16,\" Stephani's parents give her \\_."
         },
         {
             "pick": 2,
-            "text": "Tonight on &quot;Supernatural,&quot; Sam and Dean are forced to confront \\_ using only \\_."
+            "text": "Tonight on \"Supernatural,\" Sam and Dean are forced to confront \\_ using only \\_."
         },
         {
             "pick": 2,
-            "text": "Topping this week's non-fiction best-sellers: &quot;\\_ : the art of living with \\_.&quot;"
+            "text": "Topping this week's non-fiction best-sellers: \"\\_ : the art of living with \\_.\""
         },
         {
             "pick": 2,
@@ -2095,7 +2095,7 @@
         },
         {
             "pick": 1,
-            "text": "What was one of the rejected flavors for Bertie Bott's Every Flavour Beans&trade;?"
+            "text": "What was one of the rejected flavors for Bertie Bott's Every Flavour Beans™?"
         },
         {
             "pick": 1,
@@ -2143,11 +2143,11 @@
         },
         {
             "pick": 1,
-            "text": "Why won't they let me in Chuck E. Cheese's&reg; anymore?"
+            "text": "Why won't they let me in Chuck E. Cheese's® anymore?"
         },
         {
             "pick": 1,
-            "text": "William Shatner's shocking new autobiography is titled &quot;\\_: The Final Frontier.&quot;"
+            "text": "William Shatner's shocking new autobiography is titled \"\\_: The Final Frontier.\""
         },
         {
             "pick": 2,
@@ -2163,7 +2163,7 @@
         },
         {
             "pick": 1,
-            "text": "You have my sword. &quot;And you have my bow.&quot; &quot;And _my_ \\_!&quot;"
+            "text": "You have my sword. \"And you have my bow.\" \"And _my_ \\_!\""
         },
         {
             "pick": 1,
@@ -2694,7 +2694,7 @@
             "pick": 1
         },
         {
-            "text": "&gt;preferring 3D women over \\_",
+            "text": ">preferring 3D women over \\_",
             "pick": 1
         },
         {
@@ -2722,7 +2722,7 @@
             "pick": 1
         },
         {
-            "text": "&gt;mfw \\_.",
+            "text": ">mfw \\_.",
             "pick": 1
         },
         {
@@ -2738,7 +2738,7 @@
             "pick": 1
         },
         {
-            "text": "D&amp;D: 6th edition will feature \\_ as a main race!",
+            "text": "D&D: 6th edition will feature \\_ as a main race!",
             "pick": 1
         },
         {
@@ -2818,7 +2818,7 @@
             "pick": 1
         },
         {
-            "text": "Dustin Browder demands more \\_ in StarCraft&reg;.",
+            "text": "Dustin Browder demands more \\_ in StarCraft®.",
             "pick": 1
         },
         {
@@ -3182,7 +3182,7 @@
             "pick": 1
         },
         {
-            "text": "Alcoholic games of Clue&reg; lead to \\_.",
+            "text": "Alcoholic games of Clue® lead to \\_.",
             "pick": 1
         },
         {
@@ -3282,7 +3282,7 @@
             "pick": 1
         },
         {
-            "text": "What is mo&eacute;?",
+            "text": "What is moé?",
             "pick": 1
         },
         {
@@ -3402,7 +3402,7 @@
             "pick": 1
         },
         {
-            "text": "Coming to Neon Alley: \\_, completely UNCUT &amp; UNCENSORED.",
+            "text": "Coming to Neon Alley: \\_, completely UNCUT & UNCENSORED.",
             "pick": 1
         },
         {
@@ -3422,7 +3422,7 @@
             "pick": 1
         },
         {
-            "text": "\\_. So kawaii!! &lt;3 &lt;3",
+            "text": "\\_. So kawaii!! <3 <3",
             "pick": 1
         },
         {
@@ -3482,7 +3482,7 @@
             "pick": 1
         },
         {
-            "text": "From the creators of Tiger &amp; Bunny: \\_ &amp; \\_!!",
+            "text": "From the creators of Tiger & Bunny: \\_ & \\_!!",
             "pick": 2
         },
         {
@@ -3602,7 +3602,7 @@
             "pick": 1
         },
         {
-            "text": "The rarest Pok&eacute;mon in my collection is \\_.",
+            "text": "The rarest Pokémon in my collection is \\_.",
             "pick": 1
         },
         {
@@ -3730,7 +3730,7 @@
             "pick": 1
         },
         {
-            "text": "The mo&eacute; debate was surprisingly civil until someone mentioned \\_.",
+            "text": "The moé debate was surprisingly civil until someone mentioned \\_.",
             "pick": 1
         },
         {
@@ -7194,7 +7194,7 @@
             "pick": 2
         },
         {
-            "text": "Grand Theft Auto&trade;: \\_.",
+            "text": "Grand Theft Auto™: \\_.",
             "pick": 1
         },
         {
@@ -7554,7 +7554,7 @@
             "pick": 1
         },
         {
-            "text": "\\_ &amp; \\_: Worst mods ever.",
+            "text": "\\_ & \\_: Worst mods ever.",
             "pick": 2
         },
         {
@@ -7854,7 +7854,7 @@
             "pick": 2
         },
         {
-            "text": "\\_, by Bad Dragon&reg;.",
+            "text": "\\_, by Bad Dragon®.",
             "pick": 1
         },
         {
@@ -9186,7 +9186,7 @@
             "pick": 1
         },
         {
-            "text": "&gt;walk into gamestop\n&gt;see \\_\n&gt;walk out",
+            "text": ">walk into gamestop\n>see \\_\n>walk out",
             "pick": 1
         },
         {
@@ -9262,7 +9262,7 @@
             "pick": 1
         },
         {
-            "text": "&gt;\\_\n&gt;\\_\n&gt;2011\n&gt;ISHYGDDT",
+            "text": ">\\_\n>\\_\n>2011\n>ISHYGDDT",
             "pick": 2
         },
         {
@@ -9426,7 +9426,7 @@
             "pick": 1
         },
         {
-            "text": "&gt;implying you aren't \\_",
+            "text": ">implying you aren't \\_",
             "pick": 1
         },
         {
@@ -9522,7 +9522,7 @@
             "pick": 1
         },
         {
-            "text": "&gt;tfw when \\_.",
+            "text": ">tfw when \\_.",
             "pick": 1
         },
         {
@@ -9754,7 +9754,7 @@
             "pick": 2
         },
         {
-            "text": "\\_? No, I'm not really into Pok&eacute;mon.",
+            "text": "\\_? No, I'm not really into Pokémon.",
             "pick": 1
         },
         {
@@ -9863,7 +9863,7 @@
         "Pictures of boobs.",
         "Doing the right thing.",
         "The violation of our most basic human rights.",
-        "Viagra&reg;.",
+        "Viagra®.",
         "Self-loathing.",
         "Spectacular abs.",
         "A balanced breakfast.",
@@ -9972,7 +9972,7 @@
         "Gandhi.",
         "Preteens.",
         "Toni Morrison's vagina.",
-        "Five-Dollar Footlongs&trade;.",
+        "Five-Dollar Footlongs™.",
         "Land mines.",
         "A sea of troubles.",
         "A zesty breakfast burrito.",
@@ -9990,7 +9990,7 @@
         "Pixelated bukkake.",
         "Friends with benefits.",
         "The token minority.",
-        "The Tempur-Pedic&reg; Swedish Sleep System&trade;.",
+        "The Tempur-Pedic® Swedish Sleep System™.",
         "A thermonuclear detonation.",
         "Take-backsies.",
         "The Rapture.",
@@ -10015,7 +10015,7 @@
         "Britney Spears at 55.",
         "All-you-can-eat shrimp for $4.99.",
         "Pooping back and forth. Forever.",
-        "Fancy Feast&reg;.",
+        "Fancy Feast®.",
         "Jewish fraternities.",
         "Being a motherfucking sorcerer.",
         "Pulling out.",
@@ -10043,7 +10043,7 @@
         "Darth Vader.",
         "Eating the last known bison.",
         "Guys who don't call.",
-        "Hot Pockets&reg;.",
+        "Hot Pockets®.",
         "A time travel paradox.",
         "The milk man.",
         "Testicular torsion.",
@@ -10072,14 +10072,14 @@
         "Getting really high.",
         "Attitude.",
         "Sarah Palin.",
-        "The &Uuml;bermensch.",
+        "The Übermensch.",
         "Altar boys.",
         "My soul.",
         "My sex life.",
         "Pedophiles.",
         "72 virgins.",
         "Pabst Blue Ribbon.",
-        "Domino's&trade; Oreo&trade; Dessert Pizza.",
+        "Domino's™ Oreo™ Dessert Pizza.",
         "A snapping turtle biting the tip of your penis.",
         "The Blood of Christ.",
         "Half-assed foreplay.",
@@ -10089,7 +10089,7 @@
         "Bill Nye the Science Guy.",
         "Italians.",
         "A windmill full of corpses.",
-        "Adderall&trade;.",
+        "Adderall™.",
         "Crippling debt.",
         "A stray pube.",
         "Prancing.",
@@ -10146,7 +10146,7 @@
         "The gays.",
         "Scientology.",
         "Estrogen.",
-        "GoGurt&reg;.",
+        "GoGurt®.",
         "Judge Judy.",
         "Dick fingers.",
         "Racism.",
@@ -10167,7 +10167,7 @@
         "Third base.",
         "Racially-biased SAT questions.",
         "Porn stars.",
-        "A Super Soaker&trade; full of cat pee.",
+        "A Super Soaker™ full of cat pee.",
         "Muhammed (Praise Be Unto Him).",
         "Puberty.",
         "A disappointing birthday party.",
@@ -10184,7 +10184,7 @@
         "A robust mongoloid.",
         "An M. Night Shyamalan plot twist.",
         "Getting drunk on mouthwash.",
-        "Lunchables&trade;.",
+        "Lunchables™.",
         "Women in yogurt commercials.",
         "John Wilkes Booth.",
         "Powerful thighs.",
@@ -10211,7 +10211,7 @@
         "The miracle of childbirth.",
         "Finger painting.",
         "A monkey smoking a cigar.",
-        "The Make-A-Wish&reg; Foundation.",
+        "The Make-A-Wish® Foundation.",
         "Anal beads.",
         "The Force.",
         "Kamikaze pilots.",
@@ -10227,7 +10227,7 @@
         "A mopey zoo lion.",
         "A defective condom.",
         "Teenage pregnancy.",
-        "A Bop It&trade;.",
+        "A Bop It™.",
         "Expecting a burp and vomiting on the floor.",
         "Horrifying laser hair removal accidents.",
         "Boogers.",
@@ -10258,10 +10258,10 @@
         "Embryonic stem cells.",
         "Nicolas Cage.",
         "Firing a rifle into the air while balls deep in a squealing hog.",
-        "Switching to Geico&reg;.",
+        "Switching to Geico®.",
         "The chronic.",
         "Erectile dysfunction.",
-        "Home video of Oprah sobbing into a Lean Cuisine&reg;.",
+        "Home video of Oprah sobbing into a Lean Cuisine®.",
         "A bucket of fish heads.",
         "50,000 volts straight to the nipples.",
         "Being fat and stupid.",
@@ -10338,7 +10338,7 @@
         "Media coverage.",
         "Making the penises kiss.",
         "Moral ambiguity.",
-        "Medieval Times&reg; Dinner &amp; Tournament.",
+        "Medieval Times® Dinner & Tournament.",
         "Mad hacky-sack skills.",
         "Just the tip.",
         "Literally eating shit.",
@@ -10372,7 +10372,7 @@
         "The hiccups.",
         "The harsh light of day.",
         "The Gulags.",
-        "The Fanta&reg; girls.",
+        "The Fanta® girls.",
         "A big black dick.",
         "A beached whale.",
         "A low standard of living.",
@@ -10404,7 +10404,7 @@
         "A sweaty, panting leather daddy.",
         "Intimacy problems.",
         "The new Radiohead album.",
-        "Pretty Pretty Princess Dress-Up Board Game&reg;.",
+        "Pretty Pretty Princess Dress-Up Board Game®.",
         "A man in yoga pants with a ponytail and feather earrings.",
         "An army of skeletons.",
         "A squadron of moles wearing aviator goggles.",
@@ -10436,9 +10436,9 @@
         "Fetal alcohol syndrome.",
         "Graphic violence, adult language, and some sexual content.",
         "A bigger, blacker dick.",
-        "The mere concept of Applebee's&reg;.",
+        "The mere concept of Applebee's®.",
         "A sad fat dragon with no friends.",
-        "A pi&ntilde;ata full of scorpions.",
+        "A piñata full of scorpions.",
         "Existing.",
         "Hillary Clinton's death stare.",
         "Catastrophic urethral trauma.",
@@ -10486,7 +10486,7 @@
         "Samuel L. Jackson.",
         "Self-flagellation.",
         "The systematic destruction of an entire people and their way of life.",
-        "The Quesadilla Explosion Salad&trade; from Chili's&reg;.",
+        "The Quesadilla Explosion Salad™ from Chili's®.",
         "Reverse cowgirl.",
         "Vietnam flashbacks.",
         "Actually getting shot, for real.",
@@ -10522,7 +10522,7 @@
         "A vagina that leads to another dimension.",
         "Disco fever.",
         "Getting your dick stuck in a Chinese finger trap with another dick.",
-        "Drinking ten 5-hour ENERGYs&reg; to get fifty continuous hours of energy.",
+        "Drinking ten 5-hour ENERGYs® to get fifty continuous hours of energy.",
         "Sneezing, farting, and coming at the same time.",
         "Some douche with an acoustic guitar.",
         "Spending lots of money.",
@@ -10543,7 +10543,7 @@
         "That ass.",
         "A surprising amount of hair.",
         "Eating Tom Selleck's mustache to gain his powers.",
-        "Velcro&trade;.",
+        "Velcro™.",
         "A PowerPoint presentation.",
         "Crazy opium eyes.",
         "10 Incredible Facts About the Anus.",
@@ -10557,7 +10557,7 @@
         "Fucking a corpse back to life.",
         "Neil Diamond's Greatest Hits.",
         "Calculating every mannerism so as not to suggest homosexuality.",
-        "Whatever a McRib&reg; is made of.",
+        "Whatever a McRib® is made of.",
         "No clothes on, penis in vagina.",
         "All the single ladies.",
         "Whispering all sexy.",
@@ -10601,7 +10601,7 @@
         "Interspecies marriage.",
         "A gender identity that can only be conveyed through slam poetry.",
         "Almost giving money to a homeless person.",
-        "Stuff a child's face with Fun Dip&reg; until he starts having fun.",
+        "Stuff a child's face with Fun Dip® until he starts having fun.",
         "What Jesus would do.",
         "A for-real lizard that spits blood from its eyes.",
         "Blackula.",
@@ -10630,7 +10630,7 @@
         "The eight gay warlocks who dictate the rules of fashion.",
         "Being nine years old.",
         "The unbelievable world of mushrooms.",
-        "The Abercrombie &amp; Fitch lifestyle.",
+        "The Abercrombie & Fitch lifestyle.",
         "Vegetarian options.",
         "My first period.",
         "Having been dead for a while.",
@@ -10673,7 +10673,7 @@
         "A one-way ticket to Gary, Indiana.",
         "Daddy's credit card.",
         "September 11th, 2001.",
-        "An unforgettable quincea&ntilde;era.",
+        "An unforgettable quinceañera.",
         "Deez nuts.",
         "Social justice warriors with flamethrowers of compassion.",
         "Some shit-hot guitar licks.",
@@ -10740,7 +10740,7 @@
         "Robots who just want to party.",
         "A self-microwaving burrito.",
         "Forgetting grandma's first name.",
-        "Our new Buffalo Chicken Dippers&reg;!",
+        "Our new Buffalo Chicken Dippers®!",
         "Treasures beyond your wildest dreams.",
         "Getting shot out of a cannon.",
         "The sweet song of sword against and the braying of mighty war beasts.",
@@ -10812,7 +10812,7 @@
         "Becoming the President of the United States.",
         "Being sexually attracted to children.",
         "Being turned into sausages.",
-        "Beyonc&eacute;.",
+        "Beyoncé.",
         "Big, smart money boys tap-tapping on their keyboards.",
         "Blossoming into a beautiful young woman.",
         "Breastfeeding in public like a radiant earth goddess.",
@@ -10859,7 +10859,7 @@
         "Finding a nice elevator to poop in.",
         "Forty-five minutes of finger blasting.",
         "Founding a major world religion.",
-        "Fucking me good and taking me to Red Lobster&reg;.",
+        "Fucking me good and taking me to Red Lobster®.",
         "Fucking my therapist.",
         "Gary.",
         "Gay thoughts.",
@@ -10971,7 +10971,7 @@
         "The best, deepest quotes from The Dark Knight.",
         "The body of a 46-year-old man.",
         "The bond between a woman and her horse.",
-        "The chicken from Popeyes&reg;.",
+        "The chicken from Popeyes®.",
         "The clown that followed me home from the grocery store.",
         "The fear and hatred in men's hearts.",
         "The feeling of going to McDonald's as a 6-year-old.",
@@ -11015,7 +11015,7 @@
         "Sucking the President's dick.",
         "Sunny D! Alright!",
         "A mulatto, an albino, a mosquito, and my libido.",
-        "Log&trade;.",
+        "Log™.",
         "Jerking off to a 10-second RealMedia clip.",
         "The Y2K bug.",
         "Deregulating the mortgage market.",
@@ -11029,7 +11029,7 @@
         "Pure Moods, Vol. 1.",
         "Pizza in the morning, pizza in the evening, pizza at supper time.",
         "Pamela Anderson's boobs running in slow motion.",
-        "Getting caught up in the CROSSFIRE&trade;.",
+        "Getting caught up in the CROSSFIRE™.",
         "Angels interfering in an otherwise fair baseball game.",
         "Cool 90s up-in-the-front hair.",
         "Patti Mayonnaise.",
@@ -11215,7 +11215,7 @@
         "Immaculate conception.",
         "Space Jam on VHS.",
         "Gift-wrapping a live hamster.",
-        "A Hungry-Man&trade; Frozen Christmas Dinner for One.",
+        "A Hungry-Man™ Frozen Christmas Dinner for One.",
         "Swapping bodies with mom for a day.",
         "Making up for 10 years of shitty parenting with a PlayStation.",
         "Finding out that Santa isn't real.",
@@ -11275,13 +11275,13 @@
         "Nude-modding Super Mario World.",
         "Temporary invincibility.",
         "Being an attractive elf trapped in an unattractive human's body.",
-        "Filling every pouch of a UtiliKilt&trade; with pizza.",
+        "Filling every pouch of a UtiliKilt™ with pizza.",
         "The Sarlacc.",
         "Achieving the manual dexterity and tactical brilliance of a 12-year-old Korean boy.",
         "Allowing nacho cheese to curdle in your beard while you creep in League of Legends.",
         "The collective wail of every Magic player suddenly realizing that they've spent hundreds of dollars on pieces of cardboard.",
         "Rolling a D20 to save a failing marriage.",
-        "Legendary Creature &ndash; Robert Khoo.",
+        "Legendary Creature – Robert Khoo.",
         "Winning the approval of Cooking Mama that you never got from actual mama.",
         "Never watching, discussing, or thinking about My Little Pony.",
         "Turn-of-the-century sky racists.",
@@ -11379,7 +11379,7 @@
         "Ringo Starr & His All-Starr Band.",
         "Sandwich.",
         "Saving the Rainforest Cafe.",
-        "Sir Thomas More's Fruitopia&trade;.",
+        "Sir Thomas More's Fruitopia™.",
         "Sweating it out on the streets of a runaway American Dream.",
         "That one leftover screw.",
         "That thing politicians do with their thumbs when they talk.",
@@ -11417,7 +11417,7 @@
         "A ball pit filled with testicles.",
         "A banana. You know, for scale.",
         "A beard longer than 12 inches.",
-        "A Benedict Cumberbatch RealDoll&trade;.",
+        "A Benedict Cumberbatch RealDoll™.",
         "A bit o' the ol' slap and tickle.",
         "A bitchin' Camaro.",
         "A black fly in your chardonnay.",
@@ -11436,7 +11436,7 @@
         "A donkey show.",
         "A fear-boner.",
         "A fishy taste.",
-        "A Fleshlight&reg;.",
+        "A Fleshlight®.",
         "A fluffy little butt.",
         "A four-inch clit.",
         "A good schtupping.",
@@ -11465,7 +11465,7 @@
         "A slack-jawed yokel.",
         "A song about how great Nebraska is.",
         "A stinky pinky.",
-        "A stripper named &quot;Anchovy.&quot;",
+        "A stripper named \"Anchovy.\"",
         "A strong, independent woman who don't need no man.",
         "A tender rodgering.",
         "A thirsty, sperm-jacking wanna-be baby mama.",
@@ -11487,9 +11487,9 @@
         "An effeminate southern homophobe.",
         "An emergency root canal.",
         "An emperor penguin with _no_ sense of shame.",
-        "An entire bottle of J&auml;germeister&reg;.",
+        "An entire bottle of Jägermeister®.",
         "An erotic novel about the Loch Ness Monster.",
-        "An extra-large can of Bone Bashful&trade; brand Chinchilla Pudding Sauce.",
+        "An extra-large can of Bone Bashful™ brand Chinchilla Pudding Sauce.",
         "An itsy-bitsy teeny weenie.",
         "An obscene amount of butter.",
         "An Oosik, or Inuit war club made from the penis bone of a walrus.",
@@ -11499,7 +11499,7 @@
         "An unsurprising rash.",
         "Anything with a hole.",
         "Applying to a new guild.",
-        "Asian girls with names like &quot;Christina&quot; or &quot;Elizabeth&quot;.",
+        "Asian girls with names like \"Christina\" or \"Elizabeth\".",
         "Auto-erotic asphyxiation.",
         "Axl Rose.",
         "Baby carrots.",
@@ -11515,8 +11515,8 @@
         "Being raped to sleep by dickwolves.",
         "Being small but perfectly well formed.",
         "Being so far in the closet, you can see Narnia.",
-        "Being waterboarded with Wild Turkey&reg; 101.",
-        "Belching out the lyrics to &quot;Hey Jude.&quot;",
+        "Being waterboarded with Wild Turkey® 101.",
+        "Belching out the lyrics to \"Hey Jude.\"",
         "Bitch tits.",
         "Bitchy resting face.",
         "Blistering barnacles!",
@@ -11535,7 +11535,7 @@
         "Cocktimus Prime: the laser-guided dildo rocket.",
         "Cockulous Maximus, tremendous tallywacker of Tripoli.",
         "Combing out the dingleberries.",
-        "Costco&reg; food samples.",
+        "Costco® food samples.",
         "Crabs Adjust Humidity.",
         "Cumalot.",
         "Curb-stomping.",
@@ -11550,27 +11550,27 @@
         "Enrolling in clown school.",
         "Erotic balloon animals.",
         "Erotic Star Trek fan fiction where all the characters are furries, like Kirk is an ocelot or something.",
-        "Explaining how I got the nickname &quot;Nibbleberries.&quot;",
-        "Ezekiel 23:20 &quot;There she lusted after her lovers, whose genitals were like those of donkeys and whose emission was like that of horses.&quot;",
+        "Explaining how I got the nickname \"Nibbleberries.\"",
+        "Ezekiel 23:20 \"There she lusted after her lovers, whose genitals were like those of donkeys and whose emission was like that of horses.\"",
         "Fat Man and Little Boy.",
         "Felching.",
         "Flop sweat.",
         "Front row seats to the Shit Show.",
         "Gargling noises.",
         "Gazpacho tactics.",
-        "Gettin' down there and bein' all like &quot;this shit is nasty, yo. Fuck this, yo.&quot;",
+        "Gettin' down there and bein' all like \"this shit is nasty, yo. Fuck this, yo.\"",
         "Getting ganked.",
         "Gilbert Gottfried's voice.",
         "Giving Anne Frank a drum kit for her birthday.",
         "Giving the tumor a cutesy name.",
         "Giving your pet lamb a Brazilian.",
-        "Googling &quot;Betty White nude.&quot;",
+        "Googling \"Betty White nude.\"",
         "Grandma's wet, sloppy kisses.",
         "Ham night!",
         "Her dry, scaly hands.",
         "Hey, fuck you buddy.",
         "Hilarious foreigners!",
-        "Honey Boo Boo shotgunning a 2-litre bottle of &quot;go-go juice.&quot;",
+        "Honey Boo Boo shotgunning a 2-litre bottle of \"go-go juice.\"",
         "Hookers and blow.",
         "Hooking up at a Tegan and Sara concert.",
         "Hulking out.",
@@ -11584,7 +11584,7 @@
         "Kentucky Fried Children.",
         "Killing hobos.",
         "LeBron James' vast, enveloping hands.",
-        "Lego&reg; recreations of famous porn scenes.",
+        "Lego® recreations of famous porn scenes.",
         "Living among us... Learning our ways. Watching. Waiting.",
         "Long Schlong Silver.",
         "Low-hanging fruit.",
@@ -11593,12 +11593,12 @@
         "M'lady.",
         "Making airplane noises.",
         "Making sweet, sweet love all night long.",
-        "Making vigorous love to a Taco Bell&reg; Beefy 5-Layer Burrito&trade;.",
+        "Making vigorous love to a Taco Bell® Beefy 5-Layer Burrito™.",
         "Mesothelioma.",
         "Michele Bachmann furiously masturbating with a coathanger.",
         "Minimum wage.",
         "Mitt Romney doing a burlesque routine in a giant champagne glass.",
-        "Mongolian &quot;beef.&quot;",
+        "Mongolian \"beef.\"",
         "Monkey torture.",
         "More dots!",
         "Mr. Right Now.",
@@ -11614,7 +11614,7 @@
         "OH EM GEE, TOTES ADORBS!!!",
         "One Direction.",
         "One whose nether regions are vast and beckoning, like unto a corridor down which a frankfurter might be thrown.",
-        "Opening for Sigur R&oacute;s.",
+        "Opening for Sigur Rós.",
         "Origami erotica.",
         "Painal.",
         "Paula Deen's dietician.",
@@ -11626,7 +11626,7 @@
         "Pretending to be a malfunctioning robot.",
         "Pretending to have the hiccups.",
         "Primo schlick material.",
-        "Pronouncing &quot;quinoa&quot; properly.",
+        "Pronouncing \"quinoa\" properly.",
         "Protective custody.",
         "Putting Baby in a corner.",
         "Racist ninjas.",
@@ -11665,7 +11665,7 @@
         "Taking one for the team.",
         "Tampons in every hole.",
         "Ted Nugent's cold, dead hands.",
-        "That &quot;not-so-fresh&quot; feeling.",
+        "That \"not-so-fresh\" feeling.",
         "That thing with the spoon.",
         "The (technically) Virgin Mary.",
         "The age of consent.",
@@ -11679,7 +11679,7 @@
         "The fabled Mongolian Death Worm.",
         "The few shreds of tinsel still clinging to my asshole.",
         "The Gaza Strip.",
-        "The graveyard shift at 7-Eleven&reg;.",
+        "The graveyard shift at 7-Eleven®.",
         "The green apple splatters.",
         "The hole in my chest where my heart used to be.",
         "The Large Hard-On Collider.",
@@ -11804,7 +11804,7 @@
         "A raging libido.",
         "Going black, and never going back.",
         "The best man dressed in drag.",
-        "A heart-shaped Jacuzzi filled with champagne and Viagra&trade;.",
+        "A heart-shaped Jacuzzi filled with champagne and Viagra™.",
         "Secretly drunk-dialing exes.",
         "Sexercise.",
         "Changing both your last names to \"Danger.\"",
@@ -11863,13 +11863,13 @@
         "The secret handshake.",
         "Mowing the fucking lawn.",
         "Blaming it on the dog.",
-        "A nervous breakdown at IKEA&trade;.",
+        "A nervous breakdown at IKEA™.",
         "A healthy work-life balance.",
         "Several decades of festering resentment.",
         "Really letting yourself go.",
         "Wondering who's gonna die first.",
         "The wedding-industrial complex.",
-        "Hiding the M&M's&reg;.",
+        "Hiding the M&M's®.",
         "\"Intimacy issues.\"",
         "Just giving up.",
         "A 50% divorce rate.",
@@ -11975,7 +11975,7 @@
         "Living Saint Inquisitor Grendel",
         "Abaddon the Armless",
         "Sigmar",
-        "Gav &amp; Bob",
+        "Gav & Bob",
         "MR RAGE",
         "Shub-Niggurath",
         "The Great Race of Yith",
@@ -12012,7 +12012,7 @@
         "Yu-Gi-Oh",
         "Engine Heart",
         "Pokemon: Tabletop Adventures",
-        "Pok&eacute;mon TCG",
+        "Pokémon TCG",
         "Vampire LARP",
         "Vampire: The Masquerade",
         "Esh-Esh",
@@ -12219,7 +12219,7 @@
         "The whizzard",
         "Mary Sue",
         "Crazy Hassan",
-        "&gt;BLAM",
+        ">BLAM",
         "Gork and Mork",
         "Hour long quest adventures over Omegle",
         "Skip the bullshit and go straight to banging",
@@ -12238,7 +12238,7 @@
         "125% Reccomended Daily Allowance of cock.",
         "A molotov cocktail.",
         "Just the tip!",
-        "A Fleshlite&trade;.",
+        "A Fleshlite™.",
         "SCIENCE!!1!",
         "Granny panties.",
         "A bag of dicks.",
@@ -12429,7 +12429,7 @@
         "Holy dildos.",
         "George Costanza",
         "Dr. Phil.",
-        "The sound a single ThunderStix&reg; makes.",
+        "The sound a single ThunderStix® makes.",
         "the PS4",
         "The Wii U",
         "the SNES",
@@ -12474,7 +12474,7 @@
         "The One Piece rap.",
         "CENTURY SOOOOUUUP!!!!!",
         "Stupid fucking Kululu.",
-        "Thinking Misty from Pok&eacute;mon is... kinda sexy.",
+        "Thinking Misty from Pokémon is... kinda sexy.",
         "The Gripper.",
         "Reverse harems.",
         "Garzey's Wing.",
@@ -12530,7 +12530,7 @@
         "Creamy Mami.",
         "The ungodly abomination that is Robotech.",
         "Carl Macek.",
-        "Panty &amp; Stocking with Garterbelt.",
+        "Panty & Stocking with Garterbelt.",
         "Punching a man so hard his clothes fly off.",
         "Banana sushi.",
         "Oro?",
@@ -12608,7 +12608,7 @@
         "Tachikoma-kun.",
         "Naoki Urasawa.",
         "Stupid sexy Johan.",
-        "Bear punching, tiger chopping, shark suplexing, &amp; helicopter bodyslamming.",
+        "Bear punching, tiger chopping, shark suplexing, & helicopter bodyslamming.",
         "Juvijuvibro.",
         "Jacuzzi Splot.",
         "The Tsukihime anime.",
@@ -12724,7 +12724,7 @@
         "Ora! Ora! Ora! Ora! Ora! Ora! Ora! Ora! Ora! Ora! Ora! Ora! Ora! Ora! Ora! Ora! Ora! Ora! Ora! Ora! Ora! Ora! Ora! Ora!",
         "Getting in a fistfight with an earthquake.",
         "WcDonald's.",
-        "Black&#x2605;Star",
+        "Black★Star",
         "Octopus balls.",
         "My badass numchucks.",
         "Trying to get your die-cast Gundam model through airport security.",
@@ -12739,7 +12739,7 @@
         "My Johnny!",
         "Petite Princess Yucie.",
         "Kotetsu T. Kaburagi, aka. \"The D.I.L.F.\"",
-        "An argument lasting over an hour about what mo&eacute; really is.",
+        "An argument lasting over an hour about what moé really is.",
         "Saber Starblast.",
         "A succubus living inside your testes.",
         "Raping Tokyo Tower.",
@@ -12795,7 +12795,7 @@
         "Robots with tits.",
         "Red bean paste.",
         "Gender-swapped Oda Nobunaga.",
-        "Henry Goto's massive peyote &amp; wine cooler addiction.",
+        "Henry Goto's massive peyote & wine cooler addiction.",
         "Henry Goto, John Sirabella, and Stu Levy in a three man fight to the death.",
         "Henry Goto.",
         "Henry Goto having an accident in his pants during the live Aniplex of America panel.",
@@ -12806,7 +12806,7 @@
         "Cute stuff.",
         "An artbox that feels like human skin.",
         "Polygamy jokes in a kid's show.",
-        "Dangling Pok&eacute;balls.",
+        "Dangling Pokéballs.",
         "Having a giant drill for a dick.",
         "A robot having an orgasm.",
         "Villagulio.",
@@ -12876,8 +12876,8 @@
         "The Chupacabra.",
         "Blowing a child's head off with a rocket launcher.",
         "Erotic incestuous toothbrushing.",
-        "Pok&eacute;mon tears.",
-        "Pok&eacute;sexuality.",
+        "Pokémon tears.",
+        "Pokésexuality.",
         "Chopstick-based martial arts.",
         "All the gayness in GetBackers.",
         "Gen \"The Uro-Butcher\".",
@@ -12896,7 +12896,7 @@
         "SHAFT being SHAFT.",
         "One a them bamboo things that goes \"doonk\".",
         "Shotas.",
-        "Mo&eacute; schoolgirl Hitler.",
+        "Moé schoolgirl Hitler.",
         "Romance of the Three Kingdoms, but everyone is gender-swapped.",
         "A washpan falling onto someone's head from out of nowhere.",
         "Franken Fran.",
@@ -13193,7 +13193,7 @@
         "The Shipping Olympics.",
         "Shipping the fuck out of something.",
         "Ships ending in -cest.",
-        "Schr&ouml;dinger's Nepeta.",
+        "Schrödinger's Nepeta.",
         "SCIENCE WAND!",
         "Seadweller dick fins.",
         "Shippers.",
@@ -13398,7 +13398,7 @@
         "Chest of WHIMSY.",
         "A chip in your heart that forces you to love.",
         "Butler Island.",
-        "C4NDY R3D BLOOD &gt;:]",
+        "C4NDY R3D BLOOD >:]",
         "Caledscratch.",
         "Caliborn.",
         "Caliginous speed dating.",
@@ -13700,7 +13700,7 @@
         "GREAT! GREAT! GREAT!",
         "Grep.",
         "Grumping it.",
-        "G&uuml;f Troop.",
+        "Güf Troop.",
         "Half the deal for twice the price!",
         "A Scottish bloke that talks too fast.",
         "A replay from Barry.",
@@ -13937,7 +13937,7 @@
         "House Lannister.",
         "House Targaryen.",
         "George R. R. Martin.",
-        "Gratuitous nudity, the way only HBO&reg; can provide.",
+        "Gratuitous nudity, the way only HBO® can provide.",
         "Throwing a boy out of a window to cover up incest.",
         "Joining the Night's Watch.",
         "Selling your sister to Dothraki nomads.",
@@ -13992,7 +13992,7 @@
         "Gamer chicks.",
         "GNS theory.",
         "Drizzt.",
-        "The entire Palladium Books&reg; Megaverse&trade;",
+        "The entire Palladium Books® Megaverse™",
         "BadWrongFun.",
         "Misogynerds.",
         "Cultural Marxism.",
@@ -14000,7 +14000,7 @@
         "Steve Jackson's beard.",
         "Natural 20.",
         "Rapenards.",
-        "The Crisis of Treachery&trade;.",
+        "The Crisis of Treachery™.",
         "Game balance.",
         "Fishmalks.",
         "A kick to the dicebags.",
@@ -14021,7 +14021,7 @@
         "Mike Mearls.",
         "Comeliness.",
         "Vampire: The Masquerade.",
-        "Rifts&trade;.",
+        "Rifts™.",
         "The random prostitute table.",
         "Dildo of Enlightenment +2",
         "Grognards Against Humanity.",
@@ -14038,7 +14038,7 @@
         "Kobolds.",
         "Oozemaster.",
         "Rocks fall, everyone dies.",
-        "Mark Rein&middot;Hagen.",
+        "Mark Rein·Hagen.",
         "Maid RPG.",
         "Splugorth blind warrior women.",
         "Dying during chargen.",
@@ -14116,7 +14116,7 @@
         "Six gummy bears and some scotch",
         "Situational awareness",
         "Shut up and take my money",
-        "Schr&ouml;dinger's cat",
+        "Schrödinger's cat",
         "Shenanigans",
         "Security theater",
         "Security Evangelist",
@@ -14657,7 +14657,7 @@
         "Sausage.",
         "A lesson in pain.",
         "Cheating death.",
-        "Pow-Pow-PowerWheeels&reg;!",
+        "Pow-Pow-PowerWheeels®!",
         "The magical land of Oz.",
         "A compound fracture.",
         "Chaz Bono.",
@@ -15057,18 +15057,18 @@
         "Nessie.",
         "Princess Peach's Cake.",
         "Shitting on the White House lawn.",
-        "Mountain Dew&reg; Baja Blast.",
+        "Mountain Dew® Baja Blast.",
         "The tears of a college student.",
-        "Apples to Apples&reg;.",
+        "Apples to Apples®.",
         "Snorting Pixie Stix.",
         "Getting high on bath salts.",
         "The final circle of Hell.",
-        "Poorly written Star Wars&reg; fan fiction.",
+        "Poorly written Star Wars® fan fiction.",
         "Borat's one piece.",
         "A 1971 Ford Pinto.",
         "LOOK AT THIS PHOTOGRAPH!",
         "Master Chief.",
-        "The shitty remains of Taco Bell&reg;.",
+        "The shitty remains of Taco Bell®.",
         "Sponge baths.",
         "Walt Disney's frozen head.",
         "Hoola hoops.",
@@ -15076,12 +15076,12 @@
         "A walrus with a beret.",
         "Speedrunning life.",
         "Demi Moore's bush.",
-        "Eating 120 White Castle burgers&reg;.",
+        "Eating 120 White Castle burgers®.",
         "Blowing the President.",
         "Indentured servants.",
         "Sex in your mouth.",
         "Bong hits for Jesus.",
-        "Quiznos&reg;.",
+        "Quiznos®.",
         "Scotsmen marrying their sheep.",
         "The truffle shuffle.",
         "Nurse Joy.",
@@ -15094,7 +15094,7 @@
         "Terabytes of horse porn.",
         "The hero of time.",
         "Ringworm.",
-        "Rich, chocolatey Ovaltine&reg;.",
+        "Rich, chocolatey Ovaltine®.",
         "Abusive fathers.",
         "Hungry Hungry Hippos.",
         "Canadian tuxedo.",
@@ -15517,7 +15517,7 @@
         "Discovering monster porn.",
         "A dick so big you have to give it a hugjob.",
         "The fine line between feral and outright bestiality.",
-        "Bad Dragon&trade; cumlube.",
+        "Bad Dragon™ cumlube.",
         "Piss.",
         "Leaving your orifices bloody and sore.",
         "Rubbing peanut butter on your genitals.",
@@ -15596,7 +15596,7 @@
         "A fedora enthusiast.",
         "A tongue-beast.",
         "Frisky tentacles.",
-        "Sex with Pok&eacute;mon.",
+        "Sex with Pokémon.",
         "Making out with dogs.",
         "YouTube videos of horse breeding.",
         "Pissing on your significant other to show ownership.",
@@ -15983,9 +15983,9 @@
         "Creepy guys in the RDA chat hitting on Tara.",
         "David Bowie's package.",
         "Diamanda Hagan.",
-        "Crystal Pepsi&reg;.",
+        "Crystal Pepsi®.",
         "Dark Nella.",
-        "A Crystal Pepsi&reg;-flavored enema.",
+        "A Crystal Pepsi®-flavored enema.",
         "A congregation of bums.",
         "A doppelganger in black leather with a sword.",
         "A disembodied orgasm hippo.",
@@ -16248,7 +16248,7 @@
         "Wii Fit Trainer",
         "using your PC as a heater in the winter",
         "thowing bottles of holy water in the original Castlevania",
-        "the orange gem from Bejeweled&trade;",
+        "the orange gem from Bejeweled™",
         "Pheonix Wright",
         "Hank Hill",
         "Banjo-Kazooie",
