@@ -7,7 +7,6 @@ import ICardChoice from "./ICardChoice";
 import Player from "./player";
 
 export default class Round extends EventEmitter {
-
     /**
      * Cards played by each player
      */
@@ -16,7 +15,7 @@ export default class Round extends EventEmitter {
     constructor(
         public readonly cardCzar: Player,
         public readonly blackCard: IBlackCard,
-        public readonly players: Player[],
+        public readonly players: Player[]
     ) {
         super();
         // Initializes cardsPlayed to 0 cards played for every playing player
@@ -39,9 +38,11 @@ export default class Round extends EventEmitter {
         if (!this.canPlayCards(player, cardIndexes)) {
             throw new Error(`You can't play cards ${cardIndexes.join(", ")}`);
         }
-              
+
         const playedByPlayer: string[] = [];
-        logger.info(`Retrieving cards ${cardIndexes.join()} for player ${player}`);
+        logger.info(
+            `Retrieving cards ${cardIndexes.join()} for player ${player}`
+        );
         // First, we add the cards
         cardIndexes.forEach((index) => {
             const card = player.hand[index];
@@ -53,12 +54,16 @@ export default class Round extends EventEmitter {
         cardIndexes = cardIndexes.sort().reverse();
         cardIndexes.forEach((index) => {
             const removedCard = player.hand.splice(index, 1)[0];
-            logger.info(`Removed card ${removedCard} at index ${index} from user's hand`);
+            logger.info(
+                `Removed card ${removedCard} at index ${index} from user's hand`
+            );
         });
 
-        logger.info(`Added cards ${playedByPlayer.join(", ")} for players ${player}`);
-        this.choices.push({cards: playedByPlayer, player});
-        
+        logger.info(
+            `Added cards ${playedByPlayer.join(", ")} for players ${player}`
+        );
+        this.choices.push({ cards: playedByPlayer, player });
+
         if (this.isOver) {
             logger.info("Every player made a choice");
             this.shuffleChoices();
@@ -80,17 +85,41 @@ export default class Round extends EventEmitter {
                 return false;
             }
         }
-        
+
         if (cardIndexes.length !== this.blackCard.pick) {
-            logger.error(`Player ${player} played ${cardIndexes.length} cards instead of ${this.blackCard.pick}`);
-            throw new Error(`Please pick ${this.blackCard.pick} ordered cards for this round`);
+            logger.error(
+                `Player ${player} played ${
+                    cardIndexes.length
+                } cards instead of ${this.blackCard.pick}`
+            );
+            throw new Error(
+                `Please pick ${
+                    this.blackCard.pick
+                } ordered cards for this round`
+            );
         }
-        const alreadyPlayed = !(this.choices.find((c) => c.player.id === player.id) == null);
+        const alreadyPlayed = !(
+            this.choices.find((c) => c.player.id === player.id) == null
+        );
         return !alreadyPlayed;
     }
 
+    public removePlayer(playerId: string) {
+        _.remove(this.players, (p) => p.id === playerId);
+        _.remove(this.choices, (c) => c.player.id === playerId);
+    }
+
+    public giveCardsBack() {
+        this.choices.forEach((c) => {
+            c.player.drawCards(...c.cards);
+        });
+        this.choices = [];
+    }
+
     public toString(): string {
-        return `czar: ${this.cardCzar}, blackCard: ${this.blackCard.text}, players: ${this.players.join()}`;
+        return `czar: ${this.cardCzar}, blackCard: ${
+            this.blackCard.text
+        }, players: ${this.players.join()}`;
     }
 
     /**

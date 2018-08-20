@@ -42,8 +42,8 @@ export default class Player {
      * Player draws the specified card
      * @param {string} card The card
      */
-    public drawCard(card: string) {
-        this.hand.push(card);
+    public drawCards(...cards: string[]) {
+        this.hand.push(...cards);
     }
 
     /**
@@ -53,7 +53,7 @@ export default class Player {
     public drawUntilFull(deck: Deck<string>) {
         logger.debug(`Player ${this} drawing until full`);
         while (this.hand.length !== 10) {
-            this.drawCard(deck.draw());
+            this.drawCards(deck.draw());
         }
     }
 

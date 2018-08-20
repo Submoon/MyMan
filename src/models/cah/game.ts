@@ -12,10 +12,10 @@ import Player from "./player";
 import Round from "./round";
 
 export default class Game {
-    // /**
-    //  * All cards
-    //  */
-    // public allCahCards: ICahCards;
+    /**
+     * Minimum number of players
+     */
+    public static readonly MINPLAYERS = 3;
     /**
      * Players in the game
      */
@@ -82,8 +82,8 @@ export default class Game {
 
         this.players.push(player);
 
-        // If we have more than 2 players, start the game
-        if (this.players.length > 1 && !this.started) {
+        // If we have more than MINPLAYERS players, start the game
+        if (this.players.length >= Game.MINPLAYERS && !this.started) {
             logger.info("Minimum player count reached, starting game in 30s");
             await this.channel.send("Game will start in 30 seconds!");
             setTimeout(async () => {
@@ -99,6 +99,8 @@ export default class Game {
      */
     public async playerLeave(playerId: string) {
         const removed = _.remove(this.players, (p) => p.id === playerId);
+
+        // No player found
         if (removed.length !== 1) {
             logger.warn(
                 `Player ${playerId} tried to leave the game on ${
@@ -106,6 +108,20 @@ export default class Game {
                 }` + ` but is not part of this game`
             );
             throw new Error("You are are not part of the game !");
+        }
+        // Removing player from current round
+        if (this.round) {
+            if (this.round.cardCzar.id === playerId) {
+                // If he was the card czar, just create a new round
+
+                // If we're waiting for the czar to choose (cards have been revealed), don't give them back
+                if (!this.waitingForCzarInput) {
+                    this.round.giveCardsBack();
+                }
+                this.newRound();
+            } else {
+                const removedFromRound = this.round.removePlayer(playerId);
+            }
         }
     }
 
@@ -215,18 +231,6 @@ export default class Game {
      * Generates a new round and changes round
      */
     private async newRound() {
-        logger.info("Generating new round");
-        const oldCzar = this.round != null ? this.round.cardCzar : null;
-        // Getting czar, black card and players
-        const newCzar = this.getNextCzar(oldCzar);
-        const nextBlackCard = this.deckBlackCards.draw();
-        const playingPlayers = _.filter(
-            this.players,
-            (p) => p.id !== newCzar.id
-        );
-
-        this.waitingForCzarInput = false;
-
         // Discard all played cards
         if (this.round != null) {
             const playedWhiteCards = _.flatten(
@@ -236,6 +240,27 @@ export default class Game {
             this.deckWhiteCards.discard(...playedWhiteCards);
             this.deckBlackCards.discard(this.round.blackCard);
         }
+
+        this.waitingForCzarInput = false;
+
+        // If there's not enough players, pause the game
+        if (this.players.length < Game.MINPLAYERS) {
+            await this.channel.send(
+                "Not enough players, waiting for additional players"
+            );
+            this.round = null;
+            return;
+        }
+
+        logger.info("Generating new round");
+        const oldCzar = this.round != null ? this.round.cardCzar : null;
+        // Getting czar, black card and players
+        const newCzar = this.getNextCzar(oldCzar);
+        const nextBlackCard = this.deckBlackCards.draw();
+        const playingPlayers = _.filter(
+            this.players,
+            (p) => p.id !== newCzar.id
+        );
 
         this.round = new Round(newCzar, nextBlackCard, playingPlayers);
         const roundText = CahMessageFormatter.newRoundMessage(
@@ -250,6 +275,7 @@ export default class Game {
                 } and playing players: ${playingPlayers.map((p) => p.user.tag)}`
         );
 
+        // Filling player's hands
         const roundMessage = (await this.channel.send(roundText)) as Message;
         this.round.players.forEach((p) => {
             p.drawUntilFull(this.deckWhiteCards);
@@ -257,6 +283,7 @@ export default class Game {
             p.user.send(printedCards);
         });
 
+        // Event when round is over
         this.round.once("end", (r) => {
             logger.info("Received end evnt from round");
             this.sendChoices(r).catch((err: Error) => {
