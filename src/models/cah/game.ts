@@ -195,12 +195,20 @@ export default class Game {
 
         const winner = this.round.choices[winnerIndex];
         logger.info(`Winner is ${winner.player.user.tag}`);
-
+        winner.player.earnPoint();
         await this.channel.send(
             CahMessageFormatter.winnerMessage(winner, this.round.blackCard)
         );
 
         await this.newRound();
+    }
+
+    /**
+     * Displays the score for this game
+     */
+    public async sendScores() {
+        const text = CahMessageFormatter.scoresMessage(this.players);
+        await this.channel.send(text);
     }
 
     /**

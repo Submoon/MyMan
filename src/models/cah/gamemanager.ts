@@ -47,9 +47,8 @@ class GameManager {
      */
     public async destroyGame(channelId: string) {
         const game = this.games.get(channelId);
-        if (game === null) {
-            throw new Error("There is no game to stop");
-        }
+        this.throwIfNoGame(game);
+        game.sendScores();
         game.dispose();
         this.games.delete(channelId);
         return channelId;
@@ -64,9 +63,7 @@ class GameManager {
      */
     public async joinGame(channelId: string, user: User): Promise<Player> {
         const game = this.games.get(channelId);
-        if (!game) {
-            throw new Error("There is no game to join");
-        }
+        this.throwIfNoGame(game);
         const player = await game.addPlayer(user);
         return player;
     }
@@ -80,9 +77,7 @@ class GameManager {
      */
     public async playerLeave(channelId: string, userId: string) {
         const game = this.games.get(channelId);
-        if (!game) {
-            throw new Error("There is no game to leave in this channel");
-        }
+        this.throwIfNoGame(game);
         await game.playerLeave(userId);
     }
 
@@ -99,9 +94,7 @@ class GameManager {
         cardIndexes: number[]
     ) {
         const game = this.games.get(channelId);
-        if (!game) {
-            throw new Error("There is no game in this channel");
-        }
+        this.throwIfNoGame(game);
         return game.playerPicked(userId, cardIndexes);
     }
 
@@ -119,10 +112,29 @@ class GameManager {
         winnerIndex: number
     ) {
         const game = this.games.get(channelId);
+        this.throwIfNoGame(game);
+        return game.czarChose(userId, winnerIndex);
+    }
+
+    /**
+     * Displays the score the the specified game
+     * @param channelId the channel ID
+     */
+    public async displayScore(channelId: string) {
+        const game = this.games.get(channelId);
+        this.throwIfNoGame(game);
+        return game.sendScores();
+    }
+
+    /**
+     * Throws an exception if game is null
+     * @param game the game to check
+     * @throws if game is null
+     */
+    private throwIfNoGame(game: Game) {
         if (!game) {
             throw new Error("There is no game in this channel");
         }
-        return game.czarChose(userId, winnerIndex);
     }
 }
 

@@ -1,7 +1,4 @@
 import { Message, RichEmbed, User } from "discord.js";
-
-import * as cheerio from "cheerio";
-import { userInfo } from "os";
 import logger from "../../utils/logger";
 import Deck from "./deck";
 
@@ -9,11 +6,15 @@ import Deck from "./deck";
  * @class Player
  */
 export default class Player {
-
     /**
      * Cards in the hand of the player
      */
     public hand: string[];
+
+    /**
+     * Player's points for this game
+     */
+    private _points: number;
 
     /**
      * Returns the user id associated to the player
@@ -23,10 +24,18 @@ export default class Player {
     }
 
     /**
+     * Returns the player's points
+     */
+    get points() {
+        return this._points;
+    }
+
+    /**
      * @param {User} user The user
      */
     public constructor(public user: User) {
         this.hand = [];
+        this._points = 0;
     }
 
     /**
@@ -53,28 +62,6 @@ export default class Player {
      * @return {string} The text for a message
      */
     public printCards(roundMessage: Message): string {
-
-        // let embed = new RichEmbed()
-        // .setAuthor(this.user.username, this.user.avatarURL)
-        // .setColor(0x00AE86)
-        // .setTitle("Your cards");
-        // // embe = embed.addField("Link", roundMessage.link);
-        // // const text = "";
-        // // let turndown = new TurnDown();
-        // for (let i = 0; i < this.hand.length; i++) {
-        //     const card = this.hand[i];
-        //     const $ = cheerio.load("<div>card</div>");
-        //     if (!$("b").empty()) {
-        //         embed = embed.addField(`${i} : ${$("b").text()}`, $("small").text());
-        //     } else {
-        //         embed = embed.addField(`${i} : ${card}`, card);
-        //     }
-
-        //     // let markdown = turndown.turndown(card);
-        //     // let cardWithoutdHtml = card.replace(/<[^>]+>/g, '');
-        //     // text += `${i} : ${markdown}\n`;
-        // }
-
         const lines: string[] = [];
         lines.push("Your cards");
         lines.push(`Message: ${roundMessage.url}`);
@@ -86,8 +73,15 @@ export default class Player {
         return lines.join("\n");
     }
 
+    /**
+     * Player earns one point
+     * @returns {number} the number of points
+     */
+    public earnPoint(): number {
+        return ++this._points;
+    }
+
     public toString(): string {
         return this.user.toString();
     }
-
 }
