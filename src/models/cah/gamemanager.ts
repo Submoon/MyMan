@@ -79,6 +79,10 @@ class GameManager {
         const game = this.games.get(channelId);
         this.throwIfNoGame(game);
         await game.playerLeave(userId);
+        if (game.players.length === 0) {
+            await game.channel.send("No more players. Stopping the CAH game.");
+            await this.destroyGame(game.channel.id);
+        }
     }
 
     /**

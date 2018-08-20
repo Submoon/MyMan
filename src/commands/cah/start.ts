@@ -9,20 +9,22 @@ export default class CahStartCommand extends BaseCommand {
     }
 
     static get description() {
-        return  {
+        return {
             text: "Allows to start a cah game",
             usage: "cah_start",
         } as IDescription;
     }
 
     public async run() {
-        gameManager.createGame(this.message.channel as TextChannel)
-        .then((game) => {
-            const text = `Game started for channel ${game.channel}
+        gameManager
+            .createGame(this.message.channel as TextChannel)
+            .then((game) => {
+                const text = `Game started for channel ${game.channel}
             Please join the game by using cah_join`;
-            this.message.channel.send(text);
-        }).catch((error) => {
-            this.message.channel.send("Error: " + error);
-        });
+                this.message.channel.send(text);
+            })
+            .catch((error) => {
+                this.message.channel.send("Error: " + error);
+            });
     }
 }
