@@ -51,7 +51,7 @@ class GameManager {
         game.sendScores();
         game.dispose();
         this.games.delete(channelId);
-        return channelId;
+        return game.channel;
     }
 
     /**
