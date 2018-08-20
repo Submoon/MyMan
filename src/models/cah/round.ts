@@ -18,7 +18,7 @@ export default class Round extends EventEmitter {
         public readonly players: Player[]
     ) {
         super();
-        // Initializes cardsPlayed to 0 cards played for every playing player
+
         this.choices = [];
     }
 
@@ -110,6 +110,12 @@ export default class Round extends EventEmitter {
     public removePlayer(playerId: string) {
         _.remove(this.players, (p) => p.id === playerId);
         _.remove(this.choices, (c) => c.player.id === playerId);
+        if (this.isOver) {
+            logger.info("Every player made a choice");
+            this.shuffleChoices();
+            logger.info("Sending end event");
+            this.emit("end", this);
+        }
     }
 
     public giveCardsBack() {

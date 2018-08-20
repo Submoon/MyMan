@@ -109,19 +109,21 @@ export default class Game {
             );
             throw new Error("You are are not part of the game !");
         }
-        // Removing player from current round
+
         if (this.round) {
-            if (this.round.cardCzar.id === playerId) {
+            if (
+                this.round.cardCzar.id === playerId ||
+                this.waitingForCzarInput
+            ) {
                 // If he was the card czar, just create a new round
 
                 // If we're waiting for the czar to choose (cards have been revealed), don't give them back
-                if (!this.waitingForCzarInput) {
-                    this.round.giveCardsBack();
-                }
+                this.round.giveCardsBack();
                 this.newRound();
-            } else {
-                const removedFromRound = this.round.removePlayer(playerId);
+                return;
             }
+            // Removing player from current round
+            const removedFromRound = this.round.removePlayer(playerId);
         }
     }
 
