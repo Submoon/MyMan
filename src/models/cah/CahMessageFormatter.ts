@@ -8,7 +8,7 @@ export default class CahMessageFormatter {
         const sortedByScore = _.orderBy(players, ["points"], ["desc"]);
         const lines: string[] = [];
         sortedByScore.forEach((s) => {
-            lines.push(`${s.toString}\t: ${s.points}`);
+            lines.push(`${s.toString()}\t: ${s.points}`);
         });
         return lines.join("\n");
     }
@@ -50,7 +50,7 @@ export default class CahMessageFormatter {
             return `${blackCard.text} *${whiteCards[0]}*`;
         }
         whiteCards.forEach((w) => {
-            text = text.replace("_", `*${w}*`);
+            text = text.replace("\\_", `*${w}*`);
         });
         return text;
     }

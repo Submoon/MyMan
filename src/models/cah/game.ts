@@ -279,7 +279,7 @@ export default class Game {
         const roundMessage = (await this.channel.send(roundText)) as Message;
         this.round.players.forEach((p) => {
             p.drawUntilFull(this.deckWhiteCards);
-            const printedCards = p.printCards(roundMessage);
+            const printedCards = p.printCards(roundMessage, nextBlackCard);
             p.user.send(printedCards);
         });
 

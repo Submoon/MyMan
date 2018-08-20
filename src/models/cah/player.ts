@@ -1,6 +1,7 @@
 import { Message, RichEmbed, User } from "discord.js";
 import logger from "../../utils/logger";
 import Deck from "./deck";
+import { IBlackCard } from "./cahapi";
 
 /**
  * @class Player
@@ -61,8 +62,9 @@ export default class Player {
      * Displays the user cards as message
      * @return {string} The text for a message
      */
-    public printCards(roundMessage: Message): string {
+    public printCards(roundMessage: Message, blackCard: IBlackCard): string {
         const lines: string[] = [];
+        lines.push(`**${blackCard.text}**`);
         lines.push("Your cards");
         lines.push(`Message: ${roundMessage.url}`);
         this.hand.forEach((card, i) => {

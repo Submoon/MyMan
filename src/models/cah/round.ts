@@ -79,6 +79,9 @@ export default class Round extends EventEmitter {
      * @param {number[]} cardIndexes the card indexes
      */
     public canPlayCards(player: Player, cardIndexes: number[]) {
+        if (this.players.find((p) => p.id === player.id)) {
+            return false;
+        }
         for (const i of cardIndexes) {
             if (i < 0 || i >= player.hand.length || isNaN(i) || i == null) {
                 logger.error(`Card index ${i} is not a valid pick`);
