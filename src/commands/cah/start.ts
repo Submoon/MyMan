@@ -25,7 +25,7 @@ export default class CahStartCommand extends BaseCommand {
             .then((game) => {
                 const text =
                     `Game started for channel ${game.channel}\n` +
-                    `You will need ${requiredWins} to win.\n` +
+                    `You will need ${requiredWins} points to win.\n` +
                     `Please join the game by using cah_join`;
                 this.message.channel.send(text);
             })
