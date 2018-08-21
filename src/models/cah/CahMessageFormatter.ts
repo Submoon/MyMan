@@ -6,7 +6,7 @@ import _ from "lodash";
 export default class CahMessageFormatter {
     public static scoresMessage(players: Player[]): string {
         const sortedByScore = _.orderBy(players, ["points"], ["desc"]);
-        const lines: string[] = [];
+        const lines: string[] = ["**Scores:**"];
         sortedByScore.forEach((s) => {
             lines.push(`${s.toString()}\t: ${s.points}`);
         });
