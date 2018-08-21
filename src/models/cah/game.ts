@@ -189,6 +189,9 @@ export default class Game extends EventEmitter {
             );
             return false;
         }
+        if (this.round.cardCzar.id === playerId) {
+            throw new Error("The czar cannot pick cards!");
+        }
         const player = this.players.find((p) => p.id === playerId);
         this.round.addPlayedCards(player, cardIndexes);
         // this.channel.send(`${player.user} played ${cardIndexes.join(", ")}!`);
