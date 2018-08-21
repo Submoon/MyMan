@@ -28,15 +28,23 @@ class GameManager {
      * @param {TextChannel} channel
      * @return {Promise<Game>} the created game
      */
-    public async createGame(channel: TextChannel): Promise<Game> {
+    public async createGame(
+        channel: TextChannel,
+        requiredWins: number
+    ): Promise<Game> {
         const channelId = channel.id;
         if (this.games.get(channelId)) {
             throw new Error(
                 "There is already a game on this channel! Please use the command cah_stop"
             );
         }
-        const game = new Game(channel);
+        const game = new Game(channel, requiredWins);
         this.games.set(channelId, game);
+
+        game.once("end", (reason: string) => {
+            game.channel.send("Stopping the CAH game:\n" + reason);
+            this.destroyGame(game.channel.id);
+        });
         return game;
     }
 
@@ -50,6 +58,7 @@ class GameManager {
         this.throwIfNoGame(game);
         game.sendScores();
         game.dispose();
+        game.removeAllListeners("end");
         this.games.delete(channelId);
         return game.channel;
     }
@@ -79,10 +88,6 @@ class GameManager {
         const game = this.games.get(channelId);
         this.throwIfNoGame(game);
         await game.playerLeave(userId);
-        if (game.players.length === 0) {
-            await game.channel.send("No more players. Stopping the CAH game.");
-            await this.destroyGame(game.channel.id);
-        }
     }
 
     /**

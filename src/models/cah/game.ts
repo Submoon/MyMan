@@ -11,7 +11,7 @@ import Deck from "./deck";
 import Player from "./player";
 import Round from "./round";
 
-export default class Game {
+export default class Game extends EventEmitter {
     /**
      * Minimum number of players
      */
@@ -41,7 +41,11 @@ export default class Game {
      * Generates a new game for the specified channel
      * @param {TexChannel} channel the channel in which the game will take place
      */
-    public constructor(public readonly channel: TextChannel) {
+    public constructor(
+        public readonly channel: TextChannel,
+        private readonly requiredWins: number = 10
+    ) {
+        super();
         // this.allCahCards = require("../../../cahcards.json") as ICahCards;
         this.players = [];
         this.deckWhiteCards = new Deck(allCahCards.whiteCards);
@@ -57,12 +61,19 @@ export default class Game {
     }
 
     /**
+     * Returns true if a player has reached the required points
+     */
+    public get isOver() {
+        return this.players.find((p) => p.points >= this.requiredWins) != null;
+    }
+
+    /**
      * Destroys the game (removes listeners on the current Round)
      */
     public dispose() {
         logger.info(`Disposing of game on channel ${this.channel.name}`);
         if (this.round != null) {
-            this.round.removeAllListeners();
+            this.round.removeAllListeners("end");
         }
     }
 
@@ -124,6 +135,10 @@ export default class Game {
             }
             // Removing player from current round
             const removedFromRound = this.round.removePlayer(playerId);
+        }
+
+        if (this.players.length === 0) {
+            this.emitEndSignal("No more players in the game.");
         }
     }
 
@@ -218,6 +233,12 @@ export default class Game {
             CahMessageFormatter.winnerMessage(winner, this.round.blackCard)
         );
 
+        if (this.isOver) {
+            this.emitEndSignal(
+                `${winner} has reached ${this.requiredWins} and won the game!`
+            );
+        }
+
         await this.newRound();
     }
 
@@ -227,6 +248,15 @@ export default class Game {
     public async sendScores() {
         const text = CahMessageFormatter.scoresMessage(this.players);
         await this.channel.send(text);
+    }
+
+    /**
+     * Emits an end event signal with the reason as args
+     * @param reason the reason for the end signal
+     */
+    private emitEndSignal(reason: string) {
+        logger.info(`Game is over because of : ${reason}. Sending end signal.`);
+        this.emit("end", reason);
     }
 
     /**
