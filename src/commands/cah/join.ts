@@ -24,9 +24,9 @@ export default class CahJoinCommand extends BaseCommand {
                 // const embed = player.printCards();
                 // user.send({embed});
             })
-            .catch((ex) => {
-                logger.error(ex);
-                this.message.channel.send("Error: " + ex);
+            .catch((ex: Error) => {
+                logger.error(ex.message);
+                this.message.channel.send("Error: " + ex.message);
             });
     }
 }

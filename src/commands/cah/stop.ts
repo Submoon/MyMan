@@ -18,8 +18,8 @@ export default class CahStopCommand extends BaseCommand {
                     `Game stopped for channel ${channel}`
                 );
             })
-            .catch((error) => {
-                this.message.channel.send("Error: " + error);
+            .catch((error: Error) => {
+                this.message.channel.send("Error: " + error.message);
             });
     }
 }

@@ -29,8 +29,8 @@ export default class CahStartCommand extends BaseCommand {
                     `Please join the game by using cah_join`;
                 this.message.channel.send(text);
             })
-            .catch((error) => {
-                this.message.channel.send("Error: " + error);
+            .catch((error: Error) => {
+                this.message.channel.send("Error: " + error.message);
             });
     }
 }
