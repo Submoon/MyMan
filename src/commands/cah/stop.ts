@@ -3,11 +3,11 @@ import BaseCommand from "../../basecommand";
 import gameManager from "../../models/cah/gamemanager";
 
 export default class CahStopCommand extends BaseCommand {
-    static get description() {
+    static get description(): IDescription {
         return {
             text: "Allows to stop a cah game",
             usage: "cah_stop",
-        } as IDescription;
+        };
     }
 
     public async run() {

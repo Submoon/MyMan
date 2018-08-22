@@ -4,7 +4,6 @@ import BaseCommand from "../basecommand";
 import logger from "../utils/logger";
 
 export default class PingCommand extends BaseCommand {
-
     /**
      * @param {Client} client
      * @param {Message} message
@@ -15,15 +14,15 @@ export default class PingCommand extends BaseCommand {
     }
 
     static get description(): IDescription {
-        return  {
+        return {
             text: "Pings the server",
             usage: "ping",
-        } as IDescription;
+        };
     }
 
     public async run() {
         const createdAt = this.message.createdTimestamp;
-        const message = await this.message.channel.send("Pong!") as Message;
+        const message = (await this.message.channel.send("Pong!")) as Message;
         const endTime = message.createdTimestamp;
         const diff = endTime - createdAt;
         message.edit(`Pong (${diff}ms)`);

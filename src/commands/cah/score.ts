@@ -3,11 +3,11 @@ import BaseCommand from "../../basecommand";
 import gameManager from "../../models/cah/gamemanager";
 
 export default class CahScoreCommand extends BaseCommand {
-    static get description() {
+    static get description(): IDescription {
         return {
             text: "Displays the score for the current CAH game",
             usage: "cah_score",
-        } as IDescription;
+        };
     }
 
     public async run() {
