@@ -6,7 +6,7 @@ import { IBlackCard, ICahCards } from "./cahapi";
 
 import { isNullOrUndefined } from "util";
 import allCahCards from "../../../cahcards.json";
-import CahMessageFormatter from "./cahmessageformatter";
+import CahMessageFormatter from "./CahMessageFormatter";
 import Deck from "./deck";
 import Player from "./player";
 import Round from "./round";
