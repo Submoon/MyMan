@@ -49,7 +49,10 @@ export default class CahMessageFormatter {
         while (text.includes("\\_")) {
             text = text.replace("\\_", `*${whiteCardsCopy.shift()}*`);
         }
-        return `${text} *${whiteCardsCopy.join(" ")}*`;
+        whiteCardsCopy.forEach((w) => {
+            text += `*${w}*`;
+        });
+        return text;
     }
 
     /**
