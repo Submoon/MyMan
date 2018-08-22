@@ -139,6 +139,7 @@ export default class Game extends EventEmitter {
 
         if (this.players.length === 0) {
             this.emitEndSignal("No more players in the game.");
+            return;
         }
     }
 
@@ -238,8 +239,11 @@ export default class Game extends EventEmitter {
 
         if (this.isOver) {
             this.emitEndSignal(
-                `${winner} has reached ${this.requiredWins} and won the game!`
+                `${winner.player} has reached ${
+                    this.requiredWins
+                } and won the game!`
             );
+            return;
         }
 
         await this.newRound();
