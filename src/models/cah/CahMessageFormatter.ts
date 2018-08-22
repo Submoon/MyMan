@@ -45,12 +45,12 @@ export default class CahMessageFormatter {
         whiteCards: string[]
     ): string {
         let text = blackCard.text;
-        if (blackCard.text.indexOf("_") === -1) {
-            // If there is no _ in the black card, we put the white card's text at the end
-            return `${blackCard.text} *${whiteCards[0]}*`;
+        const whiteCardsCopy = whiteCards.slice();
+        while (text.includes("\\_")) {
+            text = text.replace("\\_", `*${whiteCardsCopy.shift()}*`);
         }
-        whiteCards.forEach((w) => {
-            text = text.replace("\\_", `*${w}*`);
+        whiteCardsCopy.forEach((w) => {
+            text += `*${w}*`;
         });
         return text;
     }
