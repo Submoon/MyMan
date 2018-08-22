@@ -18,8 +18,8 @@ export default class CahLeaveCommand extends BaseCommand {
             .then(() => {
                 this.message.channel.send(`Player ${user} left the game`);
             })
-            .catch((error) => {
-                this.message.channel.send("Error: " + error);
+            .catch((error: Error) => {
+                this.message.channel.send("Error: " + error.message);
             });
     }
 }
