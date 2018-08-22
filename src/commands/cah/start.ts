@@ -8,12 +8,12 @@ export default class CahStartCommand extends BaseCommand {
         super(client, message, args);
     }
 
-    static get description() {
+    static get description(): IDescription {
         return {
             text:
                 "Allows to start a cah game. First to {x} wins. Defaults to 10.",
             usage: "cah_start {x?}",
-        } as IDescription;
+        };
     }
 
     public async run() {
