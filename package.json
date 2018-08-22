@@ -27,6 +27,7 @@
     "@types/isomorphic-fetch": "0.0.34",
     "axios": "^0.17.1",
     "bookshelf": "^0.13.3",
+    "cheerio": "^1.0.0-rc.2",
     "discord.js": "^11.4.0",
     "dropbox": "^4.0.9",
     "es6-promise": "^4.2.4",
@@ -42,13 +43,17 @@
   },
   "devDependencies": {
     "@types/bookshelf": "^0.9.9",
+    "@types/cheerio": "^0.22.8",
     "@types/glob": "^5.0.35",
     "@types/jszip": "^3.1.4",
     "@types/knex": "^0.14.20",
     "@types/lodash": "^4.14.116",
     "@types/node": "^10.5.7",
     "@types/winston": "^2.3.9",
+    "prettier": "^1.14.2",
     "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.14.0",
+    "tslint-config-standard": "^7.1.0",
     "typescript": "^3.0.1"
   }
 }

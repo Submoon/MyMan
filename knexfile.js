@@ -4,15 +4,14 @@ const Knex = require("knex");
 const config = require("./config.json");
 
 module.exports = {
-
     development: {
         client: "pg",
         connection: {
-            database : "my_man_test",
+            database: "my_man_test",
             host: config.host,
-            password : config.testdatabasepassword,
+            password: config.testdatabasepassword,
             port: 5432,
-            user : config.testdatabaseuser,
+            user: config.testdatabaseuser,
         },
         migrations: {
             directory: __dirname + "/migrations",
@@ -21,7 +20,6 @@ module.exports = {
         seeds: {
             directory: __dirname + "/seeds/development",
         },
-
     },
 
     production: {
@@ -31,7 +29,7 @@ module.exports = {
             host: config.host,
             password: config.productiondatabasepassword,
             port: 5432,
-            user:     config.productiondatabaseuser,
+            user: config.productiondatabaseuser,
         },
         migrations: {
             directory: __dirname + "/migrations",
@@ -45,5 +43,4 @@ module.exports = {
             directory: __dirname + "/seeds/production",
         },
     },
-
 };

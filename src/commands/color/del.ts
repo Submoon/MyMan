@@ -19,7 +19,7 @@ export default class ColorDelCommand extends BaseCommand {
     public async run() {
         const id = this.message.author.id;
         const name = `color{${id}}`;
-        const roleFound = this.message.guild.roles.find((Role) => Role.name === name);
+        const roleFound = this.message.guild.roles.find((role) => role.name === name);
         if (roleFound) {
             logger.info(`Role ${roleFound} found`);
             await roleFound.delete();

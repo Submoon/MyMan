@@ -1,11 +1,26 @@
 {
     "defaultSeverity": "error",
     "extends": [
-        "tslint:recommended"
+        "tslint:recommended",
+        "tslint-config-standard",
+        "tslint-config-prettier"
     ],
     "jsRules": {},
     "rules": {
-        "no-trailing-whitespace": [true, "ignore-template-string", "ignore-blank-lines"]
+        "no-trailing-whitespace": [
+            true,
+            "ignore-template-string",
+            "ignore-blank-lines"
+        ],
+        "variable-name": [
+            true,
+            "check-format",
+            "allow-pascal-case",
+            "allow-leading-underscore"
+        ],
+        "ordered-imports": false,
+        "object-literal-sort-keys": false,
+        "member-ordering": false
     },
     "rulesDirectory": []
 }
