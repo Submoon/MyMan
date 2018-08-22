@@ -14,6 +14,7 @@ addons:
             - sshpass
 before_script:
     - npm install # installs node modules
+    - touch config.json && echo "{}" > ./config.json # To avoid ts import error
     - npm run tsc # typescript compilation
 script:
     - npm run lint # tslint
