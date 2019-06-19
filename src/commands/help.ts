@@ -190,20 +190,22 @@ export default class HelpCommand extends BaseCommand {
         const mini = currentPage * 5;
         const maxi = mini + 4;
         const commandsToPrint = this.client.commands.entries()/*.slice(mini, maxi)*/;
-
+        
         for (const [commandName, command] of commandsToPrint) {
             // Can't slice an associative array, this is a nightmare
-            if (i < mini) {
+            if(!commandName.includes("_")){
+                if (i < mini) {
+                    i++;
+                    continue;
+                }
+                if (i > maxi) {
+                    break;
+                }
+                const description = this.getStringDescriptionOfCommand(command);
+                // Adds a field for this command's description and usage
+                embed = embed.addField(`${emojis[i % 5]} ${commandName}`,  description, false); // Not inline
                 i++;
-                continue;
             }
-            if (i > maxi) {
-                break;
-            }
-            const description = this.getStringDescriptionOfCommand(command);
-            // Adds a field for this command's description and usage
-            embed = embed.addField(`${emojis[i % 5]} ${commandName}`,  description, false); // Not inline
-            i++;
         }
         return embed;
     }
