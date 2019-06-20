@@ -35,7 +35,7 @@ export default class HelpCommand extends BaseCommand {
             await this.sendMenu(page);
         } else {
             // If it's a string, we print the help page for this command
-            await this.sendHelpForCommand(this.args[0]);
+            await this.sendHelpForArgCommand(this.args[0]);
         }
     }
 
@@ -163,6 +163,96 @@ export default class HelpCommand extends BaseCommand {
             }
         });
     }
+
+
+    // ------------------------------------------------------------------------------
+
+    /**
+     * Sends an embed for the help page of a command in the current channel
+     * @param {string} commandName The command name
+     * @param {number} returnPage The page which will be displayed if the user click return
+     */
+    private async sendHelpForArgCommand(commandName: string, returnPage: number = 1) {
+        const embed = this.getHelpForArgCommand(commandName);
+        const author = this.message.author;
+        const menu = await this.message.channel.send({embed}) as Message;
+        const acceptedForCommand = [emojis[5], emojis[7]];
+        for (const [, react] of acceptedForCommand.entries()) {
+            await menu.react(`${react}`);
+        }
+
+        // Create a reaction collector
+        const filter: CollectorFilter = (reaction, user) => acceptedForCommand.some((e) => e === reaction.emoji.name)
+            && user.id === author.id;
+        const collector = menu.createReactionCollector(filter, { time: 120000 });
+        collector.on("collect", (r, collect)  => {
+            logger.info(`Collected ${r.emoji.name}`);
+            // Searching for the emoji index
+            const index = acceptedForCommand.indexOf(r.emoji.name);
+            switch (index) {
+                case 0:
+                    // User clicked back
+                    r.message.delete();
+                    this.sendMenu(returnPage);
+                    break;
+                case 1:
+                    // X to exit help
+                    r.message.delete();
+                    break;
+                default:
+                    logger.error("What are you doing here, little one?");
+            }
+        });
+    }
+
+
+    /**
+     * Creates a help embed for a given command
+     * @param {string} commandName The command name
+     * @return {RichEmbed} The embed
+     */
+    private getHelpForArgCommand(commandName: string): RichEmbed {
+        logger.debug(`Sending help for command ${commandName}`);
+        const BreakException = {};
+        var i = 0;
+        const lowerCommandName = commandName.toLowerCase();
+        const command = this.client.commands.get(lowerCommandName);
+        let embed = new RichEmbed()
+        .setAuthor(this.client.user.username, this.client.user.avatarURL)
+        .setColor(0x00AE86)
+        
+        try{
+            this.client.commands.forEach(function(value, key){
+                const description = value.description.text;
+                // console.warn("Nom de clé : " + key.name);
+                if(value.name === command.name && value.name.includes("SubCommand")){
+                    // Adds a field for this command's description and usage
+                    embed = embed.addField(`${key.toString()}`,  description, false) // Not inline
+                    .addField("Usage", value.description.usage);
+                    i++;
+                    console.warn("Nombre de field stop : " + i);
+                    throw BreakException;
+                } else if(value.name.startsWith(command.name.substr(0, 3)) && value.name.includes("SubCommand")) {
+                    // Adds a field for this command's description and usage
+                    embed = embed.addField(`${key.toString()}`,  description, false) // Not inline
+                    .addField("Usage", value.description.usage);
+                    i++;
+                    console.warn("Nombre de field 1 : " + i);
+                } else if (value.name === command.name) {
+                    // Adds a field for this command's description and usage
+                    embed = embed.addField(`${key.toString()}`,  description, false) // Not inline
+                    .addField("Usage", value.description.usage);
+                    i++;
+                    console.warn("Nombre de field 2 : " + i);
+                }
+            });
+        } catch (e) {
+            if (e !== BreakException) {throw e;}
+        }
+        return embed;
+    }
+
+    // ------------------------------------------------------------------------------
 
     /**
      * Generates an help embed for a specific page

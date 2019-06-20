@@ -4,7 +4,7 @@ import BaseCommand from "../../basecommand";
 import AutoAnswer from "../../db/models/autoanswer";
 import logger from "../../utils/logger";
 
-export default class AutoStopCommand extends BaseCommand {
+export default class AnswerStopSubCommand extends BaseCommand {
     constructor(client: IExtendedClient, message: Message, args: string[]) {
         super(client, message, args);
     }

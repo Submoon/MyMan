@@ -5,7 +5,7 @@ import BaseCommand from "../../basecommand";
 import Constants from "../../utils/constants";
 const colorsOk = Constants.COLORSOK;
 
-export default class ColorListCommand extends BaseCommand {
+export default class ColorListSubCommand extends BaseCommand {
     constructor(client: IExtendedClient, message: Message, args: string[]) {
         super(client, message, args);
     }

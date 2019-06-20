@@ -2,7 +2,7 @@ import { IDescription } from "../../api";
 import BaseCommand from "../../basecommand";
 import gameManager from "../../models/cah/gamemanager";
 
-export default class CahLeaveCommand extends BaseCommand {
+export default class CardLeaveSubCommand extends BaseCommand {
     static get description(): IDescription {
         return {
             text: "Allows to leave a cah game",
