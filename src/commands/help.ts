@@ -5,6 +5,8 @@ import BaseCommand from "../basecommand";
 import { entries } from "../utils/arrayutils";
 import Constants from "../utils/constants";
 import logger from "../utils/logger";
+import { deepStrictEqual } from "assert";
+import { map } from "bluebird";
 const emojis = Constants.MENUACCEPTED;
 /**
  * The help command manager
@@ -213,37 +215,59 @@ export default class HelpCommand extends BaseCommand {
      */
     private getHelpForArgCommand(commandName: string): RichEmbed {
         logger.debug(`Sending help for command ${commandName}`);
-        const BreakException = {};
+        var detect = 0;
+        var match = 0;
         var i = 0;
+        const BreakException = {};
+        const BreakMatchException = {};
         const lowerCommandName = commandName.toLowerCase();
+        const commandList = this.client.commands;
         const command = this.client.commands.get(lowerCommandName);
         let embed = new RichEmbed()
         .setAuthor(this.client.user.username, this.client.user.avatarURL)
         .setColor(0x00AE86)
         
+        const commandsToPrint = this.client.commands.entries()/*.slice(mini, maxi)*/;
+        
+        for (const [, commandClass] of commandsToPrint) {
+            console.warn("Command requested : " + command.name + "\nCommand class name : " + commandClass.name);
+            if(commandClass.name === command.name && commandClass.name.includes("SubCommand")){
+                match++;
+                break;
+            } else if(commandClass.name.startsWith(command.name.substr(0, 3)) && commandClass.name.includes("SubCommand")) {
+                match++;
+            } else if (commandClass.name === command.name) {
+                match++;
+            }
+        }
+        console.warn("Match number : " + match);
         try{
+// tslint:disable-next-line: only-arrow-functions
             this.client.commands.forEach(function(value, key){
                 const description = value.description.text;
-                // console.warn("Nom de clé : " + key.name);
+                // console.warn("Key name : " + key.name);
                 if(value.name === command.name && value.name.includes("SubCommand")){
                     // Adds a field for this command's description and usage
                     embed = embed.addField(`${key.toString()}`,  description, false) // Not inline
-                    .addField("Usage", value.description.usage);
-                    i++;
-                    console.warn("Nombre de field stop : " + i);
+                    .addField("_Usage_", value.description.usage, true)
                     throw BreakException;
                 } else if(value.name.startsWith(command.name.substr(0, 3)) && value.name.includes("SubCommand")) {
                     // Adds a field for this command's description and usage
                     embed = embed.addField(`${key.toString()}`,  description, false) // Not inline
-                    .addField("Usage", value.description.usage);
+                    .addField("_Usage_", value.description.usage, true)
+                    detect = 1;
                     i++;
-                    console.warn("Nombre de field 1 : " + i);
                 } else if (value.name === command.name) {
                     // Adds a field for this command's description and usage
                     embed = embed.addField(`${key.toString()}`,  description, false) // Not inline
-                    .addField("Usage", value.description.usage);
+                    .addField("_Usage_", value.description.usage, true)
+                    detect = 1;
                     i++;
-                    console.warn("Nombre de field 2 : " + i);
+                }
+                console.warn("Match number : " + match + "\nIndex : " + i);
+                if(detect > 0 && i < match){
+                    embed = embed.addBlankField();
+                    detect = 0;
                 }
             });
         } catch (e) {
