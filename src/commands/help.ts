@@ -216,6 +216,7 @@ export default class HelpCommand extends BaseCommand {
     private getHelpForArgCommand(commandName: string): RichEmbed {
         logger.debug(`Sending help for command ${commandName}`);
         var detect = 0;
+        var sub = 0;
         var match = 0;
         var i = 0;
         const BreakException = {};
@@ -230,9 +231,8 @@ export default class HelpCommand extends BaseCommand {
         const commandsToPrint = this.client.commands.entries()/*.slice(mini, maxi)*/;
         
         for (const [, commandClass] of commandsToPrint) {
-            console.warn("Command requested : " + command.name + "\nCommand class name : " + commandClass.name);
             if(commandClass.name === command.name && commandClass.name.includes("SubCommand")){
-                match++;
+                sub = 1;
                 break;
             } else if(commandClass.name.startsWith(command.name.substr(0, 3)) && commandClass.name.includes("SubCommand")) {
                 match++;
@@ -240,38 +240,39 @@ export default class HelpCommand extends BaseCommand {
                 match++;
             }
         }
-        console.warn("Match number : " + match);
-        try{
-// tslint:disable-next-line: only-arrow-functions
+
+        if(sub !== 1){
+        // tslint:disable-next-line: only-arrow-functions
+                this.client.commands.forEach(function(value, key){
+                    const description = value.description.text;
+                    if(value.name.startsWith(command.name.substr(0, 3)) && value.name.includes("SubCommand")) {
+                        // Adds a field for this command's description and usage
+                        embed = embed.addField(`${key.toString()}`,  description, false) // Not inline
+                        .addField("_Usage_", value.description.usage, true)
+                        detect = 1;
+                        i++;
+                    } else if (value.name === command.name) {
+                        // Adds a field for this command's description and usage
+                        embed = embed.addField(`${key.toString()}`,  description, false) // Not inline
+                        .addField("_Usage_", value.description.usage, true)
+                        detect = 1;
+                        i++;
+                    }
+                    if(detect > 0 && i < match){
+                        embed = embed.addBlankField();
+                        detect = 0;
+                    }
+                });
+        }else{
+        // tslint:disable-next-line: only-arrow-functions
             this.client.commands.forEach(function(value, key){
                 const description = value.description.text;
-                // console.warn("Key name : " + key.name);
                 if(value.name === command.name && value.name.includes("SubCommand")){
                     // Adds a field for this command's description and usage
                     embed = embed.addField(`${key.toString()}`,  description, false) // Not inline
                     .addField("_Usage_", value.description.usage, true)
-                    throw BreakException;
-                } else if(value.name.startsWith(command.name.substr(0, 3)) && value.name.includes("SubCommand")) {
-                    // Adds a field for this command's description and usage
-                    embed = embed.addField(`${key.toString()}`,  description, false) // Not inline
-                    .addField("_Usage_", value.description.usage, true)
-                    detect = 1;
-                    i++;
-                } else if (value.name === command.name) {
-                    // Adds a field for this command's description and usage
-                    embed = embed.addField(`${key.toString()}`,  description, false) // Not inline
-                    .addField("_Usage_", value.description.usage, true)
-                    detect = 1;
-                    i++;
-                }
-                console.warn("Match number : " + match + "\nIndex : " + i);
-                if(detect > 0 && i < match){
-                    embed = embed.addBlankField();
-                    detect = 0;
                 }
             });
-        } catch (e) {
-            if (e !== BreakException) {throw e;}
         }
         return embed;
     }
