@@ -167,10 +167,9 @@ export default class HelpCommand extends BaseCommand {
     }
 
 
-    // ------------------------------------------------------------------------------
 
     /**
-     * Sends an embed for the help page of a command in the current channel
+     * Sends an embed for the help page of a command passed as an argument in the current channel
      * @param {string} commandName The command name
      * @param {number} returnPage The page which will be displayed if the user click return
      */
@@ -209,75 +208,47 @@ export default class HelpCommand extends BaseCommand {
 
 
     /**
-     * Creates a help embed for a given command
+     * Creates a help embed for a given command passed as an argument
      * @param {string} commandName The command name
      * @return {RichEmbed} The embed
      */
     private getHelpForArgCommand(commandName: string): RichEmbed {
         logger.debug(`Sending help for command ${commandName}`);
-        var detect = 0;
-        var sub = 0;
-        var match = 0;
-        var i = 0;
-        const BreakException = {};
-        const BreakMatchException = {};
+        let detect = 0;
+        let match = 0;
+        let i = 0;
         const lowerCommandName = commandName.toLowerCase();
-        const commandList = this.client.commands;
         const command = this.client.commands.get(lowerCommandName);
         let embed = new RichEmbed()
         .setAuthor(this.client.user.username, this.client.user.avatarURL)
         .setColor(0x00AE86)
         
+        const splitted = command.name.replace("SubCommand", "").replace("Command", "");
         const commandsToPrint = this.client.commands.entries()/*.slice(mini, maxi)*/;
         
         for (const [, commandClass] of commandsToPrint) {
-            if(commandClass.name === command.name && commandClass.name.includes("SubCommand")){
-                sub = 1;
-                break;
-            } else if(commandClass.name.startsWith(command.name.substr(0, 3)) && commandClass.name.includes("SubCommand")) {
-                match++;
-            } else if (commandClass.name === command.name) {
+            if(commandClass.name.startsWith(splitted)){
                 match++;
             }
         }
 
-        if(sub !== 1){
-        // tslint:disable-next-line: only-arrow-functions
-                this.client.commands.forEach(function(value, key){
-                    const description = value.description.text;
-                    if(value.name.startsWith(command.name.substr(0, 3)) && value.name.includes("SubCommand")) {
-                        // Adds a field for this command's description and usage
-                        embed = embed.addField(`${key.toString()}`,  description, false) // Not inline
-                        .addField("_Usage_", value.description.usage, true)
-                        detect = 1;
-                        i++;
-                    } else if (value.name === command.name) {
-                        // Adds a field for this command's description and usage
-                        embed = embed.addField(`${key.toString()}`,  description, false) // Not inline
-                        .addField("_Usage_", value.description.usage, true)
-                        detect = 1;
-                        i++;
-                    }
-                    if(detect > 0 && i < match){
-                        embed = embed.addBlankField();
-                        detect = 0;
-                    }
-                });
-        }else{
-        // tslint:disable-next-line: only-arrow-functions
-            this.client.commands.forEach(function(value, key){
-                const description = value.description.text;
-                if(value.name === command.name && value.name.includes("SubCommand")){
-                    // Adds a field for this command's description and usage
-                    embed = embed.addField(`${key.toString()}`,  description, false) // Not inline
-                    .addField("_Usage_", value.description.usage, true)
-                }
-            });
-        }
+        this.client.commands.forEach((value, key) => {
+            const description = value.description.text;
+
+            if(value.name.startsWith(splitted)){
+                embed = embed.addField(`${key.toString()}`,  description, false) // Not inline
+                .addField("_Usage_", value.description.usage, true)
+                detect = 1;
+                i++;
+            }
+
+            if(detect > 0 && i < match){
+                embed = embed.addBlankField();
+                detect = 0;
+            }
+        });
         return embed;
     }
-
-    // ------------------------------------------------------------------------------
 
     /**
      * Generates an help embed for a specific page
