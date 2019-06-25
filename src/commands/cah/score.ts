@@ -2,7 +2,7 @@ import { IDescription } from "../../api";
 import BaseCommand from "../../basecommand";
 import gameManager from "../../models/cah/gamemanager";
 
-export default class CahScoreCommand extends BaseCommand {
+export default class CardScoreSubCommand extends BaseCommand {
     static get description(): IDescription {
         return {
             text: "Displays the score for the current CAH game",

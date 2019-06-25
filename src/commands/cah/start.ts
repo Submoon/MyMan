@@ -3,7 +3,7 @@ import { IDescription, IExtendedClient } from "../../api";
 import BaseCommand from "../../basecommand";
 import gameManager from "../../models/cah/gamemanager";
 
-export default class CahStartCommand extends BaseCommand {
+export default class CardStartSubCommand extends BaseCommand {
     constructor(client: IExtendedClient, message: Message, args: string[]) {
         super(client, message, args);
     }

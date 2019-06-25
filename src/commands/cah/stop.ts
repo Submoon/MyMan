@@ -2,7 +2,7 @@ import { IDescription } from "../../api";
 import BaseCommand from "../../basecommand";
 import gameManager from "../../models/cah/gamemanager";
 
-export default class CahStopCommand extends BaseCommand {
+export default class CardStopSubCommand extends BaseCommand {
     static get description(): IDescription {
         return {
             text: "Allows to stop a cah game",

@@ -3,7 +3,7 @@ import BaseCommand from "../../basecommand";
 import gameManager from "../../models/cah/gamemanager";
 import logger from "../../utils/logger";
 
-export default class CahJoinCommand extends BaseCommand {
+export default class CardJoinSubCommand extends BaseCommand {
     static get description(): IDescription {
         return {
             text: "Allows to join a cah game",

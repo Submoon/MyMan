@@ -5,6 +5,8 @@ import BaseCommand from "../basecommand";
 import { entries } from "../utils/arrayutils";
 import Constants from "../utils/constants";
 import logger from "../utils/logger";
+import { deepStrictEqual } from "assert";
+import { map } from "bluebird";
 const emojis = Constants.MENUACCEPTED;
 /**
  * The help command manager
@@ -35,7 +37,7 @@ export default class HelpCommand extends BaseCommand {
             await this.sendMenu(page);
         } else {
             // If it's a string, we print the help page for this command
-            await this.sendHelpForCommand(this.args[0]);
+            await this.sendHelpForArgCommand(this.args[0]);
         }
     }
 
@@ -164,6 +166,90 @@ export default class HelpCommand extends BaseCommand {
         });
     }
 
+
+
+    /**
+     * Sends an embed for the help page of a command passed as an argument in the current channel
+     * @param {string} commandName The command name
+     * @param {number} returnPage The page which will be displayed if the user click return
+     */
+    private async sendHelpForArgCommand(commandName: string, returnPage: number = 1) {
+        const embed = this.getHelpForArgCommand(commandName);
+        const author = this.message.author;
+        const menu = await this.message.channel.send({embed}) as Message;
+        const acceptedForCommand = [emojis[5], emojis[7]];
+        for (const [, react] of acceptedForCommand.entries()) {
+            await menu.react(`${react}`);
+        }
+
+        // Create a reaction collector
+        const filter: CollectorFilter = (reaction, user) => acceptedForCommand.some((e) => e === reaction.emoji.name)
+            && user.id === author.id;
+        const collector = menu.createReactionCollector(filter, { time: 120000 });
+        collector.on("collect", (r, collect)  => {
+            logger.info(`Collected ${r.emoji.name}`);
+            // Searching for the emoji index
+            const index = acceptedForCommand.indexOf(r.emoji.name);
+            switch (index) {
+                case 0:
+                    // User clicked back
+                    r.message.delete();
+                    this.sendMenu(returnPage);
+                    break;
+                case 1:
+                    // X to exit help
+                    r.message.delete();
+                    break;
+                default:
+                    logger.error("What are you doing here, little one?");
+            }
+        });
+    }
+
+
+    /**
+     * Creates a help embed for a given command passed as an argument
+     * @param {string} commandName The command name
+     * @return {RichEmbed} The embed
+     */
+    private getHelpForArgCommand(commandName: string): RichEmbed {
+        logger.debug(`Sending help for command ${commandName}`);
+        let detect = 0;
+        let match = 0;
+        let i = 0;
+        const lowerCommandName = commandName.toLowerCase();
+        const command = this.client.commands.get(lowerCommandName);
+        let embed = new RichEmbed()
+        .setAuthor(this.client.user.username, this.client.user.avatarURL)
+        .setColor(0x00AE86)
+        
+        const splitted = command.name.replace("SubCommand", "").replace("Command", "");
+        const commandsToPrint = this.client.commands.entries()/*.slice(mini, maxi)*/;
+        
+        for (const [, commandClass] of commandsToPrint) {
+            if(commandClass.name.startsWith(splitted)){
+                match++;
+            }
+        }
+
+        this.client.commands.forEach((value, key) => {
+            const description = value.description.text;
+
+            if(value.name.startsWith(splitted)){
+                embed = embed.addField(`${key.toString()}`,  description, false) // Not inline
+                .addField("_Usage_", value.description.usage, true)
+                detect = 1;
+                i++;
+            }
+
+            if(detect > 0 && i < match){
+                embed = embed.addBlankField();
+                detect = 0;
+            }
+        });
+        return embed;
+    }
+
     /**
      * Generates an help embed for a specific page
      * @param {number} page The page number
@@ -190,20 +276,22 @@ export default class HelpCommand extends BaseCommand {
         const mini = currentPage * 5;
         const maxi = mini + 4;
         const commandsToPrint = this.client.commands.entries()/*.slice(mini, maxi)*/;
-
+        
         for (const [commandName, command] of commandsToPrint) {
             // Can't slice an associative array, this is a nightmare
-            if (i < mini) {
+            if(!commandName.includes("_")){
+                if (i < mini) {
+                    i++;
+                    continue;
+                }
+                if (i > maxi) {
+                    break;
+                }
+                const description = this.getStringDescriptionOfCommand(command);
+                // Adds a field for this command's description and usage
+                embed = embed.addField(`${emojis[i % 5]} ${commandName}`,  description, false); // Not inline
                 i++;
-                continue;
             }
-            if (i > maxi) {
-                break;
-            }
-            const description = this.getStringDescriptionOfCommand(command);
-            // Adds a field for this command's description and usage
-            embed = embed.addField(`${emojis[i % 5]} ${commandName}`,  description, false); // Not inline
-            i++;
         }
         return embed;
     }

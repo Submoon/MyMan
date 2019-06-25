@@ -3,7 +3,7 @@ import { IDescription, IExtendedClient } from "../../api";
 import BaseCommand from "../../basecommand";
 import { dispoList as dispo } from "../../models/fakedatabase";
 
-export default class JumpDMCommand extends BaseCommand {
+export default class JumpDMSubCommand extends BaseCommand {
     constructor(client: IExtendedClient, message: Message, args: string[]) {
         super(client, message, args);
     }

@@ -2,7 +2,7 @@ import { IDescription } from "../../api";
 import BaseCommand from "../../basecommand";
 import gameManager from "../../models/cah/gamemanager";
 
-export default class CahChooseCommand extends BaseCommand {
+export default class CardChooseSubCommand extends BaseCommand {
     static get description(): IDescription {
         return {
             text: "Allows the card czar to choose the winner",

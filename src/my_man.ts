@@ -31,7 +31,7 @@ eventFiles.forEach((file) => {
     const eventName = file.split(".")[0];
     // super-secret recipe to call events with all their proper arguments *after* the `client` var.
     client.on(eventName, (...args: any[]) => {
-        new eventClass(client, ...args).run();
+        new eventClass(client, args).run();
     });
 });
 

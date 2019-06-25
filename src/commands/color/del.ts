@@ -3,7 +3,7 @@ import { IDescription, IExtendedClient } from "../../api";
 import BaseCommand from "../../basecommand";
 import logger from "../../utils/logger";
 
-export default class ColorDelCommand extends BaseCommand {
+export default class ColorDelSubCommand extends BaseCommand {
     constructor(client: IExtendedClient, message: Message, args: string[]) {
         super(client, message, args);
     }
