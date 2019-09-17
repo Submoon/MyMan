@@ -5,8 +5,7 @@ import BaseCommand from "../basecommand";
 import { entries } from "../utils/arrayutils";
 import Constants from "../utils/constants";
 import logger from "../utils/logger";
-import { deepStrictEqual } from "assert";
-import { map } from "bluebird";
+
 const emojis = Constants.MENUACCEPTED;
 /**
  * The help command manager
