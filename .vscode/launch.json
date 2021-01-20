@@ -10,6 +10,13 @@
             "name": "Lancer le programme",
             "program": "${workspaceFolder}\\dist\\src\\my_man.js",
             "console": "integratedTerminal"
+        },
+        {
+            "name": "Docker Node.js Launch",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "platform": "node"
         }
     ]
 }

@@ -1,6 +1,6 @@
 FROM node:12.17.0-alpine AS build
-WORKDIR /usr/src/app
-COPY package*.json ./
+WORKDIR /app
+COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
 COPY . .
 RUN npm install
 RUN npm run tsc
@@ -9,10 +9,12 @@ RUN npm run tsc
 
 FROM node:12.17.0-alpine
 
-WORKDIR /usr/src/app
+WORKDIR /app
+ENV NODE_ENV=production
 COPY package*.json ./
-RUN npm install --only=production
-COPY --from=build /usr/src/app/dist ./dist
+RUN npm install --production
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/knexfile.js .
 RUN npm run migratedb
 ## EXPOSE 3000 # No need with the bot
 CMD npm start

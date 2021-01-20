@@ -1,17 +1,17 @@
 // Update with your config settings.
 // Keep it as JS because it's useless to make it a TS file and it has to be at the root of the project
 const Knex = require("knex");
-const config = require("./config.json");
+// const config = require("./config.json");
 
 module.exports = {
     development: {
         client: "pg",
         connection: {
             database: "my_man_test",
-            host: config.host,
-            password: config.testdatabasepassword,
+            host: process.env.DATABASE_HOST,
+            password: process.env.DATABASE_PWD,
             port: 5432,
-            user: config.testdatabaseuser,
+            user: process.env.DATABASE_USER,
         },
         migrations: {
             directory: __dirname + "/migrations",
@@ -26,10 +26,10 @@ module.exports = {
         client: "pg",
         connection: {
             database: "my_man_production",
-            host: config.host,
-            password: config.productiondatabasepassword,
+            host: process.env.DATABASE_HOST,
+            password: process.env.DATABASE_PWD,
             port: 5432,
-            user: config.productiondatabaseuser,
+            user: process.env.DATABASE_USER,
         },
         migrations: {
             directory: __dirname + "/migrations",

@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  myman:
+    image: myman
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    volumes:
+      - "./config.json:/app/config.json"
+    ports:
+      - 3000:3000
