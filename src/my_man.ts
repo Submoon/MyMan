@@ -100,4 +100,5 @@ client.on("message", (message) => {
     }
 });
 
+logger.info(JSON.stringify(client.config));
 client.login(client.config.token);

@@ -62,4 +62,5 @@ dist
 
 config.json
 
+data/**/*
 
