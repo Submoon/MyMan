@@ -1,7 +1,9 @@
 import * as Discord from "discord.js";
 import * as glob from "glob";
 import * as path from "path";
-import config from "../config.json";
+// import config from "../config.json";
+// const config = await import("/run/secrets/config.json") as IConfig;
+
 import {
     ICommandConstructor,
     IConfig,
@@ -11,6 +13,8 @@ import {
 } from "./api";
 import AutoAnswer from "./db/models/autoanswer";
 import logger from "./utils/logger";
+
+const config = require("/run/secrets/config.json") as IConfig;
 
 const client = new Discord.Client() as IExtendedClient;
 

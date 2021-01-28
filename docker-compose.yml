@@ -8,13 +8,18 @@ services:
             dockerfile: ./Dockerfile
         environment:
             NODE_ENV: production
-        volumes:
-            - "./config.json:/app/config.json"
+        # volumes:
+        #     - "./config.json:/run/secrets/config.json"
         ports:
             - 3000:3000
+        secrets:
+            - config.json
     mongo:
         image: mongo:4.4.3-bionic
         volumes:
             - ./data:/data/db
         ports:
             - "27017:27017"
+secrets:
+    "config.json":
+        file: ./config.json

@@ -3,7 +3,7 @@ WORKDIR /app
 COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
 COPY . .
 RUN npm install
-RUN touch config.json && echo "{}" > ./config.json
+# RUN touch config.json && echo "{}" > ./config.json
 RUN npm run tsc
 
 ## this is stage two , where the app actually runs
