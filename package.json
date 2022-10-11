@@ -39,7 +39,7 @@
     "moment": "^2.22.2",
     "pg": "^7.4.3",
     "winston": "^2.4.4",
-    "winston-daily-rotate-file": "^1.7.2"
+    "winston-daily-rotate-file": "^4.7.1"
   },
   "devDependencies": {
     "@types/bookshelf": "^0.9.9",
