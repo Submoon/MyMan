@@ -27,7 +27,7 @@
     "@types/isomorphic-fetch": "0.0.34",
     "axios": "^0.21.1",
     "bookshelf": "^0.13.3",
-    "cheerio": "^1.0.0-rc.2",
+    "cheerio": "^1.0.0-rc.12",
     "discord.js": "^11.4.2",
     "dropbox": "^4.0.9",
     "es6-promise": "^4.2.4",
