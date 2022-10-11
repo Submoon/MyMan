@@ -32,7 +32,7 @@
     "dropbox": "^4.0.9",
     "es6-promise": "^4.2.4",
     "glob": "^7.1.2",
-    "isomorphic-fetch": "^2.2.1",
+    "isomorphic-fetch": "^3.0.0",
     "jszip": "^3.7.0",
     "knex": "^0.19.5",
     "lodash": "^4.17.21",
